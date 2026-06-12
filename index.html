@@ -1,0 +1,2902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#121110">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20viewBox%3D'0%200%2064%2064'%20xmlns%3D'http://www.w3.org/2000/svg'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%23121110'/%3E%3Ccircle%20cx%3D'32'%20cy%3D'32'%20r%3D'26'%20fill%3D'none'%20stroke%3D'%233A3631'%20stroke-width%3D'4'/%3E%3Cpath%20d%3D'M%2019.5%209.2%20A%2026%2026%200%200%201%2044.5%209.2'%20fill%3D'none'%20stroke%3D'%23E8540F'%20stroke-width%3D'4'%20stroke-linecap%3D'round'/%3E%3Ctext%20x%3D'32'%20y%3D'43'%20font-family%3D'ui-monospace,%20monospace'%20font-size%3D'31'%20font-weight%3D'700'%20fill%3D'%23F0EDE6'%20text-anchor%3D'middle'%3E%E2%82%BF%3C/text%3E%3C/svg%3E">
+<title>Bitcoin Quant · Bitcoin's Four Seasons</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --ink:#121110;
+    --ink-2:#171514;
+    --ink-3:#1D1B19;
+    --panel:#151312;
+    --paper:#F0EDE6;
+    --paper-dim:#A8A49C;
+    --paper-faint:#6E6A63;
+    --accent:#E04E11;
+    --accent-hi:#F25E1D;
+    --accent-dim:rgba(224,78,17,.4);
+    --brass:#A8A49C;
+    --brass-dim:rgba(168,164,156,.35);
+    --btc:#E04E11;
+    --spring:#8FBF7C;
+    --summer:#E8A33D;
+    --autumn:#E2614F;
+    --winter:#8FB6D9;
+    --red:#E2614F;--red-deep:#A8423C;--amber:#E8A33D;--blue:#8FB6D9;
+    --line:rgba(240,237,230,.10);
+    --line-soft:rgba(240,237,230,.06);
+    --display:'Archivo', 'Arial Black', sans-serif;
+    --body:'Inter', system-ui, sans-serif;
+    --mono:'IBM Plex Mono', ui-monospace, monospace;
+    --r:10px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation-duration:.001s !important;transition-duration:.001s !important}
+  }
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--body);
+    font-weight:400;
+    font-size:16px;
+    line-height:1.7;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  .stars{display:none}
+  main{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 32px}
+
+  ::selection{background:var(--accent);color:#fff}
+  a{color:var(--accent-hi)}
+  button{font-family:var(--mono)}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  ::-webkit-scrollbar{width:10px;height:10px}
+  ::-webkit-scrollbar-track{background:var(--ink)}
+  ::-webkit-scrollbar-thumb{background:#2A2724;border-radius:6px;border:2px solid var(--ink)}
+  b,strong{font-weight:600;color:var(--paper)}
+
+  /* shared display style */
+  h1,.sec-head h2,.panel h2,.proj h3,.next h3,.cc-roman,.dc-phase,.pb-cta{
+    font-family:var(--display);
+    font-stretch:125%;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:.01em;
+  }
+
+  /* ---------- SCROLL REVEAL ---------- */
+  .rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease, transform .7s cubic-bezier(.2,.75,.25,1)}
+  .rv.in{opacity:1;transform:none}
+
+  /* ---------- TOP NAV ---------- */
+  .topnav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:18px 32px;
+    background:rgba(18,17,16,.85);
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .tn-home{display:flex;align-items:center;gap:10px;text-decoration:none}
+  .tn-mark{width:26px;height:26px;display:block;flex:none}
+  .tn-mark .mark-arc{stroke:var(--accent);transition:stroke .2s ease}
+  .tn-home:hover .mark-arc{stroke:var(--accent-hi)}
+  .tn-brand{
+    font-family:var(--display);font-stretch:115%;font-weight:800;
+    font-size:15px;letter-spacing:.05em;color:var(--paper);
+  }
+  .tn-brand i{font-style:normal;color:var(--accent)}
+  .tn-link{
+    font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    color:#fff;text-decoration:none;
+    background:var(--accent);padding:12px 22px;border-radius:3px;
+    transition:background .2s ease;
+  }
+  .tn-link:hover{background:var(--accent-hi)}
+  .tn-links{display:flex;gap:26px}
+  .tn-links a{
+    font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--paper-dim);text-decoration:none;transition:color .2s ease;
+  }
+  .tn-links a:hover{color:#fff}
+  .tn-links a.active{color:var(--accent-hi)}
+  #data,#thesis,#takeaways,#dca{scroll-margin-top:80px}
+  @media (max-width:880px){
+    .tn-links{gap:14px}
+    .tn-links a{font-size:9.5px;letter-spacing:.08em}
+  }
+  @media (max-width:640px){
+    .tn-links{display:none}
+  }
+
+  /* ---------- HERO ---------- */
+  header{padding:160px 0 20px;text-align:center}
+  .eyebrow{
+    font-family:var(--mono);font-size:11px;letter-spacing:.32em;
+    color:var(--paper-faint);text-transform:uppercase;
+    display:inline-flex;align-items:center;gap:12px;
+  }
+  .eyebrow::before{content:"◢";color:var(--accent);font-size:9px}
+  .eyebrow::after{content:none}
+  h1{
+    font-size:clamp(2.4rem, 6.4vw, 5rem);
+    line-height:1.0;margin:26px 0 22px;
+  }
+  h1 em{font-style:normal;color:var(--accent)}
+  .sub{max-width:640px;margin:0 auto;color:var(--paper-dim);font-size:1.05rem;line-height:1.8}
+  .sub strong{color:var(--paper);font-weight:600}
+
+  /* ---------- METHOD ---------- */
+  .method{margin-top:64px}
+  .mt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+  .mtable,.ct{border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;background:transparent}
+  .mt-title{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--paper-faint);margin-bottom:16px}
+  .mtable table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:.76rem}
+  .mtable th{
+    text-align:left;font-weight:400;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--paper-faint);padding:0 4px 10px;border-bottom:1px solid var(--line);
+  }
+  .mtable td{padding:9px 4px;border-bottom:1px solid var(--line-soft);color:var(--paper-dim)}
+  .mtable tr:last-child td{border-bottom:none}
+  .mtable tbody tr{transition:background .15s ease}
+  .mtable tbody tr:hover{background:rgba(240,237,230,.03)}
+  .mtable .r{text-align:right;color:var(--paper);font-weight:700;font-variant-numeric:tabular-nums}
+  .mtable tr.hot td{color:var(--paper)}
+  .mtable tr.hot .r{color:var(--accent-hi)}
+  .mtable tr.pend td{color:var(--paper-faint);font-style:italic}
+  .mtable tr.pend .r{color:var(--accent-hi);font-style:normal}
+  .mt-note{font-size:.8rem;color:var(--paper-faint);margin-top:15px;line-height:1.65}
+  .mt-note b{color:var(--paper)}
+  .ct-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px;margin-top:0 !important}
+  .ct-flow{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;font-family:var(--mono)}
+  .ct-flow .m{font-size:clamp(1.1rem,2.6vw,1.6rem);font-weight:700;font-variant-numeric:tabular-nums}
+  .ct-flow .arrow{color:var(--paper-faint);font-size:.95rem}
+  .ct-flow .proj-m{
+    color:var(--winter);border:1px dashed rgba(143,182,217,.5);border-radius:4px;padding:2px 10px;
+    font-size:clamp(.95rem,2.2vw,1.2rem);
+  }
+  .mt-src{
+    font-family:var(--mono);font-size:.7rem;color:var(--paper-faint);line-height:1.85;
+    margin-top:18px;border-left:2px solid var(--accent);padding-left:16px;
+  }
+  .mt-src b{color:var(--paper-dim);font-weight:600}
+  .mt-subhead{
+    font-family:var(--mono);font-weight:600;
+    font-size:.82rem;letter-spacing:.24em;text-transform:uppercase;color:var(--paper);
+    margin:34px 0 16px;display:flex;align-items:baseline;gap:12px;
+  }
+  .method-inner > .mt-subhead:first-child{margin-top:24px}
+  .mt-subhead span{font-family:var(--mono);font-size:.82rem;color:var(--accent);letter-spacing:.1em}
+  .method-toggle{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    border:none;background:var(--accent);color:#fff;
+    border-radius:3px;padding:14px 24px;cursor:pointer;
+    transition:background .2s ease;
+  }
+  .method-toggle:hover{background:var(--accent-hi)}
+  .method-toggle .mtg-arrow{display:inline-block;transition:transform .3s ease;font-size:.75rem}
+  .method-toggle[aria-expanded="true"] .mtg-arrow{transform:rotate(90deg)}
+  .method-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s cubic-bezier(.3,.8,.3,1)}
+  .method-body.open{grid-template-rows:1fr}
+  .method-inner{overflow:hidden;min-height:0}
+  .method-inner > .mt-grid{margin-top:20px}
+  .playbook-wrap{margin-top:20px}
+  .playbook-wrap .playbook{margin-top:18px}
+
+  /* ---------- OBSERVATORY ---------- */
+  .observatory{
+    margin-top:48px;
+    display:grid;grid-template-columns:minmax(0,520px) minmax(260px,1fr);
+    gap:44px;align-items:center;
+    border:1px solid var(--line);border-radius:var(--r);
+    background:var(--panel);
+    padding:38px;
+  }
+  .dial-wrap{position:relative;width:100%;max-width:520px;margin:0 auto}
+  .dial-wrap svg{width:100%;height:auto;display:block}
+  .dial-center{
+    position:absolute;inset:0;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;text-align:center;pointer-events:none;
+  }
+  .dc-phase{font-size:clamp(.95rem,2.4vw,1.2rem);line-height:1.15;letter-spacing:.04em}
+  .dc-emoji{font-size:1.4rem;margin-bottom:6px}
+  .dc-date{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--paper-faint);margin-top:10px;text-transform:uppercase}
+  .dc-price{font-family:var(--mono);font-size:clamp(1rem,2.6vw,1.3rem);color:var(--accent-hi);margin-top:5px;font-weight:700;font-variant-numeric:tabular-nums}
+  .dc-proj{
+    font-family:var(--mono);font-size:8.5px;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--winter);border:1px dashed rgba(143,182,217,.55);border-radius:3px;
+    padding:3px 10px;margin-top:10px;
+  }
+  .panel h2{font-size:1.35rem;line-height:1.15;margin-bottom:10px}
+  .panel .lede{color:var(--paper-dim);font-size:.93rem;margin-bottom:20px;line-height:1.75}
+  .season-cta{
+    display:flex;flex-direction:column;gap:4px;
+    border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:4px;
+    padding:14px 16px;margin-bottom:18px;
+    background:var(--ink-2);
+    transition:border-color .3s ease;
+  }
+  .season-cta .sc-k{font-family:var(--mono);font-size:9px;letter-spacing:.26em;text-transform:uppercase}
+  .season-cta .sc-t{font-size:.86rem;color:var(--paper-dim);line-height:1.55}
+  .readout{
+    display:grid;grid-template-columns:1fr 1fr;gap:1px;
+    background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden;
+  }
+  .ro-cell{background:var(--ink-2);padding:14px 16px;transition:background .15s ease}
+  .ro-cell:hover{background:var(--ink-3)}
+  .ro-label{font-family:var(--mono);font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--paper-faint)}
+  .ro-val{font-family:var(--mono);font-size:.93rem;margin-top:5px;color:var(--paper);font-variant-numeric:tabular-nums}
+  .ro-val .accent{color:var(--accent-hi)}
+
+  .scrub{margin-top:24px}
+  .scrub label{font-family:var(--mono);font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--paper-faint);display:block;margin-bottom:12px}
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:30px;background:transparent;cursor:pointer}
+  input[type=range]::-webkit-slider-runnable-track{
+    height:3px;border-radius:0;
+    background:linear-gradient(90deg,var(--summer),var(--autumn) 28%,var(--winter) 55%,var(--spring) 78%,var(--summer));
+    opacity:.85;
+  }
+  input[type=range]::-moz-range-track{
+    height:3px;border-radius:0;
+    background:linear-gradient(90deg,var(--summer),var(--autumn) 28%,var(--winter) 55%,var(--spring) 78%,var(--summer));
+  }
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;appearance:none;width:17px;height:17px;border-radius:50%;
+    background:var(--accent);border:3px solid var(--ink);
+    box-shadow:0 0 0 1.5px var(--accent);
+    margin-top:-7px;transition:transform .15s ease;
+  }
+  input[type=range]:active::-webkit-slider-thumb{transform:scale(1.18)}
+  input[type=range]::-moz-range-thumb{
+    width:11px;height:11px;border-radius:50%;
+    background:var(--accent);border:3px solid var(--ink);
+    box-shadow:0 0 0 1.5px var(--accent);
+  }
+  #comp::-webkit-slider-runnable-track{background:linear-gradient(90deg,var(--autumn),var(--summer))}
+  #comp::-moz-range-track{background:linear-gradient(90deg,var(--autumn),var(--summer))}
+  .scrub-track{position:relative}
+  .scrub-future{
+    position:absolute;top:13.5px;height:3px;pointer-events:none;
+    background:repeating-linear-gradient(90deg, rgba(143,182,217,.55) 0 6px, var(--ink) 6px 11px);
+  }
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .chip{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;
+    border:1px solid var(--line);background:transparent;color:var(--paper-dim);
+    border-radius:999px;padding:7px 14px;cursor:pointer;transition:all .18s ease;
+  }
+  .chip:hover{border-color:var(--paper-dim);color:var(--paper)}
+  .chip.now{border-color:var(--accent);color:var(--accent-hi)}
+  .chip.now:hover{background:rgba(224,78,17,.1)}
+  .chip.proj{border-style:dashed;border-color:rgba(143,182,217,.4);color:var(--winter)}
+  .chip.proj:hover{border-color:var(--winter)}
+  #chartSeasons{margin-top:0;gap:6px;flex-wrap:nowrap}
+  #chartSeasons[hidden]{display:none}
+  .season-ov-chip{padding:5px 9px;font-size:12px;line-height:1}
+  .season-ov-chip.on{border-color:var(--sc);color:var(--sc);background:rgba(240,237,230,.04)}
+  .season-ov-chip.on:hover{border-color:var(--sc)}
+
+  /* ---------- SECTIONS ---------- */
+  section{margin-top:130px}
+  .method{margin-top:64px}
+  .sec-head{display:flex;align-items:baseline;gap:22px;margin-bottom:14px;flex-wrap:wrap}
+  .sec-num{
+    font-family:var(--display);font-stretch:125%;font-weight:800;
+    font-size:clamp(1.5rem,3.4vw,2.2rem);color:var(--accent);line-height:1;
+    font-variant-numeric:tabular-nums;
+  }
+  .sec-head h2{font-size:clamp(1.5rem,3.4vw,2.2rem);line-height:1.08}
+  .sec-sub{color:var(--paper-dim);max-width:720px;font-size:.96rem;margin-bottom:32px;line-height:1.8}
+  .num-note{font-family:var(--mono);font-size:.7rem;color:var(--paper-faint);display:inline-block;margin-top:12px}
+
+  /* ---------- CHART ---------- */
+  .chart-card{border:1px solid var(--line);border-radius:var(--r);background:var(--panel);padding:28px}
+  .chart-toolbar{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:20px}
+  .toggle{display:inline-flex;border:1px solid var(--line);border-radius:4px;padding:3px;background:var(--ink)}
+  .toggle button{
+    border:none;background:transparent;color:var(--paper-dim);
+    font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+    padding:9px 18px;border-radius:2px;cursor:pointer;transition:all .2s ease;
+  }
+  .toggle button.active{background:var(--accent);color:#fff}
+  .legend{display:flex;gap:10px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;color:var(--paper-dim);align-items:center}
+  .lg-btn{
+    display:inline-flex;align-items:center;gap:7px;
+    font-family:var(--mono);font-size:10.5px;color:var(--paper-dim);
+    background:transparent;border:1px solid transparent;border-radius:999px;
+    padding:5px 11px;cursor:pointer;transition:all .18s ease;
+  }
+  .lg-btn:hover{border-color:var(--line);color:var(--paper)}
+  .lg-btn small{font-size:8.5px;color:var(--winter);letter-spacing:.08em}
+  .lg-btn.off{opacity:.3}
+  .lg-btn.off .dot{filter:grayscale(1)}
+  .lg-btn.off:hover{opacity:.55}
+  .dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+  .share-btn{
+    font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+    border:1px solid var(--accent-dim);background:transparent;color:var(--accent-hi);
+    border-radius:999px;padding:9px 18px;cursor:pointer;transition:all .2s ease;white-space:nowrap;
+  }
+  .share-btn:hover{border-color:var(--accent);background:rgba(224,78,17,.08)}
+  .share-btn.done{border-color:var(--spring);color:var(--spring)}
+  .chart-box{position:relative;height:440px}
+  @media (max-width:640px){.chart-box{height:330px}}
+  canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y}
+  .tooltip{
+    position:absolute;pointer-events:none;opacity:0;transition:opacity .12s ease;
+    background:rgba(18,17,16,.97);border:1px solid var(--line);border-radius:6px;
+    padding:9px 13px;font-family:var(--mono);font-size:11px;line-height:1.55;
+    transform:translate(-50%,-115%);white-space:nowrap;z-index:5;
+    box-shadow:0 10px 30px rgba(0,0,0,.6);
+  }
+  .tooltip .tt-p{color:var(--accent-hi);font-weight:700}
+  .chart-note{font-size:.76rem;color:var(--paper-faint);margin-top:18px;font-family:var(--mono);letter-spacing:.02em;line-height:1.75}
+
+  /* ---------- CYCLE CARDS ---------- */
+  .cycles{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+  .cycle-card{
+    border:1px solid var(--line);border-radius:var(--r);padding:24px 24px 22px;
+    background:transparent;
+    position:relative;overflow:hidden;
+    transition:border-color .25s ease, background .25s ease;
+  }
+  .cycle-card:hover{border-color:rgba(240,237,230,.22);background:rgba(240,237,230,.015)}
+  .cycle-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--cc, var(--paper-faint))}
+  .cc-roman{font-size:2.4rem;line-height:1;color:var(--cc,var(--paper-dim))}
+  .cc-years{font-family:var(--mono);font-size:9.5px;letter-spacing:.26em;color:var(--paper-faint);text-transform:uppercase;margin-top:6px}
+  .cc-rows{margin-top:20px;display:grid;gap:11px}
+  .cc-row{display:flex;justify-content:space-between;gap:10px;font-size:.85rem;border-bottom:1px solid var(--line-soft);padding-bottom:10px}
+  .cc-row:last-child{border-bottom:none;padding-bottom:0}
+  .cc-k{color:var(--paper-faint)}
+  .cc-v{font-family:var(--mono);font-size:.78rem;text-align:right;color:var(--paper);font-variant-numeric:tabular-nums}
+  .cc-v.up{color:var(--summer)} .cc-v.down{color:var(--autumn)} .cc-v.maybe{color:var(--winter)}
+  .cc-x{margin-top:16px;font-family:var(--mono);font-size:.75rem;color:var(--paper-faint)}
+  .cc-x b{color:var(--cc,var(--paper));font-size:1.05rem}
+  .cc-live-note{
+    font-family:var(--mono);font-size:.67rem;color:var(--summer);line-height:1.6;
+    border:1px dashed rgba(232,163,61,.4);
+    border-radius:4px;padding:9px 11px;margin-top:6px;
+  }
+  .cycle-card.proj-card{border-style:dashed;border-color:rgba(143,182,217,.32)}
+  .cycle-card.proj-card::before{opacity:.6}
+  .cycle-card.proj-card .cc-years{color:var(--winter)}
+
+  .multiples{
+    margin-top:30px;border:1px solid var(--line);border-radius:var(--r);padding:28px;background:var(--panel);
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;
+    font-family:var(--mono);
+  }
+  .multiples .m{font-size:clamp(1.2rem,4vw,2rem);font-weight:700;font-variant-numeric:tabular-nums}
+  .multiples .arrow{color:var(--paper-faint);font-size:1.1rem}
+  .multiples .cap{width:100%;text-align:center;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--paper-faint);margin-top:10px}
+  .multiples .m.proj-m{
+    color:var(--winter);border:1px dashed rgba(143,182,217,.45);border-radius:4px;
+    padding:2px 11px;font-size:clamp(1rem,3vw,1.5rem);
+  }
+
+  /* ---------- BEAR LEDGER ---------- */
+  .ledger{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--panel)}
+  .lhead, .lrow{
+    display:grid;
+    grid-template-columns: 110px 1.05fr 1.05fr minmax(220px,1.7fr) 86px;
+    gap:14px;align-items:center;padding:18px 26px;
+  }
+  .lhead{
+    font-family:var(--mono);font-size:9px;letter-spacing:.26em;text-transform:uppercase;
+    color:var(--paper-faint);border-bottom:1px solid var(--line);
+    background:var(--ink);
+  }
+  .lrow{border-bottom:1px solid var(--line-soft);transition:background .2s ease}
+  .lrow:last-child{border-bottom:none}
+  .lrow:hover{background:rgba(240,237,230,.02)}
+  .lrow.live{background:rgba(224,78,17,.04)}
+  .lrow.live:hover{background:rgba(224,78,17,.07)}
+  .lrow.proj{background:rgba(143,182,217,.025)}
+  .lrow.proj:hover{background:rgba(143,182,217,.05)}
+  .lrow.proj .when,.lrow.proj .price,.lrow.proj .dur{color:var(--winter);opacity:.92}
+  .lrow.proj .when small{font-family:var(--mono);font-size:9px;letter-spacing:.08em}
+  .lrow.proj .ddnum{color:var(--winter)}
+  .lrow.proj .fill{background:transparent;border:1px dashed rgba(143,182,217,.6);box-sizing:border-box}
+  .pill{
+    display:inline-flex;align-items:center;gap:7px;
+    font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    border-radius:999px;padding:6px 13px;
+    color:var(--pc,var(--paper));border:1px solid var(--pc,var(--line));background:transparent;
+    white-space:nowrap;
+  }
+  .pill-proj{border-style:dashed}
+  .pill .dotlive{width:6px;height:6px;border-radius:50%;background:var(--pc);animation:blink 1.6s infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+  @media (prefers-reduced-motion:reduce){.pill .dotlive{animation:none}}
+  .ev .when{font-size:.9rem;color:var(--paper)}
+  .ev .price{font-family:var(--mono);font-size:.86rem;margin-top:2px;font-variant-numeric:tabular-nums}
+  .ev.top .price{color:var(--summer)}
+  .ev.bot .price{color:var(--winter)}
+  .ev .price small{color:var(--paper-faint);font-size:.72rem;margin-left:4px}
+  .ddwrap{display:flex;align-items:center;gap:12px;min-width:0}
+  .track{position:relative;flex:1;height:12px;border-radius:999px;background:rgba(240,237,230,.06);overflow:visible}
+  .fill{
+    position:absolute;left:0;top:0;bottom:0;border-radius:999px;
+    background:var(--autumn);
+    width:0;transition:width 1s cubic-bezier(.2,.7,.2,1);
+  }
+  .lrow.live .fill{background:var(--accent)}
+  .ghost{
+    position:absolute;left:0;top:0;bottom:0;border-radius:999px;
+    border:1px dashed rgba(226,97,79,.6);width:0;transition:width .4s ease;pointer-events:none;
+  }
+  .gmark{
+    position:absolute;top:-5px;bottom:-5px;width:2px;background:var(--autumn);
+    opacity:.95;transition:left .4s ease;
+  }
+  .gmark::after{
+    content:attr(data-label);position:absolute;top:-18px;left:50%;transform:translateX(-50%);
+    font-family:var(--mono);font-size:9px;color:var(--autumn);white-space:nowrap;
+  }
+  .ddnum{font-family:var(--mono);font-weight:700;font-size:.98rem;color:var(--autumn);min-width:56px;text-align:right;font-variant-numeric:tabular-nums}
+  .lrow.live .ddnum{color:var(--accent-hi)}
+  .delta{
+    font-family:var(--mono);font-size:9.5px;color:var(--paper-faint);
+    display:flex;flex-direction:column;align-items:center;line-height:1.2;min-width:30px;
+  }
+  .delta b{color:var(--paper-dim)}
+  .dur{font-family:var(--mono);font-size:.84rem;color:var(--paper-dim);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+  .dur .live-tag{color:var(--accent-hi)}
+
+  /* ---------- PROJECTION PANEL ---------- */
+  .proj{margin-top:24px;border:1px solid var(--line);border-radius:var(--r);background:var(--panel);padding:32px}
+  .proj-head{display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap}
+  .proj h3{font-size:1.15rem}
+  .proj-tag{
+    font-family:var(--mono);font-size:9px;letter-spacing:.24em;text-transform:uppercase;
+    border:1px solid rgba(143,182,217,.5);color:var(--winter);border-radius:3px;padding:5px 11px;
+  }
+  .proj .explain{color:var(--paper-dim);font-size:.9rem;margin-top:12px;max-width:680px;line-height:1.75}
+  .proj .explain b{color:var(--paper)}
+  .slider-zone{margin-top:26px}
+  .slider-head{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mono)}
+  .slider-head label{font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--paper-faint)}
+  .slider-head output{font-size:1.05rem;font-weight:700;color:var(--paper);font-variant-numeric:tabular-nums}
+  .presets{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .presets .chip.active{border-color:var(--accent);color:var(--accent-hi);background:rgba(224,78,17,.07)}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:14px;margin-top:26px}
+  .card{
+    border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;background:var(--ink-2);
+    transition:border-color .2s ease;
+  }
+  .card:hover{border-color:rgba(240,237,230,.2)}
+  .card.hero{border-color:var(--accent)}
+  .card .k{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--paper-faint)}
+  .card .v{font-family:var(--mono);font-size:clamp(1.15rem,3vw,1.5rem);font-weight:700;margin-top:9px;font-variant-numeric:tabular-nums}
+  .card .v.red{color:var(--autumn)}
+  .card .v.gold{color:var(--accent-hi)}
+  .card .v.green{color:var(--spring)}
+  .card .n{font-size:.72rem;color:var(--paper-faint);margin-top:6px;font-family:var(--mono)}
+
+  /* ---------- NEXT ---------- */
+  .next{border:1px solid var(--line);border-radius:var(--r);background:var(--panel);padding:40px 36px;display:grid;grid-template-columns:1fr 1fr;gap:34px}
+  .next h3{font-size:1.15rem;margin-bottom:12px}
+  .next p{color:var(--paper-dim);font-size:.92rem;line-height:1.8}
+  .countdown{font-family:var(--mono);font-size:clamp(1.6rem,4vw,2.4rem);color:var(--accent-hi);font-weight:700;margin-top:14px;font-variant-numeric:tabular-nums}
+  .countdown small{font-size:.8rem;color:var(--paper-dim);font-weight:400;margin-left:8px}
+  .milestones{grid-column:1/-1;border:1px dashed rgba(143,182,217,.32);border-radius:var(--r);padding:20px 22px;background:transparent}
+  .ms-title{font-family:var(--mono);font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--winter);margin-bottom:16px}
+  .ms-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(124px,1fr));gap:12px}
+  .ms{display:flex;flex-direction:column;gap:1px;font-size:.78rem;color:var(--paper-dim);border-left:2px solid rgba(143,182,217,.3);padding-left:12px}
+  .ms b{color:var(--paper);font-weight:600;font-size:.82rem}
+  .ms .ms-g{font-size:.9rem}
+  .ms .ms-p{font-family:var(--mono);color:var(--winter);font-weight:700;font-variant-numeric:tabular-nums}
+
+  /* ---------- TAKEAWAYS ---------- */
+  .tk-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:18px}
+  @media (max-width:880px){.tk-grid{grid-template-columns:1fr}}
+  .tk-records,.tk-rules{border:1px solid var(--line);border-radius:var(--r);background:var(--panel);padding:26px 28px}
+  .tk-title{font-family:var(--mono);font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--paper-faint);margin-bottom:20px}
+  .rec{
+    display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:10px;align-items:baseline;
+    padding:12px 0;border-bottom:1px solid var(--line-soft);font-size:.85rem;
+    transition:background .15s ease;
+  }
+  .rec:hover{background:rgba(240,237,230,.02)}
+  .rec:last-child{border-bottom:none}
+  .rec-name{color:var(--paper);font-weight:600;border-left:3px solid var(--rc,var(--paper-faint));padding-left:12px;line-height:1.4}
+  .rec-name em{font-style:normal;font-family:var(--mono);font-size:9px;color:var(--accent-hi);letter-spacing:.1em}
+  .rec-top,.rec-bot{font-family:var(--mono);font-size:.74rem;color:var(--paper-dim);font-variant-numeric:tabular-nums}
+  .rec-top b{color:var(--summer);font-weight:700}
+  .rec-bot b{color:var(--winter);font-weight:700}
+  .rec .proj, .rec.proj .rec-top, .rec.proj .rec-bot{opacity:.85}
+  .rec.proj .rec-name{color:var(--paper-dim)}
+  .rec.proj{border-bottom-style:dotted}
+  .rec.proj .rec-top b,.rec.proj .rec-bot b{font-style:italic}
+  @media (max-width:640px){
+    .rec{grid-template-columns:1fr;gap:3px}
+    .rec-top,.rec-bot{padding-left:15px}
+  }
+  .rule{display:flex;gap:14px;padding:13px 0;border-bottom:1px solid var(--line-soft)}
+  .rule:last-child{border-bottom:none}
+  .rule.status{border:1px solid rgba(232,163,61,.35);border-radius:6px;padding:13px 12px;margin-top:6px}
+  .rule.status .rule-g,.rule.status b{color:var(--summer)}
+  .rule.wisdom{border:1px dashed rgba(143,182,217,.35);border-radius:6px;padding:13px 12px;margin-top:10px}
+  .rule.wisdom .rule-g,.rule.wisdom b{color:var(--winter)}
+  .rule-g{font-family:var(--mono);font-size:.78rem;color:var(--paper-faint);min-width:44px}
+  .rule b{display:block;font-weight:600;font-size:.88rem;color:var(--paper)}
+  .rule span{display:block;font-size:.78rem;color:var(--paper-faint);margin-top:4px;line-height:1.6}
+  .tk-playbook{border:1px solid var(--line);border-radius:var(--r);background:var(--panel);padding:26px 28px;margin-top:18px}
+  .tk-pb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
+  .tk-pb-k{
+    font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--pk,var(--paper));margin-bottom:10px;
+  }
+  .tk-pb p{font-size:.85rem;color:var(--paper-dim);line-height:1.75}
+  .tk-pb-foot{font-family:var(--mono);font-size:.74rem;color:var(--paper-faint);margin-top:24px;letter-spacing:.03em}
+  .tk-pb-foot a{color:var(--accent-hi);text-decoration:none;font-weight:600;transition:color .2s ease}
+  .tk-pb-foot a:hover{color:var(--accent)}
+  .tk-pb-foot small{display:block;margin-top:6px;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;opacity:.7}
+
+  /* ---------- PLAYBOOK ---------- */
+  .playbook{border:1px solid var(--line);border-radius:var(--r);background:var(--panel);padding:26px}
+  .pb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:14px}
+  .pb{
+    border:1px solid var(--line);border-top:3px solid var(--pc);border-radius:6px;
+    padding:20px;background:var(--ink-2);
+    transition:border-color .2s ease;
+  }
+  .pb:hover{border-color:rgba(240,237,230,.2);border-top-color:var(--pc)}
+  .pb-s{font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--pc)}
+  .pb-cta{font-size:1rem;margin:10px 0 8px;color:var(--paper);letter-spacing:.02em}
+  .pb p{font-size:.82rem;color:var(--paper-dim);line-height:1.65}
+
+  /* ---------- DCA SIMULATOR ---------- */
+  .dca{border:1px solid var(--line);border-radius:var(--r);background:var(--panel);padding:32px}
+  .dca-bar{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+  .dca-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:24px;margin-top:28px}
+  .dca-field > label, .dca-field > .dca-label{
+    font-family:var(--mono);font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--paper-faint);display:block;margin-bottom:11px;
+  }
+  .dca-num{
+    width:100%;font-family:var(--mono);font-size:1rem;font-weight:700;
+    background:var(--ink);border:1px solid var(--line);border-radius:4px;
+    color:var(--paper);padding:10px 14px;font-variant-numeric:tabular-nums;
+    transition:border-color .2s ease;
+  }
+  .dca-num::-webkit-outer-spin-button,.dca-num::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+  .dca-num:disabled{opacity:.35;cursor:not-allowed}
+  .dca-num::placeholder{color:var(--paper-faint);font-weight:400}
+  .dca-existing{grid-column:1/-1}
+  .dca-existing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:24px;max-width:560px}
+  .dca-sublabel{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--paper-faint);display:block;margin-bottom:9px}
+  .toggle[hidden]{display:none}
+  .dca-amt-toggle{margin-bottom:10px}
+  .dca-amt-toggle button{padding:7px 11px;font-size:9.5px}
+  #dcaSrcField .toggle{margin-bottom:2px}
+  .dca-srcwarn{color:var(--summer)}
+  .dca-trim{margin-top:10px;font-size:9px;padding:7px 14px}
+  .dca-trim[hidden]{display:none}
+  input.dca-num[type=number]{-moz-appearance:textfield;appearance:textfield}
+  .dca-num:focus{outline:none;border-color:var(--accent)}
+  .dca-field .unit{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--paper-faint);margin-top:8px;display:block}
+  input.dca-num[type=date]{background:transparent;color-scheme:dark;cursor:pointer}
+  input.dca-num[type=date]::-webkit-calendar-picker-indicator{opacity:.55;cursor:pointer;transition:opacity .2s ease}
+  input.dca-num[type=date]:hover::-webkit-calendar-picker-indicator{opacity:1}
+  .dca-warn{
+    font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:var(--winter);
+    border:1px dashed rgba(143,182,217,.5);border-radius:4px;
+    padding:8px 12px;margin-top:20px;display:inline-block;
+  }
+  .dca-warn[hidden]{display:none}
+  .dca-note{font-family:var(--mono);font-size:.74rem;color:var(--summer);margin-top:16px;letter-spacing:.03em}
+  .dca-seasons{grid-column:1/-1}
+  .dca-seasons .chips{margin-top:0}
+  .season-chip{text-transform:uppercase;letter-spacing:.1em}
+  .season-chip.on{border-color:var(--sc);color:var(--sc)}
+  .season-chip.on:hover{border-color:var(--sc);color:var(--sc);background:rgba(240,237,230,.05)}
+  .dca-blend{font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:var(--winter);margin-top:16px}
+  .dca-chart-bar{display:flex;justify-content:flex-end;gap:10px;margin-top:26px}
+  .dca-chart-box{position:relative;height:300px;margin-top:12px}
+  .dca-chart-box.selecting canvas{cursor:crosshair}
+  @media (max-width:640px){.dca-chart-box{height:240px}}
+
+  /* ---------- FOOTER ---------- */
+  footer{margin-top:140px;padding:44px 0 60px;border-top:1px solid var(--line-soft);text-align:center;color:var(--paper-faint);font-size:.8rem}
+  footer .credit{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--paper-dim)}
+  footer .credit a{
+    color:var(--accent-hi);text-decoration:none;font-weight:700;
+    transition:color .2s ease;
+  }
+  footer .credit a:hover{color:var(--accent)}
+  footer .warn{font-family:var(--mono);font-size:.68rem;letter-spacing:.04em;max-width:680px;margin:18px auto 0;line-height:1.95;text-transform:uppercase;opacity:.7}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:880px){
+    header{padding-top:130px}
+    .observatory{grid-template-columns:1fr;padding:26px;gap:30px}
+    .next{grid-template-columns:1fr}
+    section{margin-top:96px}
+    .topnav{padding:14px 20px}
+  }
+  @media (max-width:780px){
+    .lhead{display:none}
+    .lrow{
+      grid-template-columns:1fr 1fr;grid-template-areas:
+        "pill dur"
+        "top bot"
+        "dd dd";
+      row-gap:12px;padding:18px;
+    }
+    .lrow .pill-cell{grid-area:pill}
+    .lrow .dur{grid-area:dur}
+    .lrow .ev.top{grid-area:top}
+    .lrow .ev.bot{grid-area:bot}
+    .lrow .ddwrap{grid-area:dd}
+    .ev::before{
+      content:attr(data-m);display:block;
+      font-family:var(--mono);font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--paper-faint);margin-bottom:3px;
+    }
+  }
+
+</style>
+</head>
+<body>
+<canvas class="stars" id="stars" aria-hidden="true"></canvas>
+<nav class="topnav">
+  <a class="tn-home" href="#top" aria-label="Bitcoin Quant · back to top">
+    <svg class="tn-mark" viewBox="0 0 64 64" aria-hidden="true">
+      <circle cx="32" cy="32" r="26" fill="none" stroke="#3A3631" stroke-width="4"/>
+      <path class="mark-arc" d="M 19.5 9.2 A 26 26 0 0 1 44.5 9.2" fill="none" stroke-width="4" stroke-linecap="round"/>
+      <text x="32" y="43" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="31" font-weight="700" fill="var(--paper)" text-anchor="middle">₿</text>
+    </svg>
+    <span class="tn-brand">BTC<i>[</i>QUANT<i>]</i></span>
+  </a>
+  <div class="tn-links">
+    <a href="#data">The data</a>
+    <a href="#thesis">The thesis</a>
+    <a href="#takeaways">Takeaways</a>
+    <a href="#dca">DCA tool</a>
+  </div>
+  <a class="tn-link" href="https://x.com/Lyskey" target="_blank" rel="noopener noreferrer">By Lyskey 🥷</a>
+</nav>
+<main>
+
+  <!-- ============ HERO ============ -->
+  <header id="top">
+    <span class="eyebrow">Bitcoin Quant · Cycle IV · Last updated June 2026</span>
+    <h1>The four seasons<br>of <em>Bitcoin</em></h1>
+    <p class="sub">Every ~4 years, the halving restarts the cycle: first comes <strong>euphoria</strong>, then <strong>distribution</strong>, then <strong>capitulation</strong>, and finally <strong>accumulation</strong>.<br>We start with the raw data, then see where the cycle's hand takes us.</p>
+  </header>
+
+  <!-- ============ METHOD ============ -->
+  <section class="method" id="data">
+    <div class="sec-head"><span class="sec-num">00</span><h2>What all of this is built on</h2></div>
+    <button class="method-toggle" id="methodToggle" aria-expanded="false" aria-controls="methodBody">
+      <span class="mtg-arrow">▸</span> Show the underlying data: intervals, sources &amp; contractions
+    </button>
+
+    <div class="method-body" id="methodBody">
+    <div class="method-inner">
+    <p class="sec-sub" style="margin:22px 0 4px">Every visual below rests on two empirical patterns:<br>(1) a stubbornly regular <b style="color:var(--paper);font-weight:500">temporality</b>,<br>(2) a steady <b style="color:var(--paper);font-weight:500">contraction in price amplitude</b>.</p>
+    <h3 class="mt-subhead"><span>(1)</span> A stubbornly regular temporality</h3>
+    <div class="mt-grid">
+      <div class="mtable">
+        <div class="mt-title">① Top → bottom · per cycle</div>
+        <table>
+          <thead><tr><th>Cycle</th><th>Top</th><th>Bottom</th><th class="r">Days</th></tr></thead>
+          <tbody>
+            <tr><td>2011</td><td>June 9, 2011</td><td>Nov. 18, 2011</td><td class="r">162</td></tr>
+            <tr><td>2013–15</td><td>Nov. 29, 2013</td><td>Jan. 14, 2015</td><td class="r">411</td></tr>
+            <tr><td>2017–18</td><td>Dec. 17, 2017</td><td>Dec. 15, 2018</td><td class="r">363</td></tr>
+            <tr><td>2021–22</td><td>Nov. 10, 2021</td><td>Nov. 21, 2022</td><td class="r">376</td></tr>
+            <tr class="pend"><td>2025–?</td><td>Oct. 6, 2025</td><td>not confirmed</td><td class="r">248 ↗</td></tr>
+          </tbody>
+        </table>
+        <div class="mt-note">Mature cycles bleed <b>~383 days</b> on average (12–14 months).</div>
+      </div>
+
+      <div class="mtable">
+        <div class="mt-title">② Bottom → bottom · inter-cycle</div>
+        <table>
+          <thead><tr><th>From → to</th><th class="r">Days</th></tr></thead>
+          <tbody>
+            <tr><td>Nov. 18, 2011 → Jan. 14, 2015</td><td class="r">1,153</td></tr>
+            <tr class="hot"><td>Jan. 14, 2015 → Dec. 15, 2018</td><td class="r">1,431</td></tr>
+            <tr class="hot"><td>Dec. 15, 2018 → Nov. 21, 2022</td><td class="r">1,437</td></tr>
+          </tbody>
+        </table>
+        <div class="mt-note">Average <b>~1,340 days</b> (~3.67 yrs), and just <b>1,431 / 1,437</b> on the last two.</div>
+      </div>
+
+      <div class="mtable">
+        <div class="mt-title">③ Top → top · inter-cycle</div>
+        <table>
+          <thead><tr><th>From → to</th><th class="r">Days</th></tr></thead>
+          <tbody>
+            <tr><td>June 9, 2011 → Nov. 29, 2013</td><td class="r">904</td></tr>
+            <tr><td>Nov. 29, 2013 → Dec. 17, 2017</td><td class="r">1,479</td></tr>
+            <tr class="hot"><td>Dec. 17, 2017 → Nov. 10, 2021</td><td class="r">1,424</td></tr>
+            <tr class="hot"><td>Nov. 10, 2021 → Oct. 6, 2025</td><td class="r">1,426</td></tr>
+          </tbody>
+        </table>
+        <div class="mt-note">Avg with 2025: ~1,308 d (~3.58 yrs). Excluding the 2011 mini-cycle: <b>~1,443 d (~3.95 yrs)</b>, and the last two land at <b>1,424 / 1,426</b>, two days apart.</div>
+      </div>
+    </div>
+
+    <h3 class="mt-subhead"><span>(2)</span> A steady contraction in price amplitude</h3>
+    <div class="ct-grid">
+      <div class="ct">
+        <div class="mt-title">④ The multiples shrink · halving price → top</div>
+        <div class="ct-flow">
+          <span class="m" style="color:var(--spring)">×94</span><span class="arrow">→</span>
+          <span class="m" style="color:var(--summer)">×30</span><span class="arrow">→</span>
+          <span class="m" style="color:var(--autumn)">×8</span><span class="arrow">→</span>
+          <span class="m" style="color:var(--btc)">×2</span><span class="arrow">→</span>
+          <span class="m proj-m">~×1.8?</span><span class="arrow">→</span>
+          <span class="m proj-m">~×1.6?</span>
+        </div>
+        <div class="mt-note">Each cycle's blow-off is a fraction of the previous one: the market grows, the rocket fuel dilutes. Extending the log-decay: <b>~×1.8</b> for cycle V, <b>~×1.6</b> for cycle VI.</div>
+      </div>
+      <div class="ct">
+        <div class="mt-title">⑤ The drawdowns compress · top → bottom</div>
+        <div class="ct-flow">
+          <span class="m" style="color:var(--autumn)">−94%</span><span class="arrow">→</span>
+          <span class="m" style="color:var(--autumn)">−87%</span><span class="arrow">→</span>
+          <span class="m" style="color:var(--autumn)">−84%</span><span class="arrow">→</span>
+          <span class="m" style="color:var(--autumn)">−77.5%</span><span class="arrow">→</span>
+          <span class="m proj-m">~−72/−73%?</span>
+        </div>
+        <div class="mt-note">~<b>5.4 points of compression per cycle</b> on average. If the rhyme holds, Cycle 5's drawdown lands near −72/−73%. Test other assumptions with the slider in section III.</div>
+      </div>
+    </div>
+
+    <p class="mt-src">Dates: <b>Bitbo</b> (2011 high June 9 · 2013 high Nov. 29 · 2018 low Dec. 15 · 2022 low Nov. 21) · <b>VanEck</b> (2017 top Dec. 17) · <b>Axios</b> (Coinbase record Nov. 10, 2021) · <b>CoinMarketCap</b> (ATH $126,198, Oct. 6, 2025). Figures can shift by 1–5 days depending on the exchange, daily close vs intraday. The current cycle has no confirmed bottom: 248 days since the top, "top to bottom" is only measurable in hindsight.</p>
+    </div>
+    </div>
+  </section>
+
+  <!-- ============ DIAL ============ -->
+  <div class="observatory">
+    <div class="dial-wrap">
+      <svg id="dial" viewBox="0 0 520 520" role="img" aria-label="Bitcoin 4-year cycle clock"></svg>
+      <div class="dial-center">
+        <div class="dc-emoji" id="dcEmoji">❄️</div>
+        <div class="dc-phase" id="dcPhase">Crypto winter</div>
+        <div class="dc-date" id="dcDate">June 10, 2026</div>
+        <div class="dc-price" id="dcPrice">≈ $61,500</div>
+        <div class="dc-proj" id="dcProj" hidden>Projection</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>You are here.</h2>
+      <p class="lede">The needle marks the position within the cycle, from one halving to the next. Drag the slider from 2012 to today, and beyond into the projected cycles V &amp; VI (shown in blue).</p>
+
+      <div class="season-cta" id="seasonCta">
+        <span class="sc-k" id="scKey">Season play</span>
+        <span class="sc-t" id="scTxt">…</span>
+      </div>
+
+      <div class="readout">
+        <div class="ro-cell"><div class="ro-label">Cycle</div><div class="ro-val" id="roCycle">IV · 2024–2028</div></div>
+        <div class="ro-cell"><div class="ro-label">Cycle day</div><div class="ro-val" id="roDay">D+781 / ~1456</div></div>
+        <div class="ro-cell"><div class="ro-label">Since the top</div><div class="ro-val" id="roTop">…</div></div>
+        <div class="ro-cell"><div class="ro-label">Price (approx.)</div><div class="ro-val accent" id="roPrice">…</div></div>
+      </div>
+
+      <div class="scrub">
+        <label for="timeScrub">Time travel · 2012 → today → <span style="color:var(--winter)">2034 (projection)</span></label>
+        <div class="scrub-track">
+          <input type="range" id="timeScrub" min="0" max="1000" value="1000" aria-label="Bitcoin cycle time slider">
+          <div class="scrub-future" id="scrubFuture" aria-hidden="true"></div>
+        </div>
+        <div class="chips" id="chips"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SEASON PLAYBOOK ============ -->
+  <div class="playbook-wrap">
+    <button class="method-toggle" id="playbookToggle" aria-expanded="false" aria-controls="playbookBody">
+      <span class="mtg-arrow">▸</span> 🎯 Season playbook: what to do in each season
+    </button>
+    <div class="method-body" id="playbookBody">
+      <div class="method-inner">
+    <div class="playbook">
+      <div class="pb-grid">
+        <div class="pb" style="--pc:#8FBF7C">
+          <div class="pb-s">🌱 Spring · Accumulation</div>
+          <div class="pb-cta">Quiet, boring DCA</div>
+          <p>Buy while nobody's watching. Boredom is the discount; build the bag before the crowd returns.</p>
+        </div>
+        <div class="pb" style="--pc:#E8A33D">
+          <div class="pb-s">☀️ Summer · Bull run</div>
+          <div class="pb-cta">Ride, then ladder out</div>
+          <p>Let the trend pay you, and DCA your sells on the way up. Euphoria is an exit signal, not an entry.</p>
+        </div>
+        <div class="pb" style="--pc:#E2614F">
+          <div class="pb-s">🍂 Autumn · The fall</div>
+          <div class="pb-cta">Wait. Don't be a hero</div>
+          <p>No falling knives. Cash is a position; patience is the trade. Let capitulation come to you.</p>
+        </div>
+        <div class="pb" style="--pc:#8FB6D9">
+          <div class="pb-s">❄️ Winter · Crypto winter</div>
+          <div class="pb-cta">Survive</div>
+          <p>Protect capital first. Slow DCA if convinced, study, touch grass.</p>
+        </div>
+      </div>
+    </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ CHART ============ -->
+  <section id="thesis">
+    <div class="sec-head"><span class="sec-num">01</span><h2>Four cycles, one rhyme</h2></div>
+
+    <div class="chart-card">
+      <div class="chart-toolbar">
+        <div class="toggle" role="tablist" aria-label="Chart mode">
+          <button id="btnChrono" class="active" role="tab" aria-selected="true">Chronological</button>
+          <button id="btnOverlay" role="tab" aria-selected="false">Overlay (D0 = halving)</button>
+        </div>
+        <div class="legend" id="legend"></div>
+        <div class="chips" id="chartSeasons" aria-label="Season overlay">
+          <button class="chip season-ov-chip" data-season="spring" style="--sc:var(--spring)" title="Spring · accumulation">🌱</button>
+          <button class="chip season-ov-chip" data-season="summer" style="--sc:var(--summer)" title="Summer · bull run">☀️</button>
+          <button class="chip season-ov-chip" data-season="autumn" style="--sc:var(--autumn)" title="Autumn · the fall">🍂</button>
+          <button class="chip season-ov-chip" data-season="winter" style="--sc:var(--winter)" title="Winter · crypto winter">❄️</button>
+        </div>
+        <button class="share-btn" id="shareBtn" title="Share or download this chart as an image">📤 Share</button>
+      </div>
+      <div class="chart-box">
+        <canvas id="chart"></canvas>
+        <div class="tooltip" id="tooltip"></div>
+      </div>
+      <p class="chart-note">⛏ halving · ☀ cycle top · ❄ cycle bottom. Hover or tap the curves to explore. In overlay mode, <b style="color:var(--paper-dim)">click the legend to show / hide cycles</b>.</p>
+    </div>
+  </section>
+
+  <!-- ============ CYCLES ============ -->
+  <section>
+    <div class="sec-head"><span class="sec-num">02</span><h2>The cycle ledger</h2></div>
+    <p class="sec-sub">Same score every time: a top 12 to 18 months after the halving, then a 75 to 86% drawdown. But the amplitude is contracting: the market grows, the multiples get smaller.</p>
+
+    <div class="cycles" id="cycleCards"></div>
+
+    <div class="multiples" aria-label="Multiples per cycle, from halving to top">
+      <span class="m" style="color:var(--spring)">×94</span><span class="arrow">→</span>
+      <span class="m" style="color:var(--summer)">×30</span><span class="arrow">→</span>
+      <span class="m" style="color:var(--autumn)">×8</span><span class="arrow">→</span>
+      <span class="m" style="color:var(--btc)">×2</span><span class="arrow">→</span>
+      <span class="m proj-m">~×1.8?</span><span class="arrow">→</span>
+      <span class="m proj-m">~×1.6?</span>
+      <span class="cap">halving price → top multiple · the law of diminishing returns · <span style="color:var(--winter)">dashed = projected (cycles V &amp; VI)</span></span>
+    </div>
+  </section>
+
+  <!-- ============ BEAR LEDGER ============ -->
+  <section>
+    <div class="sec-head"><span class="sec-num">03</span><h2>The anatomy of bear markets</h2></div>
+    <p class="sec-sub">Five cycle tops, followed by five brutal resets.<br>Numbered from the 2011 top onward, each cycle gives the same conclusion: the drawdown remains violent, but the amplitude keeps compressing as Bitcoin matures.<br>Use the projection below and test the pattern yourself.<br><span class="num-note">Numbering note: bears are counted from the 2011 top, one cycle before the first halving, so bear cycle N = halving cycle N−1 (e.g. bear cycle 6 = halving cycle V of the ledger above).</span></p>
+
+    <div class="ledger">
+      <div class="lhead">
+        <span>Cycle</span>
+        <span>Top (ATH)</span>
+        <span>Next bottom</span>
+        <span>Drawdown top → bottom</span>
+        <span style="text-align:right">Bear length</span>
+      </div>
+      <div id="rows"></div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-head">
+        <h3>Bottom projection · Cycle 5</h3>
+        <span class="proj-tag">extrapolation · not a prophecy</span>
+      </div>
+      <p class="explain">Drawdowns compress by <b>~5.4 points per cycle</b> on average (−94 → −87 → −84 → −77.5). If the rhyme holds, Cycle 5's drawdown would land near <b>−72/−73%</b>. The slider lets you test other assumptions.</p>
+
+      <div class="slider-zone">
+        <div class="slider-head">
+          <label for="comp">Compression vs cycle 4 (−77.5%)</label>
+          <output id="compOut">−5.4 pts</output>
+        </div>
+        <input type="range" id="comp" min="0" max="12" step="0.1" value="5.4" aria-label="Drawdown compression in points">
+        <div class="presets">
+          <button class="chip" data-v="0">Same fall (−77.5%)</button>
+          <button class="chip active" data-v="5.4">Historical average (−5.4 pts)</button>
+          <button class="chip" data-v="9">Softer bear (−9 pts)</button>
+        </div>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <div class="k">Projected C5 drawdown</div>
+          <div class="v red" id="projDd">−72.7%</div>
+          <div class="n">from the $126,198 top</div>
+        </div>
+        <div class="card hero">
+          <div class="k">Estimated bottom target</div>
+          <div class="v gold" id="projBot">$34K – $36K</div>
+          <div class="n" id="projWhen">…</div>
+        </div>
+        <div class="card">
+          <div class="k">Remaining path</div>
+          <div class="v" id="projPath">−44%</div>
+          <div class="n">from ~$61,500 today</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ NEXT ============ -->
+  <section>
+    <div class="sec-head"><span class="sec-num">04</span><h2>What if history rhymes again?</h2></div>
+    <div class="next">
+      <div>
+        <span class="proj-tag">Projection · grain of salt required</span>
+        <h3>The theoretical bottom</h3>
+        <p>Two clocks are ticking toward the same window.<br><br>The first one starts at the top: in mature Bitcoin cycles, top → bottom took 411, 363, and 376 days, about <b>383 days on average</b>. From the Oct. 6, 2025 top, that points to <b>late Oct. / Nov. 2026</b>.<br><br>The second one starts at the last bottom: bottom → bottom took <b>1,431 and 1,437 days</b> across the last two cycles. From Nov. 21, 2022, that also lands around <b>late Oct. 2026</b>.<br><br>Where we are: 248 days since the top, no confirmed bottom yet.</p>
+      </div>
+      <div class="milestones">
+        <div class="ms-title">Projected milestones · if the pattern repeats (it never repeats exactly)</div>
+        <div class="ms-grid">
+          <div class="ms"><span class="ms-g" style="color:var(--winter)">❄</span><b>Bottom C5</b><span>~late Oct. 2026</span><span class="ms-p">~$35K</span></div>
+          <div class="ms"><span class="ms-g" style="color:var(--brass)">⛏</span><b>Halving V</b><span>Apr. 2028</span><span class="ms-p"></span></div>
+          <div class="ms"><span class="ms-g" style="color:var(--summer)">☀</span><b>Top C6</b><span>~Sep. 2029</span><span class="ms-p">~$165K</span></div>
+          <div class="ms"><span class="ms-g" style="color:var(--winter)">❄</span><b>Bottom C6</b><span>~Oct. 2030</span><span class="ms-p">~$54K</span></div>
+          <div class="ms"><span class="ms-g" style="color:var(--brass)">⛏</span><b>Halving VI</b><span>~Apr. 2032</span><span class="ms-p"></span></div>
+          <div class="ms"><span class="ms-g" style="color:var(--summer)">☀</span><b>Top C7</b><span>~Aug. 2033</span><span class="ms-p">~$190K</span></div>
+          <div class="ms"><span class="ms-g" style="color:var(--winter)">❄</span><b>Bottom C7</b><span>~Sep. 2034</span><span class="ms-p">~$72K</span></div>
+        </div>
+      </div>
+      <div>
+        <h3>The next halving</h3>
+        <p>The 5th halving is expected around <b>April 2028</b>. The block reward will drop from 3.125 to 1.5625 BTC, an impact on issuance that has become almost symbolic.</p>
+        <div class="countdown"><span id="cdDays">…</span><small>days to go (est.)</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TAKEAWAYS ============ -->
+  <section id="takeaways">
+    <div class="sec-head"><span class="sec-num">05</span><h2>The takeaways</h2></div>
+
+    <div class="tk-grid">
+      <div class="tk-records">
+        <div class="tk-title">📜 The records · every top &amp; bottom</div>
+        <div class="rec">
+          <span class="rec-name" style="--rc:#8B7FD6">2011 · The First Mania</span>
+          <span class="rec-top">☀ June 9, 2011 · <b>$31.9</b></span>
+          <span class="rec-bot">❄ Nov. 18, 2011 · <b>$2.05</b></span>
+        </div>
+        <div class="rec">
+          <span class="rec-name" style="--rc:#5FAE8E">2013 · The Wild West</span>
+          <span class="rec-top">☀ Nov. 29, 2013 · <b>$1,163</b></span>
+          <span class="rec-bot">❄ Jan. 14, 2015 · <b>$152</b></span>
+        </div>
+        <div class="rec">
+          <span class="rec-name" style="--rc:#C9A23F">2017 · The ICO Mania</span>
+          <span class="rec-top">☀ Dec. 17, 2017 · <b>$19,783</b></span>
+          <span class="rec-bot">❄ Dec. 15, 2018 · <b>$3,122</b></span>
+        </div>
+        <div class="rec">
+          <span class="rec-name" style="--rc:#C96B4A">2021 · The Institutional Wave</span>
+          <span class="rec-top">☀ Nov. 10, 2021 · <b>$68,789</b></span>
+          <span class="rec-bot">❄ Nov. 21, 2022 · <b>$15,476</b></span>
+        </div>
+        <div class="rec live">
+          <span class="rec-name" style="--rc:#E8A33D">2025 · The ETF Cycle <em>● live</em></span>
+          <span class="rec-top">☀ Oct. 6, 2025 · <b>$126,198</b></span>
+          <span class="rec-bot proj">❄ proj. late Oct. 2026 · <b>~$35K</b></span>
+        </div>
+        <div class="rec proj">
+          <span class="rec-name" style="--rc:#8FB6D9">2029 · Projected Cycle VI</span>
+          <span class="rec-top proj">☀ ~Sep. 2029 · <b>~$165K</b></span>
+          <span class="rec-bot proj">❄ ~Oct. 2030 · <b>~$54K</b></span>
+        </div>
+        <div class="rec proj">
+          <span class="rec-name" style="--rc:#8FB6D9">2033 · Projected Cycle VII</span>
+          <span class="rec-top proj">☀ ~Aug. 2033 · <b>~$190K</b></span>
+          <span class="rec-bot proj">❄ ~Sep. 2034 · <b>~$72K</b></span>
+        </div>
+      </div>
+
+      <div class="tk-rules">
+        <div class="tk-title">🧭 The rhythm · five rules of thumb</div>
+        <div class="rule"><span class="rule-g">⛏→☀</span><div><b>Tops land 520–550 days after the halving.</b><span>366 d in 2013, then 526, 548, 534: eerily tight on the last three.</span></div></div>
+        <div class="rule"><span class="rule-g">☀→❄</span><div><b>Top → bottom: ~383 days on average.</b><span>162 d (2011) → 411 → 363 → 376. The mature cycles bleed for 12–14 months.</span></div></div>
+        <div class="rule"><span class="rule-g">☀→☀</span><div><b>Top → top: ~1,425 days (3.9 yrs).</b><span>1,424 d then 1,426 d on the last two, and Oct. 6, 2025 fell 1,426 d after Nov. 2021.</span></div></div>
+        <div class="rule"><span class="rule-g">❄→❄</span><div><b>Bottom → bottom: ~1,434 days on the last two.</b><span>1,153 d (2011 → 2015), then 1,431 and 1,437. From Nov. 21, 2022, the clock points to ~late Oct. 2026.</span></div></div>
+        <div class="rule"><span class="rule-g">📉</span><div><b>The violence fades each round.</b><span>Drawdowns compress ~5.4 pts/cycle (−94 → −77.5) and multiples shrink ×94 → ×30 → ×8 → ×2.</span></div></div>
+        <div class="rule status"><span class="rule-g">⏳</span><div><b>Where we stand: day 248 since the top.</b><span>No confirmed bottom yet for the current cycle: "top to bottom" can only be measured in hindsight.</span></div></div>
+        <div class="rule wisdom"><span class="rule-g">🎯</span><div><b>If the temporality plays out again, remember one thing: you will never catch the exact top or bottom.</b><span>The edge is not precision, it is preparation: DCA aggressively (buying or selling) across the strategic windows, instead of betting everything on a single date.</span></div></div>
+      </div>
+    </div>
+
+    <div class="tk-playbook">
+      <div class="tk-title">🎯 The optimized playbook · if the thesis confirms</div>
+      <div class="tk-pb-grid">
+        <div class="tk-pb">
+          <div class="tk-pb-k" style="--pk:var(--spring)">Accumulate · now to mid-2027</div>
+          <p>Weekly DCA from today through the projected bottom window (~$35K, late Oct. 2026) and beyond. Buying the whole $35-50K zone matters more than catching the exact low: a steady weekly plan lands an average cost basis around $42-45K. In season terms: aggressive in winter and spring, slow down when summer returns.</p>
+        </div>
+        <div class="tk-pb">
+          <div class="tk-pb-k" style="--pk:var(--accent-hi)">Distribute · Mar. to Nov. 2029</div>
+          <p>The 520-550 day post-halving rule points the next top to ~Sep. 2029 (~$165K). Start laddering out early, around $120-130K, and sell weekly through the window: that prices the average exit near $140-150K, roughly 15% below the top. Sell only in summer. Never be a hero in autumn.</p>
+        </div>
+        <div class="tk-pb">
+          <div class="tk-pb-k" style="--pk:var(--winter)">The asymmetry to remember</div>
+          <p>Being 3 months early or late inside the accumulation zone costs almost nothing: prices flatline in the cave. Being 3 months late on the exit is expensive: the post-top bleed runs ~380 days. So: a wide, boring buy window, and a sell window that starts early and ends before autumn. Full loop on the projection: buy ~$44K avg, sell ~$145K avg, about ×3.3 on invested capital in 3 years.</p>
+        </div>
+      </div>
+      <p class="tk-pb-foot">test any variant of this plan in the <a href="#dca">DCA tool</a> below<small>pattern extrapolation, not financial advice</small></p>
+    </div>
+
+  </section>
+
+  <!-- ============ DCA SIMULATOR ============ -->
+  <section id="dca">
+    <div class="sec-head"><span class="sec-num">06</span><h2>The DCA simulator</h2></div>
+    <p class="sec-sub">You will never catch the exact top or bottom, so spread your orders instead. Pick a side: accumulate on the way down, or ladder out of a stack on the way up. Every number below is computed from this page's own price path (solid history, then the dashed projection) and recalculates live as you move the controls.</p>
+
+    <div class="dca">
+      <div class="dca-bar">
+        <div class="toggle" role="tablist" aria-label="Simulator mode">
+          <button id="dcaBuyBtn" class="active" role="tab" aria-selected="true">DCA Buy</button>
+          <button id="dcaSellBtn" role="tab" aria-selected="false">DCA Sell</button>
+        </div>
+        <div class="toggle" role="tablist" aria-label="Order frequency">
+          <button id="dcaWeekBtn" role="tab" aria-selected="false">Every week</button>
+          <button id="dcaMonthBtn" class="active" role="tab" aria-selected="true">Every month</button>
+        </div>
+      </div>
+
+      <div class="dca-grid">
+        <div class="dca-field">
+          <label for="dcaStart">Start date</label>
+          <input type="date" class="dca-num" id="dcaStart" value="2026-06-12" min="2012-01-01" max="2034-12-01" aria-label="DCA start date">
+          <span class="unit" id="dcaStartHint">today</span>
+        </div>
+        <div class="dca-field">
+          <label for="dcaEnd">End date</label>
+          <input type="date" class="dca-num" id="dcaEnd" value="2031-06-12" min="2012-01-01" max="2034-12-01" aria-label="DCA end date">
+          <span class="unit" id="dcaEndOut">≈ 5.0 yrs · 61 monthly buys</span>
+        </div>
+        <div class="dca-field">
+          <label for="dcaAmount">Amount per period</label>
+          <div class="toggle dca-amt-toggle" id="dcaAmtModes" hidden>
+            <button data-am="btc">BTC / sell</button>
+            <button data-am="pctper">% / sell</button>
+            <button data-am="totalpct" class="active">total %</button>
+          </div>
+          <input type="number" class="dca-num" id="dcaAmount" min="0" step="any" value="2000" inputmode="decimal">
+          <span class="unit" id="dcaAmtUnit">USD per buy</span>
+          <span class="unit" id="dcaAmtDetail" hidden></span>
+        </div>
+        <div class="dca-field" id="dcaPctField">
+          <label for="dcaPct">% below cycle top</label>
+          <input type="number" class="dca-num" id="dcaPct" min="1" max="99" step="1" value="15" inputmode="numeric">
+          <span class="unit">how far below the projected top you sell on average</span>
+        </div>
+        <div class="dca-field dca-existing" id="dcaSrcField" hidden>
+          <span class="dca-label">Sell stack source</span>
+          <div class="toggle" role="tablist" aria-label="Sell stack source">
+            <button id="srcPlanBtn" class="active" role="tab" aria-selected="true">From my buy plan</button>
+            <button id="srcCustomBtn" role="tab" aria-selected="false">Custom stack</button>
+          </div>
+          <span class="unit" id="dcaSrcInfo"></span>
+          <button class="share-btn dca-trim" id="dcaTrimBtn" hidden>Trim buy plan to sell start</button>
+        </div>
+        <div class="dca-field dca-existing">
+          <span class="dca-label">Existing stack · optional</span>
+          <div class="dca-existing-grid">
+            <div>
+              <label class="dca-sublabel" for="dcaStack">BTC you already hold</label>
+              <input type="number" class="dca-num" id="dcaStack" min="0" step="0.0001" placeholder="0.0" inputmode="decimal">
+            </div>
+            <div>
+              <label class="dca-sublabel" for="dcaBasis">Your avg cost basis ($/BTC)</label>
+              <input type="number" class="dca-num" id="dcaBasis" min="0" step="100" inputmode="decimal" disabled>
+            </div>
+          </div>
+          <span class="unit">empty = off · in sell mode: adds to the buy plan stack, or is the custom stack</span>
+        </div>
+        <div class="dca-field dca-seasons">
+          <span class="dca-label">Seasons</span>
+          <div class="chips" id="dcaSeasons">
+            <button class="chip season-chip" data-season="spring" style="--sc:var(--spring)">🌱 Spring</button>
+            <button class="chip season-chip" data-season="summer" style="--sc:var(--summer)">☀️ Summer</button>
+            <button class="chip season-chip" data-season="autumn" style="--sc:var(--autumn)">🍂 Autumn</button>
+            <button class="chip season-chip" data-season="winter" style="--sc:var(--winter)">❄️ Winter</button>
+          </div>
+          <span class="unit">optional · pick seasons to automate your DCA inside them · none selected = every scheduled date executes</span>
+        </div>
+      </div>
+
+      <p class="dca-warn" id="dcaWarn" hidden>projection data ends Dec 2034 · period clamped</p>
+      <p class="dca-note" id="dcaNote" hidden></p>
+
+      <div class="dca-chart-bar">
+        <button class="share-btn" id="dcaViewBtn" title="Toggle between the full series and the plan window">Full view</button>
+        <button class="share-btn" id="dcaSelectBtn" title="Pick the DCA window directly on the chart">Select range on chart</button>
+      </div>
+      <div class="dca-chart-box">
+        <canvas id="dcaChart"></canvas>
+        <div class="tooltip" id="dcaTooltip"></div>
+      </div>
+
+      <p class="dca-blend" id="dcaBlend" hidden>blends real history and projection</p>
+
+      <div class="cards" id="dcaCards"></div>
+
+      <p class="chart-note">assumes BTC follows this page's cycle path: solid history, then the dashed projection of sections 01 and 04 · pattern extrapolation, not a forecast · this is not investment advice, do your own research</p>
+    </div>
+  </section>
+
+  <footer>
+    <p class="credit">Made with ♥ by <a href="https://x.com/Lyskey" target="_blank" rel="noopener noreferrer">Lyskey</a> 🥷</p>
+    <p class="warn">The dashed projection is a pattern extrapolation, NOT a forecast: 4 cycles do not make a statistic, and each cycle has broken the previous one's script somewhere. This is not investment advice, do your own research.<br>This extrapolation exists just for the record, and for the fun of it.</p>
+  </footer>
+</main>
+
+<script>
+/* =====================================================
+   DATA (approximate, illustration only)
+   ===================================================== */
+const D = (y,m,d=15)=>Date.UTC(y,m-1,d);
+const DAY = 86400000;
+
+// Approximate monthly prices (USD)
+const MONTHLY = [
+[2012,7,9],[2012,8,10],[2012,9,12],[2012,10,11],[2012,11,12.5],[2012,12,13.5],
+[2013,1,20],[2013,2,33],[2013,3,93],[2013,4,139],[2013,5,128],[2013,6,97],[2013,7,106],[2013,8,141],[2013,9,141],[2013,10,211],[2013,11,1163],[2013,12,805],
+[2014,1,940],[2014,2,580],[2014,3,480],[2014,4,450],[2014,5,630],[2014,6,640],[2014,7,590],[2014,8,480],[2014,9,390],[2014,10,340],[2014,11,375],[2014,12,320],
+[2015,1,217],[2015,2,254],[2015,3,244],[2015,4,236],[2015,5,230],[2015,6,263],[2015,7,284],[2015,8,230],[2015,9,236],[2015,10,314],[2015,11,377],[2015,12,430],
+[2016,1,368],[2016,2,437],[2016,3,416],[2016,4,448],[2016,5,531],[2016,6,673],[2016,7,650],[2016,8,575],[2016,9,610],[2016,10,700],[2016,11,745],[2016,12,963],
+[2017,1,970],[2017,2,1180],[2017,3,1080],[2017,4,1350],[2017,5,2300],[2017,6,2480],[2017,7,2875],[2017,8,4700],[2017,9,4360],[2017,10,6450],[2017,11,9900],[2017,12,19783],
+[2018,1,10200],[2018,2,10300],[2018,3,6900],[2018,4,9240],[2018,5,7500],[2018,6,6400],[2018,7,7780],[2018,8,7030],[2018,9,6600],[2018,10,6300],[2018,11,4020],[2018,12,3400],
+[2019,1,3460],[2019,2,3850],[2019,3,4100],[2019,4,5320],[2019,5,8560],[2019,6,10800],[2019,7,10080],[2019,8,9630],[2019,9,8290],[2019,10,9150],[2019,11,7550],[2019,12,7190],
+[2020,1,9350],[2020,2,8550],[2020,3,6440],[2020,4,8630],[2020,5,9450],[2020,6,9140],[2020,7,11350],[2020,8,11650],[2020,9,10780],[2020,10,13800],[2020,11,19700],[2020,12,29000],
+[2021,1,33100],[2021,2,45200],[2021,3,58800],[2021,4,57750],[2021,5,37300],[2021,6,35040],[2021,7,41460],[2021,8,47100],[2021,9,43790],[2021,10,61300],[2021,11,65000],[2021,12,46200],
+[2022,1,38480],[2022,2,43190],[2022,3,45540],[2022,4,37640],[2022,5,31790],[2022,6,19980],[2022,7,23300],[2022,8,20050],[2022,9,19430],[2022,10,20490],[2022,11,16500],[2022,12,16550],
+[2023,1,23130],[2023,2,23140],[2023,3,28480],[2023,4,29250],[2023,5,27220],[2023,6,30470],[2023,7,29230],[2023,8,25930],[2023,9,26960],[2023,10,34660],[2023,11,37720],[2023,12,42270],
+[2024,1,42580],[2024,2,61200],[2024,3,71330],[2024,4,64000],[2024,5,67540],[2024,6,62680],[2024,7,64620],[2024,8,58970],[2024,9,63330],[2024,10,70220],[2024,11,96450],[2024,12,93430],
+[2025,1,102400],[2025,2,84350],[2025,3,82550],[2025,4,94200],[2025,5,104600],[2025,6,107100],[2025,7,115800],[2025,8,108200],[2025,9,114000],[2025,10,120000],[2025,11,95000],[2025,12,88000],
+[2026,1,80000],[2026,2,74000],[2026,3,70000],[2026,4,66000],[2026,5,64000],[2026,6,61500]
+].map(([y,m,p])=>({t:D(y,m), p}));
+
+const TODAY = D(2026,6,10);
+
+const HALVINGS = [
+  {t:D(2012,11,28), p:12.35, label:"Halving I"},
+  {t:D(2016,7,9),   p:650,   label:"Halving II"},
+  {t:D(2020,5,11),  p:8600,  label:"Halving III"},
+  {t:D(2024,4,20),  p:63850, label:"Halving IV"},
+  {t:D(2028,4,15),  p:null,  label:"Halving V (est.)"}
+];
+const TOPS = [
+  {t:D(2013,11,29), p:1163,   label:"Top 2013"},
+  {t:D(2017,12,17), p:19783,  label:"Top 2017"},
+  {t:D(2021,11,10), p:68789,  label:"Top 2021"},
+  {t:D(2025,10,6),  p:126198, label:"Top 2025"}
+];
+const BOTTOMS = [
+  {t:D(2015,1,14),  p:152,   label:"Bottom 2015"},
+  {t:D(2018,12,15), p:3122,  label:"Bottom 2018"},
+  {t:D(2022,11,21), p:15476, label:"Bottom 2022"},
+  {t:D(2026,10,28), p:35000, label:"Bottom 2026 (proj.)", projected:true}
+];
+
+/* ============ PATTERN-BASED PROJECTION (next 2 cycles) ============
+   Built by repeating the historical temporality:
+   bottom ~12-14 months after top · halvings ~every 4 yrs (Apr 2028, Apr 2032)
+   tops ~520-550 days after halvings · log-decay of cycle multiples
+   drawdown compression ~5 pts per cycle. ILLUSTRATIVE ONLY. */
+const PROJ = [
+[2026,7,57000],[2026,8,51000],[2026,9,44000],[2026,10,35000],[2026,11,36500],[2026,12,38500],
+[2027,1,42000],[2027,2,45500],[2027,3,50000],[2027,4,48000],[2027,5,52500],[2027,6,56000],[2027,7,60000],[2027,8,57500],[2027,9,61500],[2027,10,67000],[2027,11,73000],[2027,12,78000],
+[2028,1,81000],[2028,2,88000],[2028,3,96000],[2028,4,93000],[2028,5,97000],[2028,6,92000],[2028,7,95500],[2028,8,91000],[2028,9,97000],[2028,10,104000],[2028,11,115000],[2028,12,121000],
+[2029,1,128000],[2029,2,118000],[2029,3,115000],[2029,4,124000],[2029,5,134000],[2029,6,141000],[2029,7,149000],[2029,8,157000],[2029,9,165000],[2029,10,152000],[2029,11,142000],[2029,12,133000],
+[2030,1,122000],[2030,2,111000],[2030,3,102000],[2030,4,106000],[2030,5,93000],[2030,6,82000],[2030,7,86000],[2030,8,75000],[2030,9,64000],[2030,10,54000],[2030,11,57000],[2030,12,60000],
+[2031,1,62500],[2031,2,66500],[2031,3,71000],[2031,4,69000],[2031,5,75000],[2031,6,80000],[2031,7,85000],[2031,8,82000],[2031,9,88000],[2031,10,94000],[2031,11,101000],[2031,12,106000],
+[2032,1,110000],[2032,2,117000],[2032,3,124000],[2032,4,121000],[2032,5,126000],[2032,6,120000],[2032,7,124000],[2032,8,119000],[2032,9,125000],[2032,10,132000],[2032,11,142000],[2032,12,150000],
+[2033,1,156000],[2033,2,148000],[2033,3,154000],[2033,4,161000],[2033,5,169000],[2033,6,176000],[2033,7,183000],[2033,8,190000],[2033,9,178000],[2033,10,167000],[2033,11,156000],[2033,12,147000],
+[2034,1,137000],[2034,2,124000],[2034,3,113000],[2034,4,117000],[2034,5,104000],[2034,6,93000],[2034,7,85000],[2034,8,78000],[2034,9,72000],[2034,10,75000],[2034,11,78000],[2034,12,81000]
+].map(([y,m,p])=>({t:D(y,m), p}));
+
+const PROJ_EVENTS = {
+  halvings:[ {t:D(2028,4,15), label:"Halving V (est.)"}, {t:D(2032,4,15), label:"Halving VI (est.)"} ],
+  tops:[ {t:D(2029,9,20), p:165000, label:"Top C6 (proj.)"}, {t:D(2033,8,25), p:190000, label:"Top C7 (proj.)"} ],
+  bottoms:[ {t:D(2026,10,28), p:35000, label:"Bottom C5 (proj.)"}, {t:D(2030,10,5), p:54000, label:"Bottom C6 (proj.)"}, {t:D(2034,9,15), p:72000, label:"Bottom C7 (proj.)"} ]
+};
+
+const CYCLES = [
+  {n:"I",  years:"2012 – 2016", color:"#8FBF7C", halving:HALVINGS[0], top:TOPS[0], bottom:BOTTOMS[0], next:HALVINGS[1], dd:"−87%", mult:"×94", d2t:366},
+  {n:"II", years:"2016 – 2020", color:"#E8A33D", halving:HALVINGS[1], top:TOPS[1], bottom:BOTTOMS[1], next:HALVINGS[2], dd:"−84%", mult:"×30", d2t:526},
+  {n:"III",years:"2020 – 2024", color:"#E2614F", halving:HALVINGS[2], top:TOPS[2], bottom:BOTTOMS[2], next:HALVINGS[3], dd:"−78%", mult:"×8",  d2t:548},
+  {n:"IV", years:"2024 – 2028", color:"#E8540F", halving:HALVINGS[3], top:TOPS[3], bottom:BOTTOMS[3], next:HALVINGS[4], dd:"−51% so far*", mult:"×2", d2t:534, live:true}
+];
+
+/* projected cycles so the seasons clock can spin into the future */
+const PROJ_CYCLES = [
+  {n:"V",  years:"2028 – 2032", color:"#8FB6D9", projected:true,
+   halving:{t:D(2028,4,15), p:93000},  top:{t:D(2029,9,20), p:165000},
+   bottom:{t:D(2030,10,5), p:54000, projected:true}, next:{t:D(2032,4,15)}},
+  {n:"VI", years:"2032 – 2036", color:"#8FB6D9", projected:true,
+   halving:{t:D(2032,4,15), p:121000}, top:{t:D(2033,8,25), p:190000},
+   bottom:{t:D(2034,9,15), p:72000, projected:true}, next:{t:D(2036,4,15)}}
+];
+const ALL_CYCLES = CYCLES.concat(PROJ_CYCLES);
+const ALL_TOPS = TOPS.concat(PROJ_EVENTS.tops);
+
+const SEASONS = {
+  ete:{name:"Summer · Bull run", emoji:"☀️", color:"#E8A33D",
+    cta:"Ride the trend and ladder out sells on the way up. Euphoria is an exit signal, not an entry."},
+  automne:{name:"Autumn · The fall", emoji:"🍂", color:"#E2614F",
+    cta:"Don't catch falling knives. Patience: cash is a position. Let capitulation come to you."},
+  hiver:{name:"Crypto winter", emoji:"❄️", color:"#8FB6D9",
+    cta:"Survive first. Protect capital, slow DCA if convinced, touch grass."},
+  printemps:{name:"Spring · Accumulation", emoji:"🌱", color:"#8FBF7C",
+    cta:"Quiet, boring DCA. Build the bag while nobody's watching, before the crowd comes back."}
+};
+
+/* =====================================================
+   HELPERS
+   ===================================================== */
+const fmtEN = new Intl.DateTimeFormat('en-US',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'});
+const fmtPrice = p => {
+  if(p>=1000) return "$" + Math.round(p).toLocaleString('en-US');
+  return "$" + (Math.round(p*10)/10).toLocaleString('en-US');
+};
+
+/* exact event anchors so the dial shows precise prices on key dates,
+   + projected monthly path so the dial can travel into the future */
+const SERIES = MONTHLY
+  .concat([
+    {t:D(2013,11,29), p:1163},  {t:D(2015,1,14),  p:152},
+    {t:D(2017,12,17), p:19783}, {t:D(2018,12,15), p:3122},
+    {t:D(2021,11,10), p:68789}, {t:D(2022,11,21), p:15476},
+    {t:D(2025,10,6),  p:126198},{t:TODAY,         p:61500}
+  ])
+  .concat(PROJ)
+  .sort((a,b)=>a.t-b.t);
+
+function priceAt(t){
+  const a = SERIES;
+  if(t<=a[0].t) return a[0].p;
+  if(t>=a[a.length-1].t) return a[a.length-1].p;
+  for(let i=0;i<a.length-1;i++){
+    if(t>=a[i].t && t<=a[i+1].t){
+      const f=(t-a[i].t)/(a[i+1].t-a[i].t);
+      return Math.pow(10, Math.log10(a[i].p)+f*(Math.log10(a[i+1].p)-Math.log10(a[i].p)));
+    }
+  }
+  return a[a.length-1].p;
+}
+
+function cycleFor(t){
+  for(let i=ALL_CYCLES.length-1;i>=0;i--){
+    if(t>=ALL_CYCLES[i].halving.t) return ALL_CYCLES[i];
+  }
+  return ALL_CYCLES[0];
+}
+
+function seasonFor(t, c){
+  const tTop = c.top.t;
+  const tBot = c.bottom.t; // projected for cycle IV
+  const tMid = tTop + (tBot - tTop)*0.45;
+  if(t < tTop) return SEASONS.ete;
+  if(t < tMid) return SEASONS.automne;
+  if(t < tBot) return SEASONS.hiver;
+  return SEASONS.printemps;
+}
+
+/* contiguous season segments between t0 and t1, same anchors as seasonFor / the dial */
+function seasonSegments(t0,t1){
+  const segs=[];
+  ALL_CYCLES.forEach((cy,i)=>{
+    const a0=i===0?Math.min(cy.halving.t,t0):cy.halving.t;
+    const tMid=cy.top.t+(cy.bottom.t-cy.top.t)*0.45;
+    [[a0,cy.top.t,'summer',SEASONS.ete.color],
+     [cy.top.t,tMid,'autumn',SEASONS.automne.color],
+     [tMid,cy.bottom.t,'winter',SEASONS.hiver.color],
+     [cy.bottom.t,cy.next.t,'spring',SEASONS.printemps.color]
+    ].forEach(s=>{
+      const A=Math.max(s[0],t0),B=Math.min(s[1],t1);
+      if(B>A) segs.push({a:A,b:B,key:s[2],color:s[3]});
+    });
+  });
+  return segs;
+}
+
+/* =====================================================
+   STARFIELD
+   ===================================================== */
+(function(){
+  const cv=document.getElementById('stars'), ctx=cv.getContext('2d');
+  function draw(){
+    const w=cv.width=innerWidth*devicePixelRatio, h=cv.height=innerHeight*devicePixelRatio;
+    cv.style.width=innerWidth+'px';cv.style.height=innerHeight+'px';
+    ctx.clearRect(0,0,w,h);
+    const n=Math.floor(innerWidth*innerHeight/9000);
+    let seed=42; const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647};
+    for(let i=0;i<n;i++){
+      const x=rnd()*w,y=rnd()*h,r=rnd()*1.4*devicePixelRatio,o=0.08+rnd()*0.5;
+      ctx.beginPath();ctx.arc(x,y,r,0,7);
+      ctx.fillStyle=`rgba(240,237,230,${o*0.45})`;ctx.fill();
+    }
+  }
+  draw(); addEventListener('resize',draw);
+})();
+
+/* =====================================================
+   DIAL (SVG)
+   ===================================================== */
+const dial = document.getElementById('dial');
+const CX=260, CY=260, R=210;
+const a2r = f => (f*360-90)*Math.PI/180;
+const ptOn = (f,r)=>({x:CX+r*Math.cos(a2r(f)), y:CY+r*Math.sin(a2r(f))});
+
+function arcPath(f0,f1,r){
+  const p0=ptOn(f0,r), p1=ptOn(f1,r);
+  const large = (f1-f0)>0.5?1:0;
+  return `M ${p0.x.toFixed(2)} ${p0.y.toFixed(2)} A ${r} ${r} 0 ${large} 1 ${p1.x.toFixed(2)} ${p1.y.toFixed(2)}`;
+}
+
+let dialCycle=null;
+function buildDial(c){
+  dialCycle=c;
+  const span = c.next.t - c.halving.t;
+  const fTop = (c.top.t - c.halving.t)/span;
+  const fMid = (c.top.t + (c.bottom.t-c.top.t)*0.45 - c.halving.t)/span;
+  const fBot = (c.bottom.t - c.halving.t)/span;
+
+  const segs = [
+    {f0:0, f1:fTop, col:SEASONS.ete.color},
+    {f0:fTop, f1:fMid, col:SEASONS.automne.color},
+    {f0:fMid, f1:fBot, col:SEASONS.hiver.color},
+    {f0:fBot, f1:1, col:SEASONS.printemps.color}
+  ];
+
+  let svg = `
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <circle cx="${CX}" cy="${CY}" r="${R+24}" fill="none" stroke="rgba(168,164,156,.18)" stroke-width="1"/>
+  <circle cx="${CX}" cy="${CY}" r="${R-36}" fill="none" stroke="rgba(168,164,156,.12)" stroke-width="1" stroke-dasharray="2 5"/>
+  <circle cx="${CX}" cy="${CY}" r="118" fill="rgba(18,17,16,.55)" stroke="rgba(168,164,156,.22)" stroke-width="1"/>`;
+
+  // season arcs
+  segs.forEach(s=>{
+    svg += `<path d="${arcPath(s.f0+0.004, s.f1-0.004, R)}" fill="none" stroke="${s.col}" stroke-width="13" stroke-linecap="round" opacity=".85"/>`;
+  });
+
+  // yearly ticks
+  const years = Math.round(span/DAY/365.25);
+  for(let y=1;y<years;y++){
+    const f=y*365.25*DAY/span;
+    const p0=ptOn(f,R-22), p1=ptOn(f,R-10);
+    svg += `<line x1="${p0.x}" y1="${p0.y}" x2="${p1.x}" y2="${p1.y}" stroke="rgba(168,164,156,.5)" stroke-width="1.5"/>`;
+    const pt=ptOn(f,R-52);
+    svg += `<text x="${pt.x}" y="${pt.y}" fill="rgba(240,237,230,.45)" font-family="IBM Plex Mono, monospace" font-size="11" text-anchor="middle" dominant-baseline="middle">+${y} yr${y>1?'s':''}</text>`;
+  }
+
+  // event glyphs
+  const ev = [
+    {f:0, glyph:"⛏", title:"Halving", col:"#A8A49C"},
+    {f:fTop, glyph:"☀", title:"Top", col:SEASONS.ete.color},
+    {f:fBot, glyph:"❄", title:"Bottom"+(c.bottom.projected?" (projected)":""), col:SEASONS.hiver.color}
+  ];
+  ev.forEach(e=>{
+    const p=ptOn(e.f,R+24+18);
+    svg += `<text x="${p.x}" y="${p.y}" font-size="17" text-anchor="middle" dominant-baseline="middle" fill="${e.col}"><title>${e.title}</title>${e.glyph}</text>`;
+    const q0=ptOn(e.f,R+10), q1=ptOn(e.f,R+24+6);
+    svg += `<line x1="${q0.x}" y1="${q0.y}" x2="${q1.x}" y2="${q1.y}" stroke="${e.col}" stroke-width="1" opacity=".6" ${e.f===fBot&&c.bottom.projected?'stroke-dasharray="3 3"':''}/>`;
+  });
+
+  // season labels (centered on each arc, inner ring)
+  const labs=[
+    {f:(0+fTop)/2, txt:"SUMMER"},
+    {f:(fTop+fMid)/2, txt:"AUTUMN"},
+    {f:(fMid+fBot)/2, txt:"WINTER"},
+    {f:(fBot+1)/2, txt:"SPRING"}
+  ];
+  labs.forEach((l,i)=>{
+    const p=ptOn(l.f,R-78);
+    svg += `<text x="${p.x}" y="${p.y}" fill="${segs[i].col}" opacity=".75" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="2.5" text-anchor="middle" dominant-baseline="middle">${l.txt}</text>`;
+  });
+
+  // needle (group updated separately)
+  svg += `<g id="needle">
+    <line id="needleLine" x1="${CX}" y1="${CY}" x2="${CX}" y2="${CY-R+6}" stroke="#E8540F" stroke-width="2.5" filter="url(#glow)"/>
+    <circle id="needleDot" cx="${CX}" cy="${CY-R+6}" r="7" fill="#E8540F" filter="url(#glow)"/>
+    <circle cx="${CX}" cy="${CY}" r="5" fill="#A8A49C"/>
+  </g>`;
+
+  dial.innerHTML = svg;
+}
+
+function setNeedle(f){
+  const p = ptOn(f, R-2);
+  const line=document.getElementById('needleLine');
+  const dot=document.getElementById('needleDot');
+  if(!line) return;
+  line.setAttribute('x2',p.x); line.setAttribute('y2',p.y);
+  dot.setAttribute('cx',p.x); dot.setAttribute('cy',p.y);
+}
+
+/* =====================================================
+   TIME STATE + READOUTS
+   ===================================================== */
+const scrub = document.getElementById('timeScrub');
+const T0 = HALVINGS[0].t, T1 = PROJ[PROJ.length-1].t;
+
+function setTime(t, fromScrub=false){
+  t=Math.min(Math.max(t,T0),T1);
+  if(!fromScrub) scrub.value = Math.round((t-T0)/(T1-T0)*1000);
+
+  const c = cycleFor(t);
+  if(dialCycle!==c) buildDial(c);
+  const span=c.next.t-c.halving.t;
+  const f=(t-c.halving.t)/span;
+  setNeedle(f);
+
+  const s = seasonFor(t,c);
+  const isFuture = t>TODAY;
+  document.getElementById('dcEmoji').textContent=s.emoji;
+  const ph=document.getElementById('dcPhase');
+  ph.textContent=s.name; ph.style.color=s.color;
+  document.getElementById('dcDate').textContent=fmtEN.format(t);
+  const price=priceAt(t);
+  const dcP=document.getElementById('dcPrice');
+  dcP.textContent=(isFuture?"~ ":"≈ ")+fmtPrice(price);
+  dcP.style.color=isFuture?'var(--winter)':'var(--btc)';
+  document.getElementById('dcProj').hidden=!isFuture;
+
+  const cta=document.getElementById('scTxt');
+  cta.textContent=s.cta;
+  document.getElementById('seasonCta').style.borderColor=s.color+'66';
+  document.getElementById('scKey').style.color=s.color;
+
+  document.getElementById('roCycle').textContent=c.n+(c.projected?' (proj.)':'')+" · "+c.years.replace(/\s/g,'');
+  const dayN=Math.round((t-c.halving.t)/DAY);
+  document.getElementById('roDay').textContent="D+"+dayN+" / ~"+Math.round(span/DAY);
+  const lastTop=[...ALL_TOPS].reverse().find(x=>x.t<=t);
+  if(lastTop){
+    const dd=(price/lastTop.p-1)*100;
+    const days=Math.round((t-lastTop.t)/DAY);
+    document.getElementById('roTop').textContent=
+      (dd<=-0.5? dd.toFixed(0).replace('-','−')+"%" : "at the top ☀")+" · "+days+" d";
+  } else {
+    document.getElementById('roTop').textContent="before the 1st top";
+  }
+  const roP=document.getElementById('roPrice');
+  roP.textContent=(isFuture?"~ ":"≈ ")+fmtPrice(price);
+  roP.style.color=isFuture?'var(--winter)':'var(--btc)';
+
+  chartScrubT=t;
+  drawChart();
+}
+
+scrub.addEventListener('input',()=>{
+  const t=T0+(scrub.value/1000)*(T1-T0);
+  setTime(t,true);
+});
+
+// chips
+const chipDefs=[
+  ...TOPS.map(x=>({t:x.t,label:"☀ '"+new Date(x.t).getUTCFullYear().toString().slice(2)})),
+  ...BOTTOMS.filter(b=>!b.projected).map(x=>({t:x.t,label:"❄ '"+new Date(x.t).getUTCFullYear().toString().slice(2)})),
+  {t:TODAY,label:"● Today",now:true},
+  {t:D(2026,10,28),label:"❄ '26",proj:true},
+  {t:D(2029,9,20), label:"☀ '29",proj:true},
+  {t:D(2030,10,5), label:"❄ '30",proj:true},
+  {t:D(2033,8,25), label:"☀ '33",proj:true},
+  {t:D(2034,9,15), label:"❄ '34",proj:true}
+].sort((a,b)=>a.t-b.t);
+const chipsBox=document.getElementById('chips');
+chipDefs.forEach(cd=>{
+  const b=document.createElement('button');
+  b.className='chip'+(cd.now?' now':'')+(cd.proj?' proj':'');
+  b.textContent=cd.label;
+  b.addEventListener('click',()=>setTime(cd.t));
+  chipsBox.appendChild(b);
+});
+
+// mark the future portion of the slider
+(function(){
+  const f=(TODAY-T0)/(T1-T0)*100;
+  const el=document.getElementById('scrubFuture');
+  el.style.left=f+'%'; el.style.width=(100-f)+'%';
+})();
+
+/* =====================================================
+   CHART (canvas)
+   ===================================================== */
+const cvs=document.getElementById('chart');
+const ctx=cvs.getContext('2d');
+const tooltip=document.getElementById('tooltip');
+let mode='chrono';
+let chartScrubT=TODAY;
+let hover=null;
+const chartSeasonsOn={spring:false,summer:false,autumn:false,winter:false};
+
+const btnC=document.getElementById('btnChrono'), btnO=document.getElementById('btnOverlay');
+function setMode(m){
+  mode=m;
+  btnC.classList.toggle('active',m==='chrono');
+  btnO.classList.toggle('active',m==='overlay');
+  btnC.setAttribute('aria-selected',m==='chrono');
+  btnO.setAttribute('aria-selected',m==='overlay');
+  document.getElementById('chartSeasons').hidden=(m==='overlay');
+  hover=null; tooltip.style.opacity=0;
+  buildLegend(); drawChart();
+}
+btnC.addEventListener('click',()=>setMode('chrono'));
+btnO.addEventListener('click',()=>setMode('overlay'));
+
+function buildLegend(){
+  const lg=document.getElementById('legend');
+  if(mode==='chrono'){
+    lg.innerHTML=`<span><span class="dot" style="background:#A8A49C"></span>halving</span>
+      <span><span class="dot" style="background:#E8A33D"></span>top</span>
+      <span><span class="dot" style="background:#8FB6D9"></span>bottom</span>
+      <span><span class="dot" style="background:#E8540F"></span>cursor</span>
+      <span><span class="dot" style="background:transparent;border:1.5px dashed #8FB6D9"></span>projection</span>`;
+  } else {
+    lg.innerHTML=
+      CYCLES.map(c=>`<button class="lg-btn${visCycles[c.n]?'':' off'}" data-k="${c.n}"><span class="dot" style="background:${c.color}"></span>Cycle ${c.n}</button>`).join('')+
+      PROJ_CYCLES.map(pc=>`<button class="lg-btn${visCycles[pc.n]?'':' off'}" data-k="${pc.n}"><span class="dot" style="background:transparent;border:1.5px dashed ${PROJ_CYCLE_COLORS[pc.n]}"></span>Cycle ${pc.n} <small>proj.</small></button>`).join('');
+  }
+}
+buildLegend();
+
+// toggle curves by clicking the legend (overlay mode)
+document.getElementById('legend').addEventListener('click',e=>{
+  const b=e.target.closest('.lg-btn'); if(!b||mode!=='overlay') return;
+  const k=b.dataset.k;
+  visCycles[k]=!visCycles[k];
+  hover=null; tooltip.style.opacity=0;
+  buildLegend(); drawChart();
+});
+
+// season overlay chips (chrono mode only, hidden in overlay)
+document.querySelectorAll('#chartSeasons .season-ov-chip').forEach(ch=>{
+  ch.addEventListener('click',()=>{
+    chartSeasonsOn[ch.dataset.season]=!chartSeasonsOn[ch.dataset.season];
+    ch.classList.toggle('on',chartSeasonsOn[ch.dataset.season]);
+    drawChart();
+  });
+});
+
+function sizeCanvas(){
+  const r=cvs.parentElement.getBoundingClientRect();
+  const dpr=Math.min(devicePixelRatio||1,2);
+  cvs.width=r.width*dpr; cvs.height=r.height*dpr;
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  return {w:r.width,h:r.height};
+}
+
+const PAD={l:56,r:18,t:16,b:34};
+
+function drawChart(){
+  const {w,h}=sizeCanvas();
+  ctx.clearRect(0,0,w,h);
+  if(mode==='chrono') drawChrono(w,h); else drawOverlay(w,h);
+}
+
+function yLog(v,vmin,vmax,h){
+  const lv=Math.log10(v), l0=Math.log10(vmin), l1=Math.log10(vmax);
+  return h-PAD.b-( (lv-l0)/(l1-l0) )*(h-PAD.t-PAD.b);
+}
+
+function gridStyle(){ctx.strokeStyle='rgba(168,164,156,.12)';ctx.lineWidth=1;ctx.setLineDash([]);}
+function axisText(){ctx.fillStyle='rgba(240,237,230,.4)';ctx.font='10px IBM Plex Mono, monospace';}
+
+function drawChrono(w,h){
+  const t0=MONTHLY[0].t, tNow=MONTHLY[MONTHLY.length-1].t, t1=PROJ[PROJ.length-1].t;
+  const x=t=>PAD.l+(t-t0)/(t1-t0)*(w-PAD.l-PAD.r);
+  const vmin=5, vmax=300000;
+  const y=v=>yLog(v,vmin,vmax,h);
+
+  // projection zone shading
+  ctx.fillStyle='rgba(143,182,217,.045)';
+  ctx.fillRect(x(tNow),PAD.t,(w-PAD.r)-x(tNow),h-PAD.t-PAD.b);
+  ctx.fillStyle='rgba(143,182,217,.6)';
+  ctx.font='9px IBM Plex Mono, monospace';
+  ctx.fillText("PAST / PRESENT", PAD.l+6, PAD.t+10);
+  ctx.fillText("PROJECTION →", x(tNow)+8, PAD.t+10);
+
+  // season overlay bands (toolbar chips), under everything price-related
+  seasonSegments(t0,t1).forEach(s=>{
+    if(!chartSeasonsOn[s.key]) return;
+    ctx.globalAlpha=.07; ctx.fillStyle=s.color;
+    ctx.fillRect(x(s.a),PAD.t,x(s.b)-x(s.a),h-PAD.t-PAD.b);
+    ctx.globalAlpha=1;
+  });
+
+  // horizontal grid (powers of 10)
+  gridStyle(); axisText();
+  [10,100,1000,10000,100000].forEach(v=>{
+    ctx.beginPath();ctx.moveTo(PAD.l,y(v));ctx.lineTo(w-PAD.r,y(v));ctx.stroke();
+    ctx.fillText(v>=1000? "$"+(v/1000)+'k' : "$"+v, 8, y(v)+3);
+  });
+  // years (odd)
+  for(let yr=2013;yr<=2034;yr++){
+    const t=D(yr,1,1); if(t<t0||t>t1)continue;
+    if(yr%2===1){ctx.fillText(""+yr, x(t)-12, h-12);}
+  }
+
+  // historical halvings
+  HALVINGS.slice(0,4).forEach(hv=>{
+    ctx.strokeStyle='rgba(168,164,156,.45)';ctx.setLineDash([4,5]);ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(x(hv.t),PAD.t);ctx.lineTo(x(hv.t),h-PAD.b);ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle='rgba(168,164,156,.8)';ctx.font='12px IBM Plex Mono, monospace';
+    ctx.fillText("⛏", x(hv.t)-6, PAD.t+22);
+  });
+  // projected halvings (fainter)
+  PROJ_EVENTS.halvings.forEach(hv=>{
+    ctx.strokeStyle='rgba(168,164,156,.25)';ctx.setLineDash([2,5]);ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(x(hv.t),PAD.t);ctx.lineTo(x(hv.t),h-PAD.b);ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle='rgba(168,164,156,.45)';ctx.font='12px IBM Plex Mono, monospace';
+    ctx.fillText("⛏", x(hv.t)-6, PAD.t+22);
+  });
+
+  // "today" divider
+  ctx.strokeStyle='rgba(143,182,217,.4)';ctx.lineWidth=1;ctx.setLineDash([1,3]);
+  ctx.beginPath();ctx.moveTo(x(tNow),PAD.t);ctx.lineTo(x(tNow),h-PAD.b);ctx.stroke();ctx.setLineDash([]);
+
+  // historical curve (solid)
+  ctx.beginPath();
+  MONTHLY.forEach((m,i)=>{const xx=x(m.t),yy=y(m.p); i?ctx.lineTo(xx,yy):ctx.moveTo(xx,yy);});
+  ctx.strokeStyle='rgba(240,237,230,.9)';ctx.lineWidth=1.8;ctx.lineJoin='round';ctx.stroke();
+
+  // soft fill under history only
+  ctx.lineTo(x(tNow),h-PAD.b);ctx.lineTo(x(t0),h-PAD.b);ctx.closePath();
+  const g=ctx.createLinearGradient(0,PAD.t,0,h-PAD.b);
+  g.addColorStop(0,'rgba(232,84,15,.10)');g.addColorStop(1,'rgba(232,84,15,0)');
+  ctx.fillStyle=g;ctx.fill();
+
+  // projected curve (dashed, blue)
+  ctx.beginPath();
+  const lastM=MONTHLY[MONTHLY.length-1];
+  ctx.moveTo(x(lastM.t),y(lastM.p));
+  PROJ.forEach(m=>ctx.lineTo(x(m.t),y(m.p)));
+  ctx.setLineDash([6,4]);
+  ctx.strokeStyle='rgba(143,182,217,.85)';ctx.lineWidth=1.6;ctx.lineJoin='round';ctx.stroke();
+  ctx.setLineDash([]);
+
+  // historical tops / bottoms (filled)
+  TOPS.forEach(tp=>{
+    ctx.beginPath();ctx.arc(x(tp.t),y(tp.p),5,0,7);
+    ctx.fillStyle='#E8A33D';ctx.fill();
+    ctx.strokeStyle='#121110';ctx.lineWidth=1.5;ctx.stroke();
+  });
+  BOTTOMS.filter(b=>!b.projected).forEach(bt=>{
+    ctx.beginPath();ctx.arc(x(bt.t),y(bt.p),5,0,7);
+    ctx.fillStyle='#8FB6D9';ctx.fill();
+    ctx.strokeStyle='#121110';ctx.lineWidth=1.5;ctx.stroke();
+  });
+  // projected tops / bottoms (hollow, dashed ring)
+  PROJ_EVENTS.tops.forEach(tp=>{
+    ctx.beginPath();ctx.arc(x(tp.t),y(tp.p),5,0,7);
+    ctx.fillStyle='#121110';ctx.fill();
+    ctx.strokeStyle='#E8A33D';ctx.lineWidth=1.8;ctx.setLineDash([2,2]);ctx.stroke();ctx.setLineDash([]);
+  });
+  PROJ_EVENTS.bottoms.forEach(bt=>{
+    ctx.beginPath();ctx.arc(x(bt.t),y(bt.p),5,0,7);
+    ctx.fillStyle='#121110';ctx.fill();
+    ctx.strokeStyle='#8FB6D9';ctx.lineWidth=1.8;ctx.setLineDash([2,2]);ctx.stroke();ctx.setLineDash([]);
+  });
+
+  // time cursor (orange in the past, blue in the projection)
+  if(chartScrubT>=t0&&chartScrubT<=t1){
+    const fut=chartScrubT>tNow;
+    const col=fut?'#8FB6D9':'#E8540F';
+    const xx=x(chartScrubT), pp=priceAt(chartScrubT);
+    ctx.setLineDash([2,4]);ctx.strokeStyle=fut?'rgba(143,182,217,.5)':'rgba(232,84,15,.5)';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(xx,PAD.t);ctx.lineTo(xx,h-PAD.b);ctx.stroke();ctx.setLineDash([]);
+    ctx.beginPath();ctx.arc(xx,y(pp),6,0,7);
+    ctx.fillStyle=col;ctx.fill();
+    ctx.strokeStyle='#121110';ctx.lineWidth=2;ctx.stroke();
+  }
+
+  // hover
+  if(hover&&hover.mode==='chrono'){
+    const xx=x(hover.t),yy=y(hover.p);
+    ctx.beginPath();ctx.arc(xx,yy,4.5,0,7);
+    ctx.fillStyle=hover.proj?'#8FB6D9':'#F0EDE6';ctx.fill();
+  }
+
+  drawChrono._x=x; drawChrono._y=y; drawChrono._t0=t0; drawChrono._t1=t1;
+}
+
+function cyclePoints(ci){
+  const c=CYCLES[ci];
+  const end=Math.min(c.next.t, MONTHLY[MONTHLY.length-1].t);
+  return MONTHLY.filter(m=>m.t>=c.halving.t&&m.t<=end)
+    .map(m=>({d:(m.t-c.halving.t)/DAY, v:m.p/c.halving.p, t:m.t, p:m.p}));
+}
+
+// monthly points of a fully projected cycle (V, VI), normalized to its halving price
+function projCyclePoints(pc){
+  return PROJ.filter(m=>m.t>=pc.halving.t && m.t<pc.next.t)
+    .map(m=>({d:(m.t-pc.halving.t)/DAY, v:m.p/pc.halving.p, t:m.t, p:m.p}));
+}
+
+// which curves are shown in overlay mode (toggled via the legend)
+const visCycles={I:true,II:true,III:true,IV:true,V:true,VI:true};
+const PROJ_CYCLE_COLORS={V:"#8FB6D9", VI:"#8B7FD6"};
+
+function drawOverlay(w,h){
+  const dmax=1500;
+  const x=d=>PAD.l+(d/dmax)*(w-PAD.l-PAD.r);
+  const vmin=0.3, vmax=120;
+  const y=v=>yLog(v,vmin,vmax,h);
+
+  gridStyle(); axisText();
+  [0.5,1,2,5,10,30,90].forEach(v=>{
+    ctx.beginPath();ctx.moveTo(PAD.l,y(v));ctx.lineTo(w-PAD.r,y(v));ctx.stroke();
+    ctx.fillText("×"+v, 14, y(v)+3);
+  });
+  [0,365,730,1095,1460].forEach(d=>{
+    const xx=x(d);
+    ctx.beginPath();ctx.moveTo(xx,PAD.t);ctx.lineTo(xx,h-PAD.b);
+    ctx.strokeStyle='rgba(168,164,156,.08)';ctx.stroke();
+    ctx.fillText(d===0?"D0 ⛏":("+"+Math.round(d/365)+" yr"+(d>365?'s':'')), xx-14, h-12);
+  });
+
+  // ×1 line
+  ctx.strokeStyle='rgba(168,164,156,.35)';ctx.setLineDash([5,5]);
+  ctx.beginPath();ctx.moveTo(PAD.l,y(1));ctx.lineTo(w-PAD.r,y(1));ctx.stroke();ctx.setLineDash([]);
+
+  // historical cycles (solid)
+  CYCLES.forEach((c,ci)=>{
+    if(!visCycles[c.n]) return;
+    const pts=cyclePoints(ci);
+    ctx.beginPath();
+    pts.forEach((p,i)=>{const xx=x(p.d),yy=y(p.v); i?ctx.lineTo(xx,yy):ctx.moveTo(xx,yy);});
+    ctx.strokeStyle=c.color;
+    ctx.lineWidth=ci===3?2.8:1.6;
+    ctx.globalAlpha=ci===3?1:0.8;
+    ctx.lineJoin='round';ctx.stroke();
+    ctx.globalAlpha=1;
+    // top marker
+    const ft=(c.top.t-c.halving.t)/DAY, fv=c.top.p/c.halving.p;
+    ctx.beginPath();ctx.arc(x(ft),y(fv),4.5,0,7);
+    ctx.fillStyle=c.color;ctx.fill();
+    ctx.strokeStyle='#121110';ctx.lineWidth=1.5;ctx.stroke();
+  });
+
+  // projected continuation of cycle IV (dashed)
+  if(visCycles.IV){
+    const c4h=CYCLES[3];
+    const histPts=cyclePoints(3);
+    const cont=PROJ.filter(m=>m.t<HALVINGS[4].t).map(m=>({d:(m.t-c4h.halving.t)/DAY, v:m.p/c4h.halving.p}));
+    if(cont.length&&histPts.length){
+      ctx.beginPath();
+      const lp=histPts[histPts.length-1];
+      ctx.moveTo(x(lp.d),y(lp.v));
+      cont.forEach(pt=>ctx.lineTo(x(pt.d),y(pt.v)));
+      ctx.setLineDash([6,4]);ctx.strokeStyle='rgba(143,182,217,.85)';ctx.lineWidth=1.6;ctx.stroke();ctx.setLineDash([]);
+    }
+  }
+
+  // fully projected cycles V & VI (dashed, their own colors)
+  PROJ_CYCLES.forEach(pc=>{
+    if(!visCycles[pc.n]) return;
+    const pts=projCyclePoints(pc);
+    if(!pts.length) return;
+    ctx.beginPath();
+    pts.forEach((p,i)=>{const xx=x(p.d),yy=y(p.v); i?ctx.lineTo(xx,yy):ctx.moveTo(xx,yy);});
+    ctx.setLineDash([6,4]);
+    ctx.strokeStyle=PROJ_CYCLE_COLORS[pc.n];
+    ctx.lineWidth=1.6;ctx.globalAlpha=.9;ctx.lineJoin='round';ctx.stroke();
+    ctx.globalAlpha=1;ctx.setLineDash([]);
+    // hollow top marker
+    const ft=(pc.top.t-pc.halving.t)/DAY, fv=pc.top.p/pc.halving.p;
+    ctx.beginPath();ctx.arc(x(ft),y(fv),4.5,0,7);
+    ctx.fillStyle='#121110';ctx.fill();
+    ctx.strokeStyle=PROJ_CYCLE_COLORS[pc.n];ctx.lineWidth=1.8;ctx.setLineDash([2,2]);ctx.stroke();ctx.setLineDash([]);
+  });
+
+  // current position, cycle IV
+  if(visCycles.IV){
+    const c4=CYCLES[3];
+    const dNow=(TODAY-c4.halving.t)/DAY, vNow=priceAt(TODAY)/c4.halving.p;
+    ctx.beginPath();ctx.arc(x(dNow),y(vNow),6,0,7);
+    ctx.fillStyle='#E8540F';ctx.fill();
+    ctx.strokeStyle='#F0EDE6';ctx.lineWidth=1.5;ctx.stroke();
+    ctx.fillStyle='rgba(232,84,15,.95)';ctx.font='10px IBM Plex Mono, monospace';
+    ctx.fillText("you are here", Math.min(x(dNow)+10,w-90), y(vNow)-8);
+  }
+
+  if(hover&&hover.mode==='overlay'){
+    const xx=x(hover.d),yy=y(hover.v);
+    ctx.beginPath();ctx.arc(xx,yy,4.5,0,7);
+    ctx.fillStyle=hover.proj?'#8FB6D9':'#F0EDE6';ctx.fill();
+  }
+
+  drawOverlay._x=x; drawOverlay._y=y; drawOverlay._dmax=dmax;
+}
+
+/* hover / touch */
+function onMove(e){
+  const r=cvs.getBoundingClientRect();
+  const px=(e.touches?e.touches[0].clientX:e.clientX)-r.left;
+  const py=(e.touches?e.touches[0].clientY:e.clientY)-r.top;
+  if(px<PAD.l||px>r.width-PAD.r){tooltip.style.opacity=0;hover=null;drawChart();return;}
+
+  if(mode==='chrono'){
+    // halving line hover → show its date
+    const hvAll=[
+      ...HALVINGS.slice(0,4).map(h=>({t:h.t,label:h.label,proj:false})),
+      ...PROJ_EVENTS.halvings.map(h=>({t:h.t,label:h.label,proj:true}))
+    ];
+    let hvHit=null;
+    for(const hv of hvAll){
+      if(Math.abs(drawChrono._x(hv.t)-px)<=6){hvHit=hv;break;}
+    }
+    if(hvHit){
+      hover=null;
+      tooltip.innerHTML=`⛏ <b style="color:var(--brass)">${hvHit.label}</b>${hvHit.proj?' <span style="color:#8FB6D9">· proj.</span>':''}<br>${fmtEN.format(hvHit.t)}`;
+      tooltip.style.left=drawChrono._x(hvHit.t)+'px';
+      tooltip.style.top=Math.max(py,42)+'px';
+      tooltip.style.opacity=1;
+      drawChart();
+      return;
+    }
+    const t=drawChrono._t0+(px-PAD.l)/(r.width-PAD.l-PAD.r)*(drawChrono._t1-drawChrono._t0);
+    const ALLPTS=MONTHLY.concat(PROJ.map(m=>({t:m.t,p:m.p,proj:true})));
+    let best=ALLPTS[0],bd=Infinity;
+    ALLPTS.forEach(m=>{const d=Math.abs(m.t-t);if(d<bd){bd=d;best=m;}});
+    hover={mode:'chrono',t:best.t,p:best.p,proj:!!best.proj};
+    tooltip.innerHTML=`${fmtEN.format(best.t)}${best.proj?' <span style="color:#8FB6D9">· proj.</span>':''}<br><span class="tt-p"${best.proj?' style="color:#8FB6D9"':''}>${best.proj?'~':''}${fmtPrice(best.p)}</span>`;
+    tooltip.style.left=drawChrono._x(best.t)+'px';
+    tooltip.style.top=drawChrono._y(best.p)+'px';
+  } else {
+    const d=(px-PAD.l)/(r.width-PAD.l-PAD.r)*drawOverlay._dmax;
+    // nearest point: historical cycles + the projected continuation of cycle IV
+    const candidates=[];
+    CYCLES.forEach((c,ci)=>{
+      if(!visCycles[c.n]) return;
+      cyclePoints(ci).forEach(p=>candidates.push({...p,c}));
+    });
+    if(visCycles.IV){
+      const c4p=CYCLES[3];
+      PROJ.filter(m=>m.t<HALVINGS[4].t).forEach(m=>{
+        candidates.push({d:(m.t-c4p.halving.t)/DAY, v:m.p/c4p.halving.p, p:m.p, c:c4p, proj:true});
+      });
+    }
+    PROJ_CYCLES.forEach(pc=>{
+      if(!visCycles[pc.n]) return;
+      projCyclePoints(pc).forEach(pt=>{
+        candidates.push({d:pt.d, v:pt.v, p:pt.p, c:pc, proj:true});
+      });
+    });
+    let best=null,bd=Infinity;
+    candidates.forEach(p=>{
+      const dx=Math.abs(p.d-d);
+      if(dx<30){
+        const yy=drawOverlay._y(p.v);
+        const dist=Math.hypot(dx*0.4, yy-py);
+        if(dist<bd){bd=dist;best=p;}
+      }
+    });
+    if(!best){tooltip.style.opacity=0;hover=null;drawChart();return;}
+    hover={mode:'overlay',d:best.d,v:best.v,proj:!!best.proj};
+    const mult=best.v>=10?best.v.toFixed(0):best.v.toFixed(2).replace(/0$/,'');
+    tooltip.innerHTML=best.proj
+      ? `Cycle ${best.c.n} · D+${Math.round(best.d)} <span style="color:#8FB6D9">· proj.</span><br><span class="tt-p" style="color:#8FB6D9">~×${mult}</span> <span style="color:var(--paper-faint)">(~${fmtPrice(best.p)})</span>`
+      : `Cycle ${best.c.n} · D+${Math.round(best.d)}<br><span class="tt-p">×${mult}</span> <span style="color:var(--paper-faint)">(${fmtPrice(best.p)})</span>`;
+    tooltip.style.left=drawOverlay._x(best.d)+'px';
+    tooltip.style.top=drawOverlay._y(best.v)+'px';
+  }
+  tooltip.style.opacity=1;
+  drawChart();
+}
+cvs.addEventListener('pointermove',onMove);
+cvs.addEventListener('pointerleave',()=>{tooltip.style.opacity=0;hover=null;drawChart();});
+
+new ResizeObserver(()=>drawChart()).observe(cvs.parentElement);
+
+/* =====================================================
+   METHOD SECTION TOGGLE
+   ===================================================== */
+(function(){
+  const btn=document.getElementById('methodToggle');
+  const body=document.getElementById('methodBody');
+  btn.addEventListener('click',()=>{
+    const open=body.classList.toggle('open');
+    btn.setAttribute('aria-expanded',open);
+    btn.innerHTML=open
+      ? '<span class="mtg-arrow">▸</span> Hide the underlying data'
+      : '<span class="mtg-arrow">▸</span> Show the underlying data: intervals, sources &amp; contractions';
+  });
+})();
+
+/* =====================================================
+   SEASON PLAYBOOK TOGGLE
+   ===================================================== */
+(function(){
+  const btn=document.getElementById('playbookToggle');
+  const body=document.getElementById('playbookBody');
+  btn.addEventListener('click',()=>{
+    const open=body.classList.toggle('open');
+    btn.setAttribute('aria-expanded',open);
+    btn.innerHTML=open
+      ? '<span class="mtg-arrow">▸</span> 🎯 Hide the season playbook'
+      : '<span class="mtg-arrow">▸</span> 🎯 Season playbook: what to do in each season';
+  });
+})();
+
+/* =====================================================
+   SCROLL REVEAL
+   ===================================================== */
+(function(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const els=document.querySelectorAll('section, .observatory, .playbook-wrap');
+  els.forEach(el=>el.classList.add('rv'));
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}
+    });
+  },{threshold:.07, rootMargin:'0px 0px -40px 0px'});
+  els.forEach(el=>io.observe(el));
+})();
+
+/* =====================================================
+   TOPNAV · ACTIVE LINK ON SCROLL
+   ===================================================== */
+(function(){
+  const links=document.querySelectorAll('.tn-links a');
+  if(!links.length) return;
+  const map={};
+  links.forEach(a=>{map[a.getAttribute('href').slice(1)]=a;});
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting) return;
+      links.forEach(a=>a.classList.remove('active'));
+      const a=map[e.target.id];
+      if(a) a.classList.add('active');
+    });
+  },{rootMargin:'-20% 0px -65% 0px'});
+  Object.keys(map).forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) io.observe(el);
+  });
+
+  // "The data" also unfolds the section 00 toggle if it is closed
+  document.querySelectorAll('.tn-links a[href="#data"]').forEach(a=>{
+    a.addEventListener('click',()=>{
+      const body=document.getElementById('methodBody');
+      if(body&&!body.classList.contains('open')) document.getElementById('methodToggle').click();
+    });
+  });
+})();
+
+/* =====================================================
+   SHARE CHART AS IMAGE
+   ===================================================== */
+document.getElementById('shareBtn').addEventListener('click', async ()=>{
+  const btn=document.getElementById('shareBtn');
+  // clean frame (no hover artifacts)
+  hover=null; tooltip.style.opacity=0; drawChart();
+
+  const r=cvs.getBoundingClientRect();
+  const scale=2;
+  const padX=28, padT=66, padB=44;
+  const out=document.createElement('canvas');
+  out.width=(r.width+padX*2)*scale;
+  out.height=(r.height+padT+padB)*scale;
+  const c=out.getContext('2d');
+  c.scale(scale,scale);
+
+  // background
+  const W=r.width+padX*2, H=r.height+padT+padB;
+  const bg=c.createLinearGradient(0,0,W,H);
+  bg.addColorStop(0,'#1A181660'); bg.addColorStop(1,'#121110');
+  c.fillStyle='#121110'; c.fillRect(0,0,W,H);
+  c.fillStyle=bg; c.fillRect(0,0,W,H);
+
+  // brand mark: cycle ring + orange arc + ₿
+  c.strokeStyle='#3A3631';c.lineWidth=2.4;
+  c.beginPath();c.arc(padX+15,22,12,0,Math.PI*2);c.stroke();
+  c.strokeStyle='#E8540F';c.lineCap='round';
+  c.beginPath();c.arc(padX+15,22,12,-2.07,-1.07);c.stroke();
+  c.lineCap='butt';
+  c.fillStyle='#F0EDE6';
+  c.font='700 14px IBM Plex Mono, ui-monospace, monospace';
+  c.textAlign='center';c.fillText('₿',padX+15,27);c.textAlign='left';
+
+  // title block
+  c.fillStyle='#F0EDE6';
+  c.font='800 20px Archivo, sans-serif';
+  c.fillText('Bitcoin · Four cycles, one rhyme', padX+40, 30);
+  c.fillStyle='rgba(168,164,156,.95)';
+  c.font='9.5px IBM Plex Mono, monospace';
+  c.fillText(mode==='chrono'
+    ? 'LOG SCALE · 2012 → 2034 · SOLID = PAST/PRESENT · DASHED = PROJECTION'
+    : 'CYCLES ALIGNED ON THEIR HALVING (D0) · LOG MULTIPLES OF HALVING PRICE', padX+40, 50);
+
+  // the chart itself
+  c.drawImage(cvs, padX, padT, r.width, r.height);
+
+  // footer
+  c.fillStyle='rgba(110,113,132,.95)';
+  c.font='9px IBM Plex Mono, monospace';
+  c.fillText('Bitcoin Quant · ATH $126,198 (Oct 6, 2025, CoinMarketCap) · approximate data · not investment advice', padX, padT+r.height+26);
+
+  out.toBlob(async blob=>{
+    if(!blob) return;
+    const file=new File([blob],'bitcoin-four-cycles.png',{type:'image/png'});
+    // native share when available (mobile), else download
+    if(navigator.canShare && navigator.canShare({files:[file]})){
+      try{
+        await navigator.share({files:[file], title:'Bitcoin · Four cycles, one rhyme'});
+        flashDone(btn); return;
+      }catch(e){ if(e && e.name==='AbortError') return; }
+    }
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download='bitcoin-four-cycles.png';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+    flashDone(btn);
+  },'image/png');
+});
+function flashDone(btn){
+  const old=btn.textContent;
+  btn.textContent='✓ Saved'; btn.classList.add('done');
+  setTimeout(()=>{btn.textContent=old;btn.classList.remove('done');},1800);
+}
+
+/* =====================================================
+   CYCLE CARDS
+   ===================================================== */
+const cardsBox=document.getElementById('cycleCards');
+CYCLES.forEach(c=>{
+  const el=document.createElement('article');
+  el.className='cycle-card';
+  el.style.setProperty('--cc',c.color);
+  const botRow = c.bottom.projected
+    ? `<div class="cc-row"><span class="cc-k">Bottom</span><span class="cc-v maybe">proj. late Oct. 2026 · ~$35K ❄</span></div>`
+    : `<div class="cc-row"><span class="cc-k">Bottom</span><span class="cc-v">${fmtEN.format(c.bottom.t)} · ${fmtPrice(c.bottom.p)}</span></div>`;
+  el.innerHTML=`
+    <div class="cc-roman">${c.n}</div>
+    <div class="cc-years">${c.years}</div>
+    <div class="cc-rows">
+      <div class="cc-row"><span class="cc-k">Halving</span><span class="cc-v">${fmtEN.format(c.halving.t)}</span></div>
+      <div class="cc-row"><span class="cc-k">Top</span><span class="cc-v up">${fmtEN.format(c.top.t)} · ${fmtPrice(c.top.p)}</span></div>
+      <div class="cc-row"><span class="cc-k">Halving → top</span><span class="cc-v">${c.d2t} days</span></div>
+      ${botRow}
+      <div class="cc-row"><span class="cc-k">Max drawdown</span><span class="cc-v down">${c.dd}</span></div>
+      ${c.live?'<div class="cc-live-note">⏳ current max drawdown: no official bottom yet, this number is still open</div>':''}
+    </div>
+    <div class="cc-x">cycle multiple <b>${c.mult}</b></div>`;
+  cardsBox.appendChild(el);
+});
+// projected cycle V card
+const pv=document.createElement('article');
+pv.className='cycle-card proj-card';
+pv.style.setProperty('--cc','#8FB6D9');
+pv.innerHTML=`
+  <div class="cc-roman">V</div>
+  <div class="cc-years">2028 – 2032 · full projection</div>
+  <div class="cc-rows">
+    <div class="cc-row"><span class="cc-k">Halving</span><span class="cc-v maybe">~Apr. 2028 · ~$93K</span></div>
+    <div class="cc-row"><span class="cc-k">Top</span><span class="cc-v maybe">~Sep. 2029 · ~$165K</span></div>
+    <div class="cc-row"><span class="cc-k">Halving → top</span><span class="cc-v maybe">~523 days</span></div>
+    <div class="cc-row"><span class="cc-k">Bottom</span><span class="cc-v maybe">~Oct. 2030 · ~$54K</span></div>
+    <div class="cc-row"><span class="cc-k">Max drawdown</span><span class="cc-v maybe">~−67%</span></div>
+  </div>
+  <div class="cc-x">cycle multiple <b>~×1.8</b> · pattern extrapolation, not a forecast</div>`;
+cardsBox.appendChild(pv);
+
+// projected cycle VI card
+const pv6=document.createElement('article');
+pv6.className='cycle-card proj-card';
+pv6.style.setProperty('--cc','#8B7FD6');
+pv6.innerHTML=`
+  <div class="cc-roman">VI</div>
+  <div class="cc-years">2032 – 2036 · full projection</div>
+  <div class="cc-rows">
+    <div class="cc-row"><span class="cc-k">Halving</span><span class="cc-v maybe">~Apr. 2032 · ~$121K</span></div>
+    <div class="cc-row"><span class="cc-k">Top</span><span class="cc-v maybe">~Aug. 2033 · ~$190K</span></div>
+    <div class="cc-row"><span class="cc-k">Halving → top</span><span class="cc-v maybe">~497 days</span></div>
+    <div class="cc-row"><span class="cc-k">Bottom</span><span class="cc-v maybe">~Sep. 2034 · ~$72K</span></div>
+    <div class="cc-row"><span class="cc-k">Max drawdown</span><span class="cc-v maybe">~−62%</span></div>
+  </div>
+  <div class="cc-x">cycle multiple <b>~×1.6</b> · pattern extrapolation, not a forecast</div>`;
+cardsBox.appendChild(pv6);
+
+// asterisk note
+const note=document.createElement('p');
+note.style.cssText="grid-column:1/-1;font-family:var(--mono);font-size:.72rem;color:var(--paper-faint);margin-top:2px";
+note.textContent="* Cycle IV in progress: −51% is the max drawdown measured so far (~$61,500 on June 10, 2026, day 248 since the top), and the cycle has not officially bottomed yet.";
+cardsBox.appendChild(note);
+
+/* =====================================================
+   HALVING V COUNTDOWN
+   ===================================================== */
+document.getElementById('cdDays').textContent=
+  Math.max(0,Math.round((HALVINGS[4].t-TODAY)/DAY)).toLocaleString('en-US');
+
+/* =====================================================
+   BEAR LEDGER
+   ===================================================== */
+const TOP5 = 126198;          // ATH Oct 6, 2025 (CoinMarketCap)
+const NOW_PRICE = 61500;       // ~June 10, 2026
+const NOW_DD = (NOW_PRICE/TOP5-1)*100; // ≈ −51
+const BEARS = [
+  {n:1, color:"#8B7FD6", topL:"June 9, 2011", topP:31.9,   botL:"Nov. 18, 2011", botP:2.05,  dd:-93.6, dys:162},
+  {n:2, color:"#5FAE8E", topL:"Nov. 29, 2013", topP:1163,   botL:"Jan. 14, 2015", botP:152,   dd:-86.9, dys:411},
+  {n:3, color:"#C9A23F", topL:"Dec. 17, 2017", topP:19783,  botL:"Dec. 15, 2018", botP:3122,  dd:-84.2, dys:363},
+  {n:4, color:"#C96B4A", topL:"Nov. 10, 2021", topP:68789,  botL:"Nov. 21, 2022", botP:15476, dd:-77.5, dys:376},
+  {n:5, color:"#E8A33D", topL:"Oct. 6, 2025",  topP:TOP5,   botL:null,            botP:null,  dd:NOW_DD, dys:248, live:true},
+  {n:6, color:"#8FB6D9", topL:"~Sep. 2029", topPs:"~$165K", botL:"~Oct. 2030", botPs:"~$54K", dd:-67, dys:"~380", proj:true, deltaTxt:5},
+  {n:7, color:"#8B7FD6", topL:"~Aug. 2033", topPs:"~$190K", botL:"~Sep. 2034", botPs:"~$72K", dd:-62, dys:"~386", proj:true, deltaTxt:5}
+];
+
+const bP = p => "$" + (p>=1000 ? Math.round(p).toLocaleString('en-US') : p);
+const bPct = (v,dec=0)=>"−"+Math.abs(v).toFixed(dec)+"%";
+const bK = v => "$"+Math.round(v/1000)+"K";
+
+(function renderLedger(){
+  const box=document.getElementById('rows');
+  BEARS.forEach((c,i)=>{
+    const row=document.createElement('div');
+    row.className='lrow'+(c.live?' live':'')+(c.proj?' proj':'');
+    const prev=i>0?BEARS[i-1]:null;
+    const deltaPts = (prev && !c.live && !c.proj && !prev.live) ? Math.round(prev.dd - c.dd) : null;
+
+    const botCell = c.live
+      ? `<div class="ev bot" data-m="Bottom"><div class="when">? (ongoing)</div><div class="price">~${bP(NOW_PRICE)}<small>now</small></div></div>`
+      : c.proj
+      ? `<div class="ev bot" data-m="Bottom"><div class="when">${c.botL} <small>proj.</small></div><div class="price">${c.botPs}</div></div>`
+      : `<div class="ev bot" data-m="Bottom"><div class="when">${c.botL}</div><div class="price">${bP(c.botP)}</div></div>`;
+
+    row.innerHTML=`
+      <div class="pill-cell"><span class="pill${c.proj?' pill-proj':''}" style="--pc:${c.color}">${c.live?'<span class="dotlive"></span>':''}Cycle ${c.n}</span></div>
+      <div class="ev top" data-m="Top"><div class="when">${c.topL}${c.live?' <span style="font-family:var(--mono);font-size:9px;color:var(--blue);letter-spacing:.1em">ATH</span>':''}${c.proj?' <small style="font-family:var(--mono);font-size:9px;color:var(--blue)">proj.</small>':''}</div><div class="price">${c.topPs||bP(c.topP)}</div></div>
+      ${botCell}
+      <div class="ddwrap">
+        <div class="track">
+          ${c.live?'<div class="ghost" id="ghostBar"></div><div class="gmark" id="ghostMark" data-label=""></div>':''}
+          <div class="fill" data-w="${Math.abs(c.dd)}"></div>
+        </div>
+        <span class="ddnum">${c.proj?'~':''}${bPct(c.dd)}</span>
+        ${c.proj?`<span class="delta">▼<b>${c.deltaTxt}</b>pts</span>`:(deltaPts!==null?`<span class="delta">▼<b>${deltaPts}</b>pts</span>`:`<span class="delta">${c.live?'<b>ongoing</b>':''}</span>`)}
+      </div>
+      <div class="dur">${c.dys} d${c.live?' <span class="live-tag">↗</span>':''}</div>`;
+    box.appendChild(row);
+  });
+  requestAnimationFrame(()=>{
+    document.querySelectorAll('.fill').forEach(f=>{f.style.width=f.dataset.w+'%';});
+  });
+})();
+
+const compSlider=document.getElementById('comp');
+function bUpdate(x){
+  const dd = -(77.5 - x);
+  const bot = TOP5 * (1 + dd/100);
+  const lo  = TOP5 * (1 + (dd-0.6)/100);
+  const hi  = TOP5 * (1 + (dd+0.6)/100);
+  const path = (bot/NOW_PRICE - 1) * 100;
+
+  document.getElementById('compOut').textContent = "−"+x.toFixed(1)+" pts";
+  document.getElementById('projDd').textContent = bPct(dd,1);
+  document.getElementById('projBot').textContent = bK(lo)+" – "+bK(hi);
+  const pathEl=document.getElementById('projPath');
+  if(path < -0.5){
+    pathEl.textContent = bPct(path);
+    pathEl.style.color = 'var(--blue)';
+    document.getElementById('projWhen').textContent = "room left to fall ❄";
+  } else {
+    pathEl.textContent = "✓";
+    pathEl.style.color = '#8FBF7C';
+    document.getElementById('projWhen').textContent = "already below target 🎯";
+  }
+  const g=document.getElementById('ghostBar'), gm=document.getElementById('ghostMark');
+  if(g){
+    g.style.width = Math.abs(dd)+'%';
+    gm.style.left = `calc(${Math.abs(dd)}% - 1px)`;
+    gm.dataset.label = "target "+bPct(dd)+" · ~"+bK(bot);
+  }
+  document.querySelectorAll('.presets .chip').forEach(ch=>{
+    ch.classList.toggle('active', Math.abs(parseFloat(ch.dataset.v)-x)<0.05);
+  });
+}
+compSlider.addEventListener('input',()=>bUpdate(parseFloat(compSlider.value)));
+document.querySelectorAll('.presets .chip').forEach(ch=>{
+  ch.addEventListener('click',()=>{compSlider.value=ch.dataset.v;bUpdate(parseFloat(ch.dataset.v));});
+});
+bUpdate(5.4);
+
+/* =====================================================
+   DCA SIMULATOR
+   ===================================================== */
+(function(){
+  const REF_TODAY = D(2026,6,12);
+  const END_CAP = D(2034,12,1); // projection data ends Dec 2034
+  const buyBtn=document.getElementById('dcaBuyBtn'), sellBtn=document.getElementById('dcaSellBtn');
+  const weekBtn=document.getElementById('dcaWeekBtn'), monthBtn=document.getElementById('dcaMonthBtn');
+  const startEl=document.getElementById('dcaStart'), startHint=document.getElementById('dcaStartHint');
+  const endEl=document.getElementById('dcaEnd'), endOut=document.getElementById('dcaEndOut');
+  const amountEl=document.getElementById('dcaAmount'), stackEl=document.getElementById('dcaStack');
+  const pctEl=document.getElementById('dcaPct'), basisEl=document.getElementById('dcaBasis');
+  const pctField=document.getElementById('dcaPctField');
+  const srcField=document.getElementById('dcaSrcField'), srcInfoEl=document.getElementById('dcaSrcInfo');
+  const srcPlanBtn=document.getElementById('srcPlanBtn'), srcCustomBtn=document.getElementById('srcCustomBtn');
+  const amtModes=document.getElementById('dcaAmtModes'), trimBtn=document.getElementById('dcaTrimBtn');
+  const amtUnit=document.getElementById('dcaAmtUnit'), amtDetail=document.getElementById('dcaAmtDetail');
+  const warnEl=document.getElementById('dcaWarn'), noteEl=document.getElementById('dcaNote');
+  const blendEl=document.getElementById('dcaBlend');
+  const cardsEl=document.getElementById('dcaCards');
+  let dcaMode='buy', dcaFreq='month';
+  let sellSrc='plan', sellAmtMode='totalpct';
+  /* per-mode persistent settings: switching tabs swaps these in and out */
+  const planState={
+    buy:{start:'2026-06-12',end:'2031-06-12',amount:'2000',freq:'month'},
+    sell:{start:'2031-06-12',end:'2032-06-12',amount:'80',freq:'month'}
+  };
+
+  /* season filter · single source of truth: the page's own seasonFor()/cycleFor() */
+  const selSeasons={spring:false,summer:false,autumn:false,winter:false};
+  const seasonKeyAt=t=>{
+    const s=seasonFor(t,cycleFor(t));
+    return s===SEASONS.printemps?'spring':s===SEASONS.ete?'summer':s===SEASONS.automne?'autumn':'winter';
+  };
+  function seasonBands(t0,t1){
+    return seasonSegments(t0,t1).map(s=>[s.a,s.b,s.color]);
+  }
+
+  const fmtBtc=v=>(v>=100?v.toFixed(1):v>=10?v.toFixed(2):v.toFixed(4))+" BTC";
+  const fmtMul=v=>"×"+(v>=10?v.toFixed(1):v.toFixed(2));
+
+  const parseDate=v=>{
+    if(!v) return NaN;
+    const p=v.split('-').map(Number);
+    return p.length===3 ? Date.UTC(p[0],p[1]-1,p[2]) : NaN;
+  };
+
+  function scheduleFor(freq,start,end){
+    const dates=[];
+    if(freq==='week'){
+      for(let t=start;t<=end;t+=7*DAY) dates.push(t);
+    } else {
+      const d0=new Date(start);
+      for(let k=0;;k++){
+        const t=Date.UTC(d0.getUTCFullYear(), d0.getUTCMonth()+k, d0.getUTCDate());
+        if(t>end) break;
+        dates.push(t);
+      }
+    }
+    return dates;
+  }
+  function schedule(start,end){return scheduleFor(dcaFreq,start,end);}
+
+  /* the buy plan recomputed from its saved state: executed buys up to a given date */
+  function buyPlanStack(upTo){
+    const bp=planState.buy;
+    const s=parseDate(bp.start);
+    const endRaw=parseDate(bp.end);
+    const amt=Math.max(0,parseFloat(bp.amount)||0);
+    if(isNaN(s)||isNaN(endRaw)||endRaw<=s||amt<=0) return {btc:0,cost:0,n:0,endRaw,start:s,end:endRaw,pts:[]};
+    const e=Math.min(endRaw,END_CAP);
+    const auto=selSeasons.spring||selSeasons.summer||selSeasons.autumn||selSeasons.winter;
+    let btc=0,cost=0,n=0;
+    const pts=[];
+    scheduleFor(bp.freq,s,e).forEach(t=>{
+      if(t>upTo) return;
+      if(auto&&!selSeasons[seasonKeyAt(t)]) return;
+      const p=priceAt(t), b=amt/p;
+      btc+=b; cost+=amt; n++;
+      pts.push({t,p,usd:amt,btc:b});
+    });
+    return {btc,cost,n,endRaw,start:s,end:e,pts};
+  }
+
+  function card(k,v,n,opt){
+    opt=opt||{};
+    return `<div class="card${opt.hero?' hero':''}"><div class="k">${k}</div><div class="v${opt.v?' '+opt.v:''}">${v}</div>${n?`<div class="n">${n}</div>`:''}</div>`;
+  }
+
+  /* ---- plan chart: the price path zoomed on the DCA window ---- */
+  const dcaCvs=document.getElementById('dcaChart');
+  const dcaCtx=dcaCvs.getContext('2d');
+  const dcaTip=document.getElementById('dcaTooltip');
+  const DPAD={l:56,r:74,t:14,b:26};
+  const MONS=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  let dcaPlot=null, dcaHover=-1;
+
+  /* range-selection state */
+  const selBtn=document.getElementById('dcaSelectBtn');
+  const FULL0=SERIES[0].t, FULL1=SERIES[SERIES.length-1].t;
+  let selMode=false, selStart=null, selHoverT=null, selDone=false;
+  const viewBtn=document.getElementById('dcaViewBtn');
+  let fullView=false;
+  const updateViewBtn=()=>{viewBtn.textContent=fullView?'Zoom to plan':'Full view';};
+  viewBtn.addEventListener('click',()=>{fullView=!fullView;updateViewBtn();drawDca();});
+  const dShort=t=>{const d=new Date(t);return MONS[d.getUTCMonth()]+" "+d.getUTCDate()+", "+d.getUTCFullYear();};
+
+  function sizeDca(){
+    const r=dcaCvs.parentElement.getBoundingClientRect();
+    const dpr=Math.min(devicePixelRatio||1,2);
+    dcaCvs.width=r.width*dpr; dcaCvs.height=r.height*dpr;
+    dcaCtx.setTransform(dpr,0,0,dpr,0,0);
+    return {w:r.width,h:r.height};
+  }
+
+  function wipeDca(){dcaPlot=null;dcaHover=-1;dcaTip.style.opacity=0;drawDca();}
+
+  function drawDca(){
+    const {w,h}=sizeDca();
+    const c=dcaCtx;
+    c.clearRect(0,0,w,h);
+    if(!selMode&&!dcaPlot) return;
+    const twoPhase=!!(dcaPlot&&dcaPlot.buyPts&&dcaPlot.buyPts.length);
+    let t0,t1;
+    if(selMode||fullView){ t0=FULL0; t1=FULL1; }
+    else {
+      const w0=twoPhase?Math.min(dcaPlot.buyWin[0],dcaPlot.start):dcaPlot.start;
+      t0=w0-90*DAY; t1=dcaPlot.end+90*DAY;
+    }
+    const pts=dcaPlot?dcaPlot.points:[];
+    const avg=(!selMode&&dcaPlot)?dcaPlot.avg:0;
+    const avgB=(!selMode&&dcaPlot&&dcaPlot.avgBuy)?dcaPlot.avgBuy:0;
+    const mode=dcaPlot?dcaPlot.mode:'buy';
+    const x=t=>DPAD.l+(t-t0)/(t1-t0)*(w-DPAD.l-DPAD.r);
+
+    // sample the price path across the window
+    const N=Math.max(140,Math.min(380,Math.round(w/3)));
+    const curve=[];
+    for(let i=0;i<=N;i++){const t=t0+(t1-t0)*i/N;curve.push({t,p:priceAt(t)});}
+    let vmin=Infinity,vmax=0;
+    curve.forEach(s=>{if(s.p<vmin)vmin=s.p;if(s.p>vmax)vmax=s.p;});
+    if(avg>0){vmin=Math.min(vmin,avg);vmax=Math.max(vmax,avg);}
+    if(avgB>0){vmin=Math.min(vmin,avgB);vmax=Math.max(vmax,avgB);}
+    vmin/=1.28; vmax*=1.18;
+    const l0=Math.log10(vmin), l1=Math.log10(vmax);
+    const y=v=>h-DPAD.b-((Math.log10(v)-l0)/(l1-l0))*(h-DPAD.t-DPAD.b);
+
+    // faint season bands inside the plan window + window veils
+    if(!selMode&&dcaPlot){
+      const p0=twoPhase?Math.min(dcaPlot.buyWin[0],dcaPlot.start):dcaPlot.start;
+      const b0=fullView?p0:t0, b1=fullView?dcaPlot.end:t1;
+      seasonBands(b0,b1).forEach(b=>{
+        c.globalAlpha=.05; c.fillStyle=b[2];
+        c.fillRect(x(b[0]),DPAD.t,x(b[1])-x(b[0]),h-DPAD.t-DPAD.b);
+        c.globalAlpha=1;
+      });
+      if(twoPhase){
+        c.fillStyle='rgba(224,78,17,.06)';
+        c.fillRect(x(dcaPlot.buyWin[0]),DPAD.t,x(dcaPlot.buyWin[1])-x(dcaPlot.buyWin[0]),h-DPAD.t-DPAD.b);
+        c.fillStyle='rgba(226,97,79,.05)';
+        c.fillRect(x(dcaPlot.start),DPAD.t,x(dcaPlot.end)-x(dcaPlot.start),h-DPAD.t-DPAD.b);
+      } else if(fullView){
+        c.fillStyle='rgba(224,78,17,.06)';
+        c.fillRect(x(dcaPlot.start),DPAD.t,x(dcaPlot.end)-x(dcaPlot.start),h-DPAD.t-DPAD.b);
+      }
+    }
+
+    // projection zone shading + today divider, same language as the main chart
+    if(t1>REF_TODAY){
+      const xs=Math.max(x(REF_TODAY),DPAD.l);
+      c.fillStyle='rgba(143,182,217,.045)';
+      c.fillRect(xs,DPAD.t,(w-DPAD.r)-xs,h-DPAD.t-DPAD.b);
+      if(REF_TODAY>t0){
+        c.strokeStyle='rgba(143,182,217,.4)';c.lineWidth=1;c.setLineDash([1,3]);
+        c.beginPath();c.moveTo(x(REF_TODAY),DPAD.t);c.lineTo(x(REF_TODAY),h-DPAD.b);c.stroke();c.setLineDash([]);
+        c.fillStyle='rgba(143,182,217,.6)';c.font='9px IBM Plex Mono, monospace';
+        c.fillText("TODAY",Math.min(x(REF_TODAY)+5,w-DPAD.r-40),DPAD.t+9);
+      }
+    }
+
+    // log grid, 1-2-5 ticks
+    c.font='10px IBM Plex Mono, monospace';
+    let ticks=[];
+    for(let e=Math.floor(l0);e<=Math.ceil(l1);e++){
+      [1,2,5].forEach(m=>{const v=m*Math.pow(10,e);if(v>=vmin&&v<=vmax)ticks.push(v);});
+    }
+    const keep=Math.ceil(ticks.length/6);
+    ticks=ticks.filter((_,i)=>i%keep===0);
+    ticks.forEach(v=>{
+      c.strokeStyle='rgba(168,164,156,.12)';c.lineWidth=1;
+      c.beginPath();c.moveTo(DPAD.l,y(v));c.lineTo(w-DPAD.r,y(v));c.stroke();
+      c.fillStyle='rgba(240,237,230,.4)';
+      c.fillText(v>=1000?"$"+(v/1000)+"k":"$"+v,8,y(v)+3);
+    });
+
+    // x labels on month boundaries, step picked to land ~5 labels
+    const spanM=(t1-t0)/DAY/30.44;
+    const stepM=[1,2,3,6,12,24].find(s=>spanM/s<=7)||36;
+    const d0=new Date(t0);
+    for(let k=0;k<400;k++){
+      const t=Date.UTC(d0.getUTCFullYear(), d0.getUTCMonth()+k, 1);
+      if(t<t0) continue;
+      if(t>t1) break;
+      const dt=new Date(t);
+      if((dt.getUTCFullYear()*12+dt.getUTCMonth())%stepM!==0) continue;
+      c.fillStyle='rgba(240,237,230,.4)';
+      const lab=stepM>=12 ? ""+dt.getUTCFullYear() : MONS[dt.getUTCMonth()]+" '"+(""+dt.getUTCFullYear()).slice(2);
+      c.fillText(lab,x(t)-14,h-9);
+    }
+
+    // price path: solid ivory in the past, dashed blue in the projection
+    const past=curve.filter(s=>s.t<=REF_TODAY);
+    const fut=curve.filter(s=>s.t>=REF_TODAY);
+    if(past.length>1){
+      c.beginPath();
+      past.forEach((s,i)=>{const xx=x(s.t),yv=y(s.p); i?c.lineTo(xx,yv):c.moveTo(xx,yv);});
+      c.strokeStyle='rgba(240,237,230,.9)';c.lineWidth=1.8;c.lineJoin='round';c.stroke();
+    }
+    if(fut.length>1){
+      const seq=(past.length?[past[past.length-1]]:[]).concat(fut);
+      c.beginPath();
+      seq.forEach((s,i)=>{const xx=x(s.t),yv=y(s.p); i?c.lineTo(xx,yv):c.moveTo(xx,yv);});
+      c.setLineDash([6,4]);c.strokeStyle='rgba(143,182,217,.85)';c.lineWidth=1.6;c.lineJoin='round';c.stroke();c.setLineDash([]);
+    }
+
+    // average cost basis / sell price lines
+    const paired=avg>0&&avgB>0&&mode==='sell';
+    if(avg>0){
+      c.setLineDash([2,4]);
+      c.strokeStyle=paired?'rgba(232,163,61,.6)':'rgba(240,237,230,.4)';
+      c.lineWidth=1;
+      c.beginPath();c.moveTo(DPAD.l,y(avg));c.lineTo(w-DPAD.r,y(avg));c.stroke();c.setLineDash([]);
+      c.font='10px IBM Plex Mono, monospace';
+      if(paired){
+        c.fillStyle='rgba(232,163,61,.85)';c.textAlign='right';
+        c.fillText("avg sell "+fmtPrice(avg),w-DPAD.r-6,y(avg)-4);
+        c.textAlign='left';
+      } else {
+        c.fillStyle='rgba(240,237,230,.6)';
+        c.fillText("avg "+fmtPrice(avg),w-DPAD.r+5,y(avg)+3);
+      }
+    }
+    if(avgB>0&&mode==='sell'){
+      c.setLineDash([2,4]);c.strokeStyle='rgba(240,237,230,.4)';c.lineWidth=1;
+      c.beginPath();c.moveTo(DPAD.l,y(avgB));c.lineTo(w-DPAD.r,y(avgB));c.stroke();c.setLineDash([]);
+      if(!paired||Math.abs(y(avgB)-y(avg))>14){
+        c.fillStyle='rgba(240,237,230,.6)';c.font='10px IBM Plex Mono, monospace';
+        c.textAlign='right';
+        c.fillText("avg cost "+fmtPrice(avgB),w-DPAD.r-6,y(avgB)-4);
+        c.textAlign='left';
+      }
+    }
+
+    if(!selMode){
+      if(fullView&&dcaPlot){
+        const xa=x(dcaPlot.start), xb=x(dcaPlot.end);
+        c.strokeStyle='rgba(224,78,17,.65)';c.lineWidth=1.2;
+        c.beginPath();c.moveTo(xa,DPAD.t);c.lineTo(xa,h-DPAD.b);c.stroke();
+        c.beginPath();c.moveTo(xb,DPAD.t);c.lineTo(xb,h-DPAD.b);c.stroke();
+      }
+      // the buy-plan string first, under the sell points (two-phase view)
+      if(twoPhase){
+        const bpts=dcaPlot.buyPts;
+        const br=(bpts.length>150?1.5:2.5)*(fullView?0.8:1);
+        c.fillStyle='#E04E11';
+        bpts.forEach(p=>{c.beginPath();c.arc(x(p.t),y(p.p),br,0,7);c.fill();});
+      }
+      // the string of orders, dotted on the curve
+      const col=mode==='buy'?'#E04E11':'#E2614F';
+      const rad=(pts.length>150?1.5:2.5)*(fullView?0.8:1);
+      let maxB=0;
+      if(mode==='sell') pts.forEach(p=>{if(p.btc>maxB)maxB=p.btc;});
+      pts.forEach((p,i)=>{
+        const edge=(i===0||i===pts.length-1);
+        let rr=edge?4:rad;
+        if(!edge&&mode==='sell'&&maxB>0) rr=rad*(0.6+0.7*Math.sqrt(p.btc/maxB));
+        c.beginPath();c.arc(x(p.t),y(p.p),rr,0,7);
+        c.fillStyle=col;c.fill();
+        if(edge){c.strokeStyle='rgba(240,237,230,.9)';c.lineWidth=1.2;c.stroke();}
+      });
+      if(mode==='sell'&&dcaPlot.depleted&&pts.length){
+        const lp=pts[pts.length-1], xx=x(lp.t), yv=y(lp.p);
+        c.strokeStyle='#E2614F';c.lineWidth=1.6;
+        c.beginPath();
+        c.moveTo(xx-5,yv-5);c.lineTo(xx+5,yv+5);
+        c.moveTo(xx+5,yv-5);c.lineTo(xx-5,yv+5);
+        c.stroke();
+      }
+      if(dcaHover>=0&&pts[dcaHover]){
+        const p=pts[dcaHover];
+        c.beginPath();c.arc(x(p.t),y(p.p),pts.length>150?4:5.5,0,7);
+        c.strokeStyle='rgba(240,237,230,.9)';c.lineWidth=1.4;c.stroke();
+      }
+    } else {
+      // selection overlays
+      c.font='10px IBM Plex Mono, monospace';
+      if(selStart!==null&&selHoverT!==null){
+        const xa=x(Math.min(selStart,selHoverT)), xb=x(Math.max(selStart,selHoverT));
+        c.fillStyle='rgba(224,78,17,.06)';
+        c.fillRect(xa,DPAD.t,xb-xa,h-DPAD.t-DPAD.b);
+      }
+      c.fillStyle='rgba(240,237,230,.5)';
+      c.fillText(selStart===null?'click to set the start date · esc to cancel':'click to set the end date', DPAD.l+8, DPAD.t+10);
+      if(selStart!==null){
+        const xs=x(selStart);
+        c.strokeStyle='#E04E11';c.lineWidth=1.5;
+        c.beginPath();c.moveTo(xs,DPAD.t);c.lineTo(xs,h-DPAD.b);c.stroke();
+        const lab='start '+dShort(selStart), tw=lab.length*6;
+        c.fillStyle='#F25E1D';
+        c.fillText(lab, xs+6+tw>w-DPAD.r?xs-6-tw:xs+6, DPAD.t+24);
+      }
+      if(selHoverT!==null){
+        const xg=x(selHoverT);
+        c.strokeStyle='rgba(224,78,17,.55)';c.lineWidth=1;c.setLineDash([3,3]);
+        c.beginPath();c.moveTo(xg,DPAD.t);c.lineTo(xg,h-DPAD.b);c.stroke();c.setLineDash([]);
+        const pv=priceAt(selHoverT);
+        const lab=dShort(selHoverT)+' · '+(pv>=1000?'$'+(Math.round(pv/100)/10)+'k':fmtPrice(pv));
+        const tw=lab.length*6;
+        c.fillStyle='rgba(240,237,230,.8)';
+        c.fillText(lab, xg+8+tw>w-DPAD.r?xg-8-tw:xg+8, h-DPAD.b-8);
+      }
+    }
+    drawDca._x=x; drawDca._y=y; drawDca._t0=t0; drawDca._t1=t1;
+  }
+
+  function dcaMove(e){
+    const rect=dcaCvs.getBoundingClientRect();
+    const px=(e.touches?e.touches[0].clientX:e.clientX)-rect.left;
+    if(selMode){
+      selHoverT=(px<DPAD.l||px>rect.width-DPAD.r)?null:pxToT(px,rect.width);
+      drawDca();
+      return;
+    }
+    if(!dcaPlot||!dcaPlot.points.length||!drawDca._x) return;
+    let best=-1,bd=Infinity;
+    dcaPlot.points.forEach((p,i)=>{const d=Math.abs(drawDca._x(p.t)-px);if(d<bd){bd=d;best=i;}});
+    if(best<0||bd>28){
+      dcaTip.style.opacity=0;
+      if(dcaHover!==-1){dcaHover=-1;drawDca();}
+      return;
+    }
+    if(best!==dcaHover){dcaHover=best;drawDca();}
+    const p=dcaPlot.points[best];
+    const verb=dcaPlot.mode==='buy'?'bought':'sold';
+    const pc=dcaPlot.mode==='buy'?'var(--accent-hi)':'var(--autumn)';
+    dcaTip.innerHTML=fmtEN.format(p.t)+(p.t>REF_TODAY?' <span style="color:#8FB6D9">· proj.</span>':'')+
+      '<br><span class="tt-p" style="color:'+pc+'">'+fmtPrice(p.p)+'</span>'+
+      '<br>'+verb+' '+fmtBtc(p.btc)+' for '+fmtPrice(p.usd);
+    dcaTip.style.left=drawDca._x(p.t)+'px';
+    dcaTip.style.top=drawDca._y(p.p)+'px';
+    dcaTip.style.opacity=1;
+  }
+  dcaCvs.addEventListener('pointermove',dcaMove);
+  dcaCvs.addEventListener('pointerleave',()=>{
+    if(selMode){selHoverT=null;drawDca();return;}
+    dcaTip.style.opacity=0;
+    if(dcaHover!==-1){dcaHover=-1;drawDca();}
+  });
+  new ResizeObserver(()=>drawDca()).observe(dcaCvs.parentElement);
+
+  /* pick the DCA window directly on the chart */
+  function pxToT(px,rectW){
+    const t=drawDca._t0+(px-DPAD.l)/(rectW-DPAD.l-DPAD.r)*(drawDca._t1-drawDca._t0);
+    return Math.max(FULL0,Math.min(FULL1,Math.round(t/DAY)*DAY));
+  }
+  const isoOf=t=>new Date(t).toISOString().slice(0,10);
+  function updateSelBtn(){
+    selBtn.textContent=selMode?'Cancel selection (esc)':(selDone?'Re-select on chart':'Select range on chart');
+  }
+  function setSel(on){
+    selMode=on; selStart=null; selHoverT=null;
+    dcaHover=-1; dcaTip.style.opacity=0;
+    dcaCvs.parentElement.classList.toggle('selecting',on);
+    updateSelBtn();
+    drawDca();
+  }
+  function finishSel(t2){
+    let a=Math.min(selStart,t2), b=Math.max(selStart,t2);
+    a=Math.min(a,END_CAP-DAY); b=Math.min(b,END_CAP);
+    if(a===b) b=a+DAY;
+    startEl.value=isoOf(a); endEl.value=isoOf(b);
+    selMode=false; selStart=null; selHoverT=null; selDone=true;
+    fullView=false; updateViewBtn();
+    dcaCvs.parentElement.classList.remove('selecting');
+    updateSelBtn();
+    run();
+  }
+  selBtn.addEventListener('click',()=>setSel(!selMode));
+  dcaCvs.addEventListener('click',e=>{
+    if(!selMode) return;
+    const rect=dcaCvs.getBoundingClientRect();
+    const px=e.clientX-rect.left;
+    if(px<DPAD.l||px>rect.width-DPAD.r) return;
+    const t=pxToT(px,rect.width);
+    if(selStart===null){selStart=t;drawDca();}
+    else finishSel(t);
+  });
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&selMode)setSel(false);});
+
+  function run(){
+    const amount=Math.max(0,parseFloat(amountEl.value)||0);
+    const exStack=Math.max(0,parseFloat(stackEl.value)||0);
+    basisEl.disabled=!(exStack>0);
+    const basisRaw=parseFloat(basisEl.value);
+    const exBasis=(exStack>0&&!isNaN(basisRaw)&&basisRaw>0)?basisRaw:0;
+    const start=parseDate(startEl.value);
+    let end=parseDate(endEl.value);
+    noteEl.hidden=true; blendEl.hidden=true;
+
+    startHint.textContent = isNaN(start) ? "·"
+      : start<REF_TODAY ? "backtest from this date"
+      : start>REF_TODAY ? "starts in the projection"
+      : "today";
+
+    if(isNaN(start)||isNaN(end)){
+      warnEl.textContent="pick a valid start and end date";
+      warnEl.hidden=false; endOut.textContent="·"; cardsEl.innerHTML=""; wipeDca(); return;
+    }
+    if(end<=start){
+      warnEl.textContent="end date must be after start date";
+      warnEl.hidden=false; endOut.textContent="·"; cardsEl.innerHTML=""; wipeDca(); return;
+    }
+    if(end>END_CAP){
+      end=END_CAP;
+      warnEl.textContent="projection data ends Dec 2034 · period clamped";
+      warnEl.hidden=false;
+    } else {
+      warnEl.hidden=true;
+    }
+
+    const dates=schedule(start,end);
+    const endPrice=priceAt(end);
+    const per=dcaFreq==='week'?'weekly':'monthly';
+    const yrs=(end-start)/DAY/365.25;
+    endOut.textContent="≈ "+yrs.toFixed(1)+" yrs · "+dates.length+" "+per+" "+(dcaMode==='buy'?'buys':'sells');
+
+    // no season selected = manual mode, every scheduled date executes
+    const seasonAuto=selSeasons.spring||selSeasons.summer||selSeasons.autumn||selSeasons.winter;
+    const exec=seasonAuto?dates.filter(t=>selSeasons[seasonKeyAt(t)]):dates;
+    const skipped=dates.length-exec.length;
+    if(!exec.length){
+      warnEl.textContent="no DCA dates fall in the selected seasons within this period";
+      warnEl.hidden=false; cardsEl.innerHTML=""; wipeDca(); return;
+    }
+
+    blendEl.hidden=!(start<REF_TODAY&&end>REF_TODAY);
+
+    // exit below the projected cycle top (tops reused from PROJ_EVENTS)
+    let pct=Math.round(parseFloat(pctEl.value)); if(isNaN(pct)) pct=15;
+    pct=Math.min(99,Math.max(1,pct));
+    let refTop=PROJ_EVENTS.tops.find(tp=>tp.t>=end);
+    const topMissed=!refTop;
+    if(!refTop) refTop=PROJ_EVENTS.tops[PROJ_EVENTS.tops.length-1];
+    const exitPrice=(1-pct/100)*refTop.p;
+    const refD=new Date(refTop.t);
+    const refLab="~$"+Math.round(refTop.p/1000)+"K "+MONS[refD.getUTCMonth()]+". "+refD.getUTCFullYear()+" top";
+    const exitCard=(btcHeld,investedRef,extra)=>{
+      const v=btcHeld*exitPrice;
+      let n="avg sell at ~"+fmtPrice(exitPrice)+" ("+pct+"% below the "+refLab+")";
+      if(extra) n+=" · "+extra;
+      if(investedRef>0){
+        const m=v/investedRef;
+        n+=' · <span style="color:'+(m>1?'var(--spring)':'var(--autumn)')+'">×'+(m>=10?m.toFixed(1):m.toFixed(2))+'</span> vs invested';
+      }
+      if(topMissed) n+="<br>⚠ no projected top after your end date, using the 2033 top";
+      return card("Exit "+pct+"% below top",fmtPrice(v),n,{v:'green'});
+    };
+
+    if(dcaMode==='buy'){
+      let invested=0,btcDca=0;
+      const pts=exec.map(t=>{
+        const p=priceAt(t), b=amount/p;
+        invested+=amount; btcDca+=b;
+        return {t,p,usd:amount,btc:b};
+      });
+      const btcTot=btcDca+exStack;
+      const preCost=exBasis>0?exStack*exBasis:0;
+      const basisUnknown=exStack>0&&exBasis<=0;
+      const costBase=invested+preCost;
+      const value=btcTot*endPrice;
+      const avg=exBasis>0
+        ? (btcTot>0?costBase/btcTot:0)
+        : (btcDca>0?invested/btcDca:0);
+      const mult=exBasis>0
+        ? (costBase>0?value/costBase:0)
+        : (invested>0?(btcDca*endPrice)/invested:0);
+      dcaPlot={points:pts,avg,start,end,mode:'buy',depleted:null};
+      cardsEl.innerHTML=
+        card("Total invested",fmtPrice(costBase),(seasonAuto
+          ? exec.length+" of "+dates.length+" "+per+" buys executed"+(skipped?" ("+skipped+" skipped off-season)":"")
+          : dates.length+" "+per+" buys of "+fmtPrice(amount))
+          +(preCost>0?" · incl. "+fmtPrice(preCost)+" pre-existing at "+fmtPrice(exBasis)+"/BTC":""))+
+        card("BTC accumulated",fmtBtc(btcTot),exStack>0?"incl. "+fmtBtc(exStack)+" pre-existing":"bought along the path")+
+        card("Value at the end",fmtPrice(value),"at ~"+fmtPrice(endPrice)+" on "+fmtEN.format(end),{hero:true,v:'gold'})+
+        card("Average cost basis",avg>0?fmtPrice(avg):"·",exBasis>0?"blended, incl. your existing stack":"$ per BTC, all buys blended")+
+        card("Multiple",mult>0?fmtMul(mult):"·",basisUnknown?"basis unknown: multiple computed on DCA only":"end value / total invested",{v:mult>1?'gold':(mult<1&&mult>0?'red':'')})+
+        exitCard(btcTot,exBasis>0?costBase:(exStack>0?0:invested));
+    } else {
+      // stack source: the buy plan (default) or the custom existing-stack fields
+      let stack0=0, basis=0, srcLabel="custom", buyPlot=null;
+      if(sellSrc==='plan'){
+        const bp=buyPlanStack(start);
+        const full=buyPlanStack(Infinity);
+        let knownBtc=bp.btc, knownCost=bp.cost;
+        stack0=bp.btc;
+        if(exStack>0){
+          stack0+=exStack;
+          if(exBasis>0){knownBtc+=exStack;knownCost+=exStack*exBasis;}
+        }
+        basis=knownBtc>0?knownCost/knownBtc:0;
+        srcLabel="from your buy plan";
+        const extendsPast=!isNaN(bp.endRaw)&&bp.endRaw>start;
+        const fullEndD=isNaN(full.end)?null:new Date(Math.min(full.end,END_CAP));
+        srcInfoEl.innerHTML=
+          "buy plan total: "+fmtBtc(full.btc)+(fullEndD?" (full plan to "+MONS[fullEndD.getUTCMonth()]+" "+fullEndD.getUTCFullYear()+")":"")+
+          "<br>counted at sell start ("+fmtEN.format(start)+"): "+fmtBtc(bp.btc)+(exStack>0?" + "+fmtBtc(exStack)+" existing":"")+
+          "<br>"+(extendsPast
+            ?'<span class="dca-srcwarn">buys after the sell start are not in the stack</span>'
+            :'full buy plan counted');
+        trimBtn.hidden=!extendsPast;
+        if(bp.pts.length) buyPlot={pts:bp.pts, win:[bp.start, Math.min(bp.end,start)]};
+      } else {
+        stack0=exStack>0?exStack:1.0;
+        basis=exBasis;
+        srcInfoEl.textContent="custom: the existing-stack fields below are the source";
+        trimBtn.hidden=true;
+      }
+
+      // per-sell size in BTC, three ways to express it
+      const raw=parseFloat(amountEl.value);
+      let perBtc=0;
+      if(sellAmtMode==='btc'){
+        perBtc=isNaN(raw)?0:Math.max(0,raw);
+        amtDetail.hidden=true;
+      } else {
+        const pc=(isNaN(raw)||raw<=0)?0:Math.min(100,Math.max(1,raw));
+        perBtc=sellAmtMode==='pctper'
+          ? pc/100*stack0
+          : (exec.length?pc/100*stack0/exec.length:0);
+        amtDetail.hidden=!(perBtc>0);
+        amtDetail.textContent="= "+fmtBtc(perBtc)+" per "+per+" sell"+(sellAmtMode==='totalpct'?" ("+exec.length+" sells)":"");
+      }
+
+      let proceeds=0,sold=0,remaining=stack0,depleted=null,sells=0;
+      const pts=[];
+      for(const t of exec){
+        if(remaining<=1e-12||perBtc<=0) break;
+        const p=priceAt(t), q=Math.min(perBtc,remaining);
+        sells++;
+        proceeds+=q*p; sold+=q; remaining-=q;
+        pts.push({t,p,usd:q*p,btc:q});
+        if(remaining<=1e-12){remaining=0;depleted=t;break;}
+      }
+      const avgSell=sold>0?proceeds/sold:0;
+      const residual=remaining*endPrice;
+      const realized=basis>0&&sold>0?proceeds-basis*sold:null;
+      const realMult=basis>0&&sold>0?proceeds/(basis*sold):0;
+      const latent=basis>0&&remaining>0?residual-basis*remaining:null;
+      dcaPlot={points:pts,avg:avgSell,start,end,mode:'sell',depleted,
+        buyPts:buyPlot?buyPlot.pts:null,
+        buyWin:buyPlot?buyPlot.win:null,
+        avgBuy:(buyPlot&&basis>0)?basis:0};
+      cardsEl.innerHTML=
+        card("Starting stack",fmtBtc(stack0),basis>0?"avg cost "+fmtPrice(basis)+" ("+srcLabel+")":"("+srcLabel+") · basis unknown")+
+        card("Total proceeds",fmtPrice(proceeds),sold>0
+          ? sells+" of "+dates.length+" "+per+" sells executed"+(seasonAuto&&skipped?" ("+skipped+" skipped off-season)":"")
+          : "nothing sold")+
+        card("Average sell price",sold>0?fmtPrice(avgSell):"·","$ per BTC, all sells blended")+
+        (realized!==null
+          ? card("Realized P&L",(realized>=0?"+":"−")+fmtPrice(Math.abs(realized)),
+              fmtMul(realMult)+" on sold coins · "+(realized>=0?"+":"−")+Math.abs((realMult-1)*100).toFixed(0)+"% vs "+fmtPrice(basis)+"/BTC basis",
+              {hero:true,v:realized>=0?'green':'red'})
+          : card("Realized P&L","·","set a cost basis to compute P&L",{hero:true}))+
+        card("BTC remaining",fmtBtc(remaining),"≈ "+fmtPrice(residual)+" at "+fmtEN.format(end)
+          +(latent!==null?" · latent "+(latent>=0?"+":"−")+fmtPrice(Math.abs(latent))+" vs basis":""));
+      if(depleted&&exec.length&&depleted<exec[exec.length-1]){
+        noteEl.hidden=false;
+        noteEl.textContent="⚠ stack depleted on "+fmtEN.format(depleted)+" · sells stop there, before the period ends";
+      }
+    }
+    dcaHover=-1; dcaTip.style.opacity=0;
+    drawDca();
+  }
+
+  function setSeg(on,off){
+    on.classList.add('active');off.classList.remove('active');
+    on.setAttribute('aria-selected','true');off.setAttribute('aria-selected','false');
+  }
+  function updateModeUI(){
+    const sell=dcaMode==='sell';
+    pctField.hidden=sell;
+    srcField.hidden=!sell;
+    amtModes.hidden=!sell;
+    stackEl.placeholder=sell?"1.0 (custom default)":"0.0";
+    if(!sell){
+      amtUnit.textContent="USD per buy";
+      amtDetail.hidden=true;
+      srcInfoEl.textContent="";
+    } else {
+      amtUnit.textContent=sellAmtMode==='btc'?"BTC sold per period"
+        :sellAmtMode==='pctper'?"% of the starting stack each sell · 1 to 100"
+        :"% of the stack sold over the whole period · 1 to 100";
+    }
+  }
+  function switchMode(m){
+    if(m===dcaMode){run();return;}
+    const cur=planState[dcaMode];
+    cur.start=startEl.value; cur.end=endEl.value; cur.amount=amountEl.value; cur.freq=dcaFreq;
+    dcaMode=m;
+    const st=planState[m];
+    startEl.value=st.start; endEl.value=st.end; amountEl.value=st.amount;
+    dcaFreq=st.freq;
+    if(dcaFreq==='week') setSeg(weekBtn,monthBtn); else setSeg(monthBtn,weekBtn);
+    if(m==='buy') setSeg(buyBtn,sellBtn); else setSeg(sellBtn,buyBtn);
+    updateModeUI();
+    run();
+  }
+  buyBtn.addEventListener('click',()=>switchMode('buy'));
+  sellBtn.addEventListener('click',()=>switchMode('sell'));
+  weekBtn.addEventListener('click',()=>{dcaFreq='week';setSeg(weekBtn,monthBtn);run();});
+  monthBtn.addEventListener('click',()=>{dcaFreq='month';setSeg(monthBtn,weekBtn);run();});
+  trimBtn.addEventListener('click',()=>{
+    planState.buy.end=startEl.value; // buy plan now ends exactly where the sell plan starts
+    run();
+  });
+  srcPlanBtn.addEventListener('click',()=>{sellSrc='plan';setSeg(srcPlanBtn,srcCustomBtn);run();});
+  srcCustomBtn.addEventListener('click',()=>{sellSrc='custom';setSeg(srcCustomBtn,srcPlanBtn);run();});
+  document.querySelectorAll('#dcaAmtModes button').forEach(b=>{
+    b.addEventListener('click',()=>{
+      sellAmtMode=b.dataset.am;
+      document.querySelectorAll('#dcaAmtModes button').forEach(x=>x.classList.toggle('active',x===b));
+      updateModeUI();
+      run();
+    });
+  });
+  amountEl.addEventListener('change',()=>{
+    if(dcaMode==='sell'&&sellAmtMode!=='btc'){
+      let v=parseFloat(amountEl.value); if(isNaN(v)) v=80;
+      amountEl.value=Math.min(100,Math.max(1,v));
+      run();
+    }
+  });
+  document.querySelectorAll('#dcaSeasons .season-chip').forEach(ch=>{
+    ch.addEventListener('click',()=>{
+      selSeasons[ch.dataset.season]=!selSeasons[ch.dataset.season];
+      ch.classList.toggle('on',selSeasons[ch.dataset.season]);
+      run();
+    });
+  });
+  startEl.addEventListener('input',run);
+  endEl.addEventListener('input',run);
+  amountEl.addEventListener('input',run);
+  stackEl.addEventListener('input',run);
+  basisEl.addEventListener('input',run);
+  pctEl.addEventListener('input',run);
+  pctEl.addEventListener('change',()=>{
+    let v=Math.round(parseFloat(pctEl.value)); if(isNaN(v)) v=15;
+    pctEl.value=Math.min(99,Math.max(1,v));
+    run();
+  });
+  run();
+})();
+
+/* =====================================================
+   INIT
+   ===================================================== */
+buildDial(CYCLES[3]);
+setTime(TODAY);
+setMode('chrono');
+</script>
+</body>
+</html>
