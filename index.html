@@ -238,6 +238,7 @@
   .ro-label{font-family:var(--mono);font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--paper-faint)}
   .ro-val{font-family:var(--mono);font-size:.93rem;margin-top:5px;color:var(--paper);font-variant-numeric:tabular-nums}
   .ro-val .accent{color:var(--accent-hi)}
+  .ro-src{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--paper-faint);margin-top:10px}
 
   .scrub{margin-top:24px}
   .scrub label{font-family:var(--mono);font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--paper-faint);display:block;margin-bottom:12px}
@@ -671,7 +672,7 @@
 
   <!-- ============ HERO ============ -->
   <header id="top">
-    <span class="eyebrow">Bitcoin Quant · Cycle IV · Last updated June 2026</span>
+    <span class="eyebrow">Bitcoin Quant · Cycle IV · Last updated <span id="lastUpdated">June 2026</span></span>
     <h1>The four seasons<br>of <em>Bitcoin</em></h1>
     <p class="sub">Every ~4 years, the halving restarts the cycle: first comes <strong>euphoria</strong>, then <strong>distribution</strong>, then <strong>capitulation</strong>, and finally <strong>accumulation</strong>.<br>We start with the raw data, then see where the cycle's hand takes us.</p>
   </header>
@@ -697,7 +698,7 @@
             <tr><td>2013–15</td><td>Nov. 29, 2013</td><td>Jan. 14, 2015</td><td class="r">411</td></tr>
             <tr><td>2017–18</td><td>Dec. 17, 2017</td><td>Dec. 15, 2018</td><td class="r">363</td></tr>
             <tr><td>2021–22</td><td>Nov. 10, 2021</td><td>Nov. 21, 2022</td><td class="r">376</td></tr>
-            <tr class="pend"><td>2025–?</td><td>Oct. 6, 2025</td><td>not confirmed</td><td class="r">248 ↗</td></tr>
+            <tr class="pend"><td>2025–?</td><td>Oct. 6, 2025</td><td>not confirmed</td><td class="r"><span class="js-dst">248</span> ↗</td></tr>
           </tbody>
         </table>
         <div class="mt-note">Mature cycles bleed <b>~383 days</b> on average (12–14 months).</div>
@@ -758,7 +759,7 @@
       </div>
     </div>
 
-    <p class="mt-src">Dates: <b>Bitbo</b> (2011 high June 9 · 2013 high Nov. 29 · 2018 low Dec. 15 · 2022 low Nov. 21) · <b>VanEck</b> (2017 top Dec. 17) · <b>Axios</b> (Coinbase record Nov. 10, 2021) · <b>CoinMarketCap</b> (ATH $126,198, Oct. 6, 2025). Figures can shift by 1–5 days depending on the exchange, daily close vs intraday. The current cycle has no confirmed bottom: 248 days since the top, "top to bottom" is only measurable in hindsight.</p>
+    <p class="mt-src">Dates: <b>Bitbo</b> (2011 high June 9 · 2013 high Nov. 29 · 2018 low Dec. 15 · 2022 low Nov. 21) · <b>VanEck</b> (2017 top Dec. 17) · <b>Axios</b> (Coinbase record Nov. 10, 2021) · <b>CoinMarketCap</b> (ATH $126,198, Oct. 6, 2025). Figures can shift by 1–5 days depending on the exchange, daily close vs intraday. The current cycle has no confirmed bottom: <span class="js-dst">248</span> days since the top, "top to bottom" is only measurable in hindsight.</p>
     </div>
     </div>
   </section>
@@ -770,7 +771,7 @@
       <div class="dial-center">
         <div class="dc-emoji" id="dcEmoji">❄️</div>
         <div class="dc-phase" id="dcPhase">Crypto winter</div>
-        <div class="dc-date" id="dcDate">June 10, 2026</div>
+        <div class="dc-date" id="dcDate">…</div>
         <div class="dc-price" id="dcPrice">≈ $61,500</div>
         <div class="dc-proj" id="dcProj" hidden>Projection</div>
       </div>
@@ -787,10 +788,11 @@
 
       <div class="readout">
         <div class="ro-cell"><div class="ro-label">Cycle</div><div class="ro-val" id="roCycle">IV · 2024–2028</div></div>
-        <div class="ro-cell"><div class="ro-label">Cycle day</div><div class="ro-val" id="roDay">D+781 / ~1456</div></div>
+        <div class="ro-cell"><div class="ro-label">Cycle day</div><div class="ro-val" id="roDay">…</div></div>
         <div class="ro-cell"><div class="ro-label">Since the top</div><div class="ro-val" id="roTop">…</div></div>
         <div class="ro-cell"><div class="ro-label">Price (approx.)</div><div class="ro-val accent" id="roPrice">…</div></div>
       </div>
+      <div class="ro-src" id="roSrc">snapshot: June 2026</div>
 
       <div class="scrub">
         <label for="timeScrub">Time travel · 2012 → today → <span style="color:var(--winter)">2034 (projection)</span></label>
@@ -933,7 +935,7 @@
         <div class="card">
           <div class="k">Remaining path</div>
           <div class="v" id="projPath">−44%</div>
-          <div class="n">from ~$61,500 today</div>
+          <div class="n">from ~<span id="projTodayPrice">$61,500</span> today</div>
         </div>
       </div>
     </div>
@@ -946,7 +948,7 @@
       <div>
         <span class="proj-tag">Projection · grain of salt required</span>
         <h3>The theoretical bottom</h3>
-        <p>Two clocks are ticking toward the same window.<br><br>The first one starts at the top: in mature Bitcoin cycles, top → bottom took 411, 363, and 376 days, about <b>383 days on average</b>. From the Oct. 6, 2025 top, that points to <b>late Oct. / Nov. 2026</b>.<br><br>The second one starts at the last bottom: bottom → bottom took <b>1,431 and 1,437 days</b> across the last two cycles. From Nov. 21, 2022, that also lands around <b>late Oct. 2026</b>.<br><br>Where we are: 248 days since the top, no confirmed bottom yet.</p>
+        <p>Two clocks are ticking toward the same window.<br><br>The first one starts at the top: in mature Bitcoin cycles, top → bottom took 411, 363, and 376 days, about <b>383 days on average</b>. From the Oct. 6, 2025 top, that points to <b>late Oct. / Nov. 2026</b>.<br><br>The second one starts at the last bottom: bottom → bottom took <b>1,431 and 1,437 days</b> across the last two cycles. From Nov. 21, 2022, that also lands around <b>late Oct. 2026</b>.<br><br>Where we are: <span class="js-dst">248</span> days since the top, no confirmed bottom yet.</p>
       </div>
       <div class="milestones">
         <div class="ms-title">Projected milestones · if the pattern repeats (it never repeats exactly)</div>
@@ -1019,7 +1021,7 @@
         <div class="rule"><span class="rule-g">☀→☀</span><div><b>Top → top: ~1,425 days (3.9 yrs).</b><span>1,424 d then 1,426 d on the last two, and Oct. 6, 2025 fell 1,426 d after Nov. 2021.</span></div></div>
         <div class="rule"><span class="rule-g">❄→❄</span><div><b>Bottom → bottom: ~1,434 days on the last two.</b><span>1,153 d (2011 → 2015), then 1,431 and 1,437. From Nov. 21, 2022, the clock points to ~late Oct. 2026.</span></div></div>
         <div class="rule"><span class="rule-g">📉</span><div><b>The violence fades each round.</b><span>Drawdowns compress ~5.4 pts/cycle (−94 → −77.5) and multiples shrink ×94 → ×30 → ×8 → ×2.</span></div></div>
-        <div class="rule status"><span class="rule-g">⏳</span><div><b>Where we stand: day 248 since the top.</b><span>No confirmed bottom yet for the current cycle: "top to bottom" can only be measured in hindsight.</span></div></div>
+        <div class="rule status"><span class="rule-g">⏳</span><div><b>Where we stand: day <span class="js-dst">248</span> since the top.</b><span>No confirmed bottom yet for the current cycle: "top to bottom" can only be measured in hindsight.</span></div></div>
         <div class="rule wisdom"><span class="rule-g">🎯</span><div><b>If the temporality plays out again, remember one thing: you will never catch the exact top or bottom.</b><span>The edge is not precision, it is preparation: DCA aggressively (buying or selling) across the strategic windows, instead of betting everything on a single date.</span></div></div>
       </div>
     </div>
@@ -1065,12 +1067,12 @@
       <div class="dca-grid">
         <div class="dca-field">
           <label for="dcaStart">Start date</label>
-          <input type="date" class="dca-num" id="dcaStart" value="2026-06-12" min="2012-01-01" max="2034-12-01" aria-label="DCA start date">
+          <input type="date" class="dca-num" id="dcaStart" min="2012-01-01" max="2034-12-01" aria-label="DCA start date">
           <span class="unit" id="dcaStartHint">today</span>
         </div>
         <div class="dca-field">
           <label for="dcaEnd">End date</label>
-          <input type="date" class="dca-num" id="dcaEnd" value="2031-06-12" min="2012-01-01" max="2034-12-01" aria-label="DCA end date">
+          <input type="date" class="dca-num" id="dcaEnd" min="2012-01-01" max="2034-12-01" aria-label="DCA end date">
           <span class="unit" id="dcaEndOut">≈ 5.0 yrs · 61 monthly buys</span>
         </div>
         <div class="dca-field">
@@ -1176,7 +1178,27 @@ const MONTHLY = [
 [2026,1,80000],[2026,2,74000],[2026,3,70000],[2026,4,66000],[2026,5,64000],[2026,6,61500]
 ].map(([y,m,p])=>({t:D(y,m), p}));
 
-const TODAY = D(2026,6,10);
+/* single source of "now": the real wall-clock date, normalized to UTC midnight
+   (everything that represents the present derives from this, never a literal) */
+const _NOW = new Date();
+const TODAY = Date.UTC(_NOW.getUTCFullYear(), _NOW.getUTCMonth(), _NOW.getUTCDate());
+
+/* =====================================================
+   LIVE STATE · today's price + days since the top
+   Fetched from CoinGecko at load; if the fetch fails,
+   is slow, or returns junk, these hardcoded values
+   are kept as a safe fallback (no visual breakage).
+   Historical/projected data (MONTHLY/PROJ) is untouched:
+   only the single "today" anchor becomes dynamic.
+   ===================================================== */
+const ATH = 126198;            // cycle top, Oct 6, 2025 (CoinMarketCap)
+const TOP_DATE = D(2025,10,6);
+const FALLBACK_PRICE = 61500;  // June 2026 snapshot, used if the live fetch fails
+let LIVE_PRICE = FALLBACK_PRICE;
+let priceIsLive = false;
+const DAYS_SINCE_TOP = Math.max(0, Math.round((TODAY - TOP_DATE)/DAY));
+const LIVE_HOOKS = [];          // callbacks re-run once the live price lands
+const liveDrawStr = () => "−"+Math.abs((LIVE_PRICE/ATH-1)*100).toFixed(0)+"%";
 
 const HALVINGS = [
   {t:D(2012,11,28), p:12.35, label:"Halving I"},
@@ -1225,7 +1247,7 @@ const CYCLES = [
   {n:"I",  years:"2012 – 2016", color:"#8FBF7C", halving:HALVINGS[0], top:TOPS[0], bottom:BOTTOMS[0], next:HALVINGS[1], dd:"−87%", mult:"×94", d2t:366},
   {n:"II", years:"2016 – 2020", color:"#E8A33D", halving:HALVINGS[1], top:TOPS[1], bottom:BOTTOMS[1], next:HALVINGS[2], dd:"−84%", mult:"×30", d2t:526},
   {n:"III",years:"2020 – 2024", color:"#E2614F", halving:HALVINGS[2], top:TOPS[2], bottom:BOTTOMS[2], next:HALVINGS[3], dd:"−78%", mult:"×8",  d2t:548},
-  {n:"IV", years:"2024 – 2028", color:"#E8540F", halving:HALVINGS[3], top:TOPS[3], bottom:BOTTOMS[3], next:HALVINGS[4], dd:"−51% so far*", mult:"×2", d2t:534, live:true}
+  {n:"IV", years:"2024 – 2028", color:"#E8540F", halving:HALVINGS[3], top:TOPS[3], bottom:BOTTOMS[3], next:HALVINGS[4], dd:liveDrawStr()+" so far*", mult:"×2", d2t:534, live:true}
 ];
 
 /* projected cycles so the seasons clock can spin into the future */
@@ -1255,19 +1277,25 @@ const SEASONS = {
    HELPERS
    ===================================================== */
 const fmtEN = new Intl.DateTimeFormat('en-US',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'});
+const fmtMonthYear = new Intl.DateTimeFormat('en-US',{month:'long',year:'numeric',timeZone:'UTC'});
 const fmtPrice = p => {
   if(p>=1000) return "$" + Math.round(p).toLocaleString('en-US');
   return "$" + (Math.round(p*10)/10).toLocaleString('en-US');
 };
+const buildCycleNote = () =>
+  "* Cycle IV in progress: "+liveDrawStr()+" is the max drawdown measured so far (~"
+  +fmtPrice(LIVE_PRICE)+", "+DAYS_SINCE_TOP+" days since the top), and the cycle has not officially bottomed yet.";
 
 /* exact event anchors so the dial shows precise prices on key dates,
-   + projected monthly path so the dial can travel into the future */
+   + projected monthly path so the dial can travel into the future.
+   TODAY_ANCHOR.p is the only point updated live (see applyLive). */
+const TODAY_ANCHOR = {t:TODAY, p:LIVE_PRICE};
 const SERIES = MONTHLY
   .concat([
     {t:D(2013,11,29), p:1163},  {t:D(2015,1,14),  p:152},
     {t:D(2017,12,17), p:19783}, {t:D(2018,12,15), p:3122},
     {t:D(2021,11,10), p:68789}, {t:D(2022,11,21), p:15476},
-    {t:D(2025,10,6),  p:126198},{t:TODAY,         p:61500}
+    {t:D(2025,10,6),  p:ATH},   TODAY_ANCHOR
   ])
   .concat(PROJ)
   .sort((a,b)=>a.t-b.t);
@@ -1477,6 +1505,7 @@ function setTime(t, fromScrub=false){
   const lastTop=[...ALL_TOPS].reverse().find(x=>x.t<=t);
   if(lastTop){
     const dd=(price/lastTop.p-1)*100;
+    // days since the most recent top; at TODAY this equals DAYS_SINCE_TOP (same source)
     const days=Math.round((t-lastTop.t)/DAY);
     document.getElementById('roTop').textContent=
       (dd<=-0.5? dd.toFixed(0).replace('-','−')+"%" : "at the top ☀")+" · "+days+" d";
@@ -2085,7 +2114,7 @@ CYCLES.forEach(c=>{
       <div class="cc-row"><span class="cc-k">Top</span><span class="cc-v up">${fmtEN.format(c.top.t)} · ${fmtPrice(c.top.p)}</span></div>
       <div class="cc-row"><span class="cc-k">Halving → top</span><span class="cc-v">${c.d2t} days</span></div>
       ${botRow}
-      <div class="cc-row"><span class="cc-k">Max drawdown</span><span class="cc-v down">${c.dd}</span></div>
+      <div class="cc-row"><span class="cc-k">Max drawdown</span><span class="cc-v down"${c.live?' id="liveCardDd"':''}>${c.dd}</span></div>
       ${c.live?'<div class="cc-live-note">⏳ current max drawdown: no official bottom yet, this number is still open</div>':''}
     </div>
     <div class="cc-x">cycle multiple <b>${c.mult}</b></div>`;
@@ -2127,8 +2156,9 @@ cardsBox.appendChild(pv6);
 
 // asterisk note
 const note=document.createElement('p');
+note.id="cycleNote";
 note.style.cssText="grid-column:1/-1;font-family:var(--mono);font-size:.72rem;color:var(--paper-faint);margin-top:2px";
-note.textContent="* Cycle IV in progress: −51% is the max drawdown measured so far (~$61,500 on June 10, 2026, day 248 since the top), and the cycle has not officially bottomed yet.";
+note.textContent=buildCycleNote();
 cardsBox.appendChild(note);
 
 /* =====================================================
@@ -2140,15 +2170,15 @@ document.getElementById('cdDays').textContent=
 /* =====================================================
    BEAR LEDGER
    ===================================================== */
-const TOP5 = 126198;          // ATH Oct 6, 2025 (CoinMarketCap)
-const NOW_PRICE = 61500;       // ~June 10, 2026
-const NOW_DD = (NOW_PRICE/TOP5-1)*100; // ≈ −51
+const TOP5 = ATH;              // ATH Oct 6, 2025 (CoinMarketCap)
+let NOW_PRICE = LIVE_PRICE;     // live price, falls back to the June 2026 snapshot
+let NOW_DD = (NOW_PRICE/TOP5-1)*100; // current drawdown vs the ATH
 const BEARS = [
   {n:1, color:"#8B7FD6", topL:"June 9, 2011", topP:31.9,   botL:"Nov. 18, 2011", botP:2.05,  dd:-93.6, dys:162},
   {n:2, color:"#5FAE8E", topL:"Nov. 29, 2013", topP:1163,   botL:"Jan. 14, 2015", botP:152,   dd:-86.9, dys:411},
   {n:3, color:"#C9A23F", topL:"Dec. 17, 2017", topP:19783,  botL:"Dec. 15, 2018", botP:3122,  dd:-84.2, dys:363},
   {n:4, color:"#C96B4A", topL:"Nov. 10, 2021", topP:68789,  botL:"Nov. 21, 2022", botP:15476, dd:-77.5, dys:376},
-  {n:5, color:"#E8A33D", topL:"Oct. 6, 2025",  topP:TOP5,   botL:null,            botP:null,  dd:NOW_DD, dys:248, live:true},
+  {n:5, color:"#E8A33D", topL:"Oct. 6, 2025",  topP:TOP5,   botL:null,            botP:null,  dd:NOW_DD, dys:DAYS_SINCE_TOP, live:true},
   {n:6, color:"#8FB6D9", topL:"~Sep. 2029", topPs:"~$165K", botL:"~Oct. 2030", botPs:"~$54K", dd:-67, dys:"~380", proj:true, deltaTxt:5},
   {n:7, color:"#8B7FD6", topL:"~Aug. 2033", topPs:"~$190K", botL:"~Sep. 2034", botPs:"~$72K", dd:-62, dys:"~386", proj:true, deltaTxt:5}
 ];
@@ -2157,13 +2187,17 @@ const bP = p => "$" + (p>=1000 ? Math.round(p).toLocaleString('en-US') : p);
 const bPct = (v,dec=0)=>"−"+Math.abs(v).toFixed(dec)+"%";
 const bK = v => "$"+Math.round(v/1000)+"K";
 
-(function renderLedger(){
+function renderLedger(){
   const box=document.getElementById('rows');
+  box.innerHTML='';
   BEARS.forEach((c,i)=>{
     const row=document.createElement('div');
     row.className='lrow'+(c.live?' live':'')+(c.proj?' proj':'');
     const prev=i>0?BEARS[i-1]:null;
     const deltaPts = (prev && !c.live && !c.proj && !prev.live) ? Math.round(prev.dd - c.dd) : null;
+    // live row reads the live globals so it refreshes when the price lands
+    const cdd  = c.live ? NOW_DD : c.dd;
+    const cdys = c.live ? DAYS_SINCE_TOP : c.dys;
 
     const botCell = c.live
       ? `<div class="ev bot" data-m="Bottom"><div class="when">? (ongoing)</div><div class="price">~${bP(NOW_PRICE)}<small>now</small></div></div>`
@@ -2178,18 +2212,19 @@ const bK = v => "$"+Math.round(v/1000)+"K";
       <div class="ddwrap">
         <div class="track">
           ${c.live?'<div class="ghost" id="ghostBar"></div><div class="gmark" id="ghostMark" data-label=""></div>':''}
-          <div class="fill" data-w="${Math.abs(c.dd)}"></div>
+          <div class="fill" data-w="${Math.abs(cdd)}"></div>
         </div>
-        <span class="ddnum">${c.proj?'~':''}${bPct(c.dd)}</span>
+        <span class="ddnum">${c.proj?'~':''}${bPct(cdd)}</span>
         ${c.proj?`<span class="delta">▼<b>${c.deltaTxt}</b>pts</span>`:(deltaPts!==null?`<span class="delta">▼<b>${deltaPts}</b>pts</span>`:`<span class="delta">${c.live?'<b>ongoing</b>':''}</span>`)}
       </div>
-      <div class="dur">${c.dys} d${c.live?' <span class="live-tag">↗</span>':''}</div>`;
+      <div class="dur">${cdys} d${c.live?' <span class="live-tag">↗</span>':''}</div>`;
     box.appendChild(row);
   });
   requestAnimationFrame(()=>{
     document.querySelectorAll('.fill').forEach(f=>{f.style.width=f.dataset.w+'%';});
   });
-})();
+}
+renderLedger();
 
 const compSlider=document.getElementById('comp');
 function bUpdate(x){
@@ -2232,8 +2267,15 @@ bUpdate(5.4);
    DCA SIMULATOR
    ===================================================== */
 (function(){
-  const REF_TODAY = D(2026,6,12);
+  const REF_TODAY = TODAY;       // the simulator's "today" = the real date
   const END_CAP = D(2034,12,1); // projection data ends Dec 2034
+  const isoDay = ts => new Date(ts).toISOString().slice(0,10);
+  const addYears = (ts,n) => { const d=new Date(ts); return Date.UTC(d.getUTCFullYear()+n, d.getUTCMonth(), d.getUTCDate()); };
+  // default plan windows, all anchored on the real today (buy: today +5y · sell chains after the buy)
+  const DEF_BUY_START  = REF_TODAY;
+  const DEF_BUY_END    = Math.min(addYears(REF_TODAY,5), END_CAP);
+  const DEF_SELL_START = DEF_BUY_END;
+  const DEF_SELL_END   = Math.min(addYears(DEF_BUY_END,1), END_CAP);
   const buyBtn=document.getElementById('dcaBuyBtn'), sellBtn=document.getElementById('dcaSellBtn');
   const weekBtn=document.getElementById('dcaWeekBtn'), monthBtn=document.getElementById('dcaMonthBtn');
   const startEl=document.getElementById('dcaStart'), startHint=document.getElementById('dcaStartHint');
@@ -2252,8 +2294,8 @@ bUpdate(5.4);
   let sellSrc='plan', sellAmtMode='totalpct';
   /* per-mode persistent settings: switching tabs swaps these in and out */
   const planState={
-    buy:{start:'2026-06-12',end:'2031-06-12',amount:'2000',freq:'month'},
-    sell:{start:'2031-06-12',end:'2032-06-12',amount:'80',freq:'month'}
+    buy:{start:isoDay(DEF_BUY_START),end:isoDay(DEF_BUY_END),amount:'2000',freq:'month'},
+    sell:{start:isoDay(DEF_SELL_START),end:isoDay(DEF_SELL_END),amount:'80',freq:'month'}
   };
 
   /* season filter · single source of truth: the page's own seasonFor()/cycleFor() */
@@ -2888,7 +2930,12 @@ bUpdate(5.4);
     pctEl.value=Math.min(99,Math.max(1,v));
     run();
   });
+  // seed the inputs from the (today-anchored) default buy plan, then compute
+  startEl.value=planState.buy.start;
+  endEl.value=planState.buy.end;
+  amountEl.value=planState.buy.amount;
   run();
+  LIVE_HOOKS.push(run); // recompute the simulator when the live price lands
 })();
 
 /* =====================================================
@@ -2897,6 +2944,46 @@ bUpdate(5.4);
 buildDial(CYCLES[3]);
 setTime(TODAY);
 setMode('chrono');
+// real days-since-top + "last updated" month, both clock-derived (independent of the price fetch)
+document.querySelectorAll('.js-dst').forEach(e=>{ e.textContent=DAYS_SINCE_TOP; });
+(function(){ const lu=document.getElementById('lastUpdated'); if(lu) lu.textContent=fmtMonthYear.format(TODAY); })();
+
+/* =====================================================
+   LIVE PRICE · CoinGecko with a safe fallback
+   ===================================================== */
+function applyLive(){
+  TODAY_ANCHOR.p = LIVE_PRICE;            // the only dynamic point of priceAt()
+  NOW_PRICE = LIVE_PRICE;
+  NOW_DD = (NOW_PRICE/TOP5-1)*100;
+  renderLedger();                          // live bear-ledger row
+  bUpdate(parseFloat(compSlider.value)||5.4); // proj panel "remaining path"
+  const n=document.getElementById('cycleNote'); if(n) n.textContent=buildCycleNote();
+  const lc=document.getElementById('liveCardDd'); if(lc) lc.textContent=liveDrawStr()+" so far*";
+  const pt=document.getElementById('projTodayPrice'); if(pt) pt.textContent=fmtPrice(LIVE_PRICE);
+  // dial + chart cursor: only snap back to today if the user has not scrubbed away
+  if(Math.abs(chartScrubT-TODAY)<2*DAY) setTime(TODAY); else drawChart();
+  LIVE_HOOKS.forEach(fn=>{ try{ fn(); }catch(e){} }); // DCA simulator, etc.
+}
+
+(async function loadLivePrice(){
+  if(typeof fetch!=='function') return;    // no fetch (old env): keep the snapshot
+  try{
+    const ctrl=new AbortController();
+    const to=setTimeout(()=>ctrl.abort(), 3000);
+    const res=await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd',{signal:ctrl.signal});
+    clearTimeout(to);
+    const data=await res.json();
+    const p=data && data.bitcoin && data.bitcoin.usd;
+    if(typeof p==='number' && isFinite(p) && p>=1000 && p<=10000000){
+      LIVE_PRICE=p; priceIsLive=true;
+      const src=document.getElementById('roSrc'); if(src) src.textContent="live · CoinGecko";
+      applyLive();
+    }
+    // out-of-range / malformed: keep the hardcoded fallback silently
+  }catch(e){ /* network error, timeout, or abort: keep the fallback, no visual change */ }
+})();
 </script>
+<script data-goatcounter="https://lyskey.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
