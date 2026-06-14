@@ -647,6 +647,97 @@
     }
   }
 
+  /* ============================================================
+     MOBILE PASS (portrait phones) · desktop rules above untouched
+     ============================================================ */
+  @media (max-width:768px){
+    main{padding:0 18px}
+    section{margin-top:80px}
+    .method{margin-top:44px}
+
+    /* hero */
+    header{padding:116px 0 10px}
+    h1{font-size:clamp(1.7rem,7.6vw,2.8rem);line-height:1.06;margin:18px 0 18px}
+    .sub{font-size:.95rem;line-height:1.7}
+    .eyebrow{display:flex;flex-wrap:wrap;justify-content:center;max-width:100%;font-size:9px;letter-spacing:.12em;gap:6px;line-height:1.6}
+
+    /* section heads + body copy */
+    .sec-head{gap:10px 12px;margin-bottom:12px}
+    .sec-num,.sec-head h2{font-size:clamp(1.3rem,5.4vw,2rem)}
+    .sec-head h2{min-width:0;flex:1 1 100%}   /* let the title wrap instead of clipping */
+    .sec-sub{font-size:.9rem;margin-bottom:24px;line-height:1.7}
+
+    /* method (section 00) */
+    .method-toggle{font-size:9.5px;padding:12px 16px;letter-spacing:.06em;line-height:1.4;text-align:left}
+    .mt-grid{gap:14px}
+    .mtable,.ct{padding:18px 16px}
+    .mt-src{font-size:.66rem}
+
+    /* observatory / dial */
+    .observatory{padding:20px 16px;gap:24px}
+    .panel h2{font-size:1.2rem}
+    .panel .lede{font-size:.88rem}
+
+    /* chart (section 01) */
+    .chart-card{padding:16px 14px}
+    .chart-toolbar{gap:10px}
+    .chart-box{height:300px}
+    .toggle button{padding:9px 12px;font-size:10px;letter-spacing:.06em}
+    .legend{font-size:9.5px;gap:6px}
+    .chart-note{font-size:.7rem}
+
+    /* cycles + multiples */
+    .multiples{padding:20px 16px;gap:8px}
+    .multiples .m{font-size:clamp(1.1rem,4.4vw,1.6rem)}
+
+    /* bear ledger projection panel + "next" */
+    .proj{padding:20px 16px}
+    .slider-head output{font-size:.95rem}
+    .next{padding:24px 18px;gap:24px}
+    .milestones{padding:16px}
+
+    /* takeaways */
+    .tk-records,.tk-rules,.tk-playbook{padding:20px 16px}
+    .tk-pb-grid{gap:18px}
+
+    /* playbook */
+    .playbook{padding:18px 14px}
+
+    /* DCA simulator: everything stacks to one column */
+    .dca{padding:18px 14px}
+    .dca-bar{gap:10px}
+    .dca-grid{grid-template-columns:1fr;gap:18px}
+    .dca-existing-grid{grid-template-columns:1fr;gap:18px;max-width:none}
+    .cards{grid-template-columns:1fr}
+    .dca-num{padding:13px 14px}            /* >=44px tall for touch */
+    .dca-chart-bar{flex-wrap:wrap;justify-content:flex-start}
+    .dca-chart-box{height:240px}
+    .dca-amt-toggle{flex-wrap:wrap}
+
+    /* footer */
+    footer{margin-top:88px;padding:36px 0 48px}
+    footer .warn{font-size:.64rem;line-height:1.85}
+  }
+
+  @media (max-width:480px){
+    main{padding:0 14px}
+    .topnav{padding:12px 14px}
+    .tn-home{gap:8px}
+    .tn-mark{width:22px;height:22px}
+    .tn-brand{font-size:13px}
+    .tn-link{padding:10px 13px;font-size:9.5px;letter-spacing:.1em}
+    header{padding-top:104px}
+    h1{font-size:clamp(1.55rem,8vw,2.4rem)}
+    section{margin-top:64px}
+    .chart-box{height:262px}
+    .dca-chart-box{height:204px}
+    .mtable table{font-size:.68rem}
+    .toggle button{padding:8px 9px;font-size:9px;letter-spacing:.04em}
+    .legend{font-size:9px}
+    .lg-btn{padding:4px 8px}
+    .multiples .arrow{font-size:.9rem}
+  }
+
 </style>
 </head>
 <body>
