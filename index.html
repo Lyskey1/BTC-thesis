@@ -15,7 +15,7 @@
   --bg:#05060A; --bg2:#0A0C12; --glass:rgba(10,12,18,.66); --glass-hi:rgba(16,19,27,.78);
   --ink:#ECEEF3; --ink2:#A3A9B8; --ink3:#6B7182;
   --line:rgba(236,238,243,.11); --line2:rgba(236,238,243,.06);
-  --mint:#5EEAD4; --mint-ui:#52C9B3; --violet:#8A78FF; --violet-hi:#A898FF;
+  --mint:#5EEAD4; --mint-ui:#52C9B3; --go:#3DF5A0; --violet:#8A78FF; --violet-hi:#A898FF;
   --spring:#19E6B0; --summer:#FFB21E; --autumn:#FF3B6B; --winter:#7B5BFF;
   --c1:#2A6E64; --c2:#3A9C8C; --c3:#52C9B3; --c4:#9AF7E2;
   --paper:rgba(14,17,24,.82); --paper-ink:#ECEEF3; --paper-ink2:#A3A9B8; --paper-line:rgba(236,238,243,.1);
@@ -53,7 +53,8 @@ button,input{font:inherit;color:inherit}
 #marks .rule{stroke:rgba(236,238,243,.22);stroke-width:1}
 #marks .hv{stroke:rgba(236,238,243,.18);stroke-width:1;stroke-dasharray:2 4}
 #marks .zone{fill:rgba(138,120,255,.06);stroke:var(--violet-hi);stroke-width:1;stroke-dasharray:4 4}
-#marks .old{stroke:#FF6B8E;stroke-width:1.5;fill:none}
+#marks .zone.hit{fill:rgba(61,245,160,.10);stroke:#3DF5A0;stroke-dasharray:none;filter:drop-shadow(0 0 8px rgba(61,245,160,.45))}
+#marks .go{fill:#3DF5A0;font-weight:500}
 #marks .dot{stroke:var(--bg);stroke-width:2}
 #marks g.sc{transition:opacity .25s linear}
 #hit{position:fixed;z-index:6;display:none;cursor:crosshair;touch-action:pan-y}
@@ -82,8 +83,9 @@ main{position:relative;z-index:4}
 .live-dot.off{background:var(--ink3);animation:none}
 @keyframes pulse{70%{box-shadow:0 0 0 9px rgba(94,234,212,0)}100%{box-shadow:0 0 0 0 rgba(94,234,212,0)}}
 h1,h2,h3{font-family:var(--serif);font-weight:300;letter-spacing:-.01em;line-height:1.02}
-h1{font-size:clamp(2.7rem,4.9vw,4.9rem)}
+h1{font-size:clamp(2.9rem,5.4vw,5.5rem)}
 h1 em,h2 em{font-style:italic;color:var(--mint)}
+#heroTitle em{color:var(--go);text-shadow:0 0 40px rgba(61,245,160,.25)}
 h2{font-size:clamp(2.2rem,4.2vw,3.7rem)}
 h3{font-size:1.7rem;line-height:1.1}
 .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mint-ui);margin-bottom:16px}
@@ -113,6 +115,16 @@ p.body b{color:var(--ink)}
 .state::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
 .state.yes{color:var(--mint)} .state.near{color:#E8B04E} .state.no{color:var(--ink2)}
 .state span{color:var(--ink)}
+.trig-k{display:flex;justify-content:space-between;align-items:center}
+.on-tag{display:none;color:#04140F;background:var(--go);padding:2px 8px;border-radius:999px;letter-spacing:.06em;font-weight:500}
+.trig.on{border-color:rgba(61,245,160,.6);background:linear-gradient(180deg,rgba(61,245,160,.10),rgba(10,12,18,.66) 60%);box-shadow:0 0 0 1px rgba(61,245,160,.18),0 0 34px rgba(61,245,160,.14)}
+.trig.on .on-tag{display:inline-block}
+.trig.on .state{color:#04140F;background:var(--go);border-color:var(--go);font-weight:500;box-shadow:0 0 18px rgba(61,245,160,.45)}
+.trig.on .state::before{background:#04140F}
+.trig.on .meter .mk{background:var(--go);box-shadow:0 0 14px var(--go)}
+.go{display:inline-flex;align-items:center;gap:9px;margin-top:22px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#04140F;background:var(--go);padding:7px 14px;border-radius:999px;font-weight:500;box-shadow:0 0 30px rgba(61,245,160,.35)}
+.go::before{content:"";width:7px;height:7px;border-radius:50%;background:#04140F;animation:pulse 2.2s infinite}
+.go[hidden]{display:none}
 .play{margin-top:22px;color:var(--ink2);font-size:.98rem;max-width:560px;border-left:2px solid var(--mint);padding-left:14px}
 .play b{color:var(--ink)}
 .cta{display:inline-flex;align-items:center;gap:10px;margin-top:26px;color:var(--ink);font-size:14px;border:1px solid var(--line);padding:11px 18px;border-radius:999px;background:rgba(236,238,243,.03);transition:background .2s,border-color .2s}
@@ -287,19 +299,20 @@ footer p{max-width:620px}
   <header class="hero wrap" id="takeaway" data-scene="ring">
     <div class="hero-copy">
       <p class="eyebrow"><span class="live-dot off" id="liveDot"></span><span id="heroEyebrow">Bitcoin cycle thesis</span></p>
+      <p class="go" id="heroGo" hidden>Both bottom signals are on</p>
       <h1 id="heroTitle">The clock says now.<br><em>The price says almost.</em></h1>
       <p class="lede" id="heroLede">Bitcoin bear markets end on one of two signals: <b>time runs out</b>, or <b>the price falls deep enough</b>.</p>
 
       <div class="triggers">
-        <div class="trig">
-          <div class="trig-k">Time signal</div>
+        <div class="trig" id="trigTime">
+          <div class="trig-k">Time signal<span class="on-tag">● On</span></div>
           <div class="trig-v"><span class="num" id="tDays">411 days</span>since the Oct 6, 2025 top</div>
           <div class="meter" id="mTime" aria-hidden="true"><div class="trk"></div><div class="band"></div><div class="band in"></div><div class="mk"></div><div class="ends"><span>day 300</span><span>day 500</span></div></div>
           <div class="trig-n">Window: the longest bear (411 days) ±10%<br><span id="tWin">day 370–452 · Oct 11, 2026 → Jan 1, 2027</span></div>
           <div class="state yes" id="tState">Inside the window</div>
         </div>
-        <div class="trig">
-          <div class="trig-k">Depth signal</div>
+        <div class="trig" id="trigDepth">
+          <div class="trig-k">Depth signal<span class="on-tag">● On</span></div>
           <div class="trig-v"><span class="num" id="pNow">$57,373</span><span id="pNowSub">−54.5% from the $126,198 top</span></div>
           <div class="meter" id="mDepth" aria-hidden="true"><div class="trk"></div><div class="band"></div><div class="mk"></div><div class="ends"><span>top</span><span>−80%</span></div></div>
           <div class="trig-n">Target zone: $35K–$58K<br>−54% to −72% from the top</div>
@@ -364,7 +377,7 @@ footer p{max-width:620px}
       <div class="card">
         <p class="kicker">Signal one · depth</p>
         <h2>Every bear is <em>a little shallower.</em></h2>
-        <p class="body">From top to bottom, the falls went −94%, −87%, −84%, −77.5%. The thesis puts this bear's floor between <b>−54% and −72%</b>, which is <b>$35K–$58K</b>. At <b class="js-ddlow">−54.5%</b>, <b class="js-zonestate">we are already inside that zone</b>.</p>
+        <p class="body">From top to bottom, the falls went −94%, −87%, −84%, −77.5%. The thesis puts this bear's floor between <b>−54% and −72%</b>, which is <b>$35K–$58K</b>. At <b class="js-ddlow">−54.5%</b>, <b class="js-zonestate" style="color:var(--go)">we are already inside that zone</b>.</p>
         <ul class="keys">
           <li><span class="sw" style="background:var(--c4)"></span>This bear so far</li>
           <li><span class="sw box"></span>Target zone</li>
@@ -446,17 +459,17 @@ footer p{max-width:620px}
       <article class="risk">
         <canvas class="rk" data-anim="quantum" aria-hidden="true"></canvas>
         <h3>Quantum computers</h3>
-        <p>A large enough quantum computer could forge Bitcoin's signatures. Coins whose public keys are already exposed go first, and moving to post-quantum signatures takes a soft fork and years of coordination.</p>
+        <p>A sufficiently powerful quantum computer could break the elliptic-curve signatures that secure Bitcoin. Coins with exposed public keys would be most at risk, and migrating to post-quantum signatures requires a protocol upgrade and years of coordination.</p>
       </article>
       <article class="risk">
         <canvas class="rk" data-anim="rivals" aria-hidden="true"></canvas>
         <h3>Credible alternatives</h3>
-        <p>New stores of value compete for the same "digital gold" money: Zcash with private money, Pearl with proof-of-work mining tied to AI compute. Every dollar they win is demand Bitcoin doesn't get.</p>
+        <p>Emerging stores of value compete for the same "digital gold" capital: Zcash with shielded, private transactions, and Pearl with proof-of-work mining tied to AI compute. Capital that flows to them is demand Bitcoin does not capture.</p>
       </article>
       <article class="risk">
         <canvas class="rk" data-anim="ai" aria-hidden="true"></canvas>
-        <h3>AI finding bugs</h3>
-        <p>AI is getting very good at finding bugs. Bitcoin upgrades slowly on purpose, so its whole stack (nodes, wallets, libraries) may not patch as fast as new holes are found.</p>
+        <h3>AI-driven vulnerability discovery</h3>
+        <p>AI models are rapidly improving at discovering software vulnerabilities. Bitcoin's deliberately conservative upgrade process may struggle to patch its full stack (nodes, wallets, libraries) as quickly as new flaws are found.</p>
       </article>
     </div>
   </section>
@@ -528,7 +541,7 @@ footer p{max-width:620px}
           <summary>Sources and data</summary>
           <div class="in">
             <p>Top and bottom dates: Bitbo (2011 and 2013 highs, 2018 and 2022 lows), VanEck (2017 top), Axios (Nov 10, 2021 record), CoinMarketCap (ATH $126,198, Oct 6, 2025). Dates can shift by 1–5 days depending on the exchange and on daily close vs intraday.</p>
-            <p style="margin-top:10px">Price history: weekly prices from blockchain.com, 2012 to Nov 2026. The live price and recent days load from CoinGecko each visit; if that fails, the page shows the Nov 21, 2026 snapshot. After today the page shows a projected range, not a single path: it widens from today's price to the $35K–$58K bottom zone, then to the $165K–$180K top zone.</p>
+            <p style="margin-top:10px">Price history: weekly prices from blockchain.com, 2012 to Nov 2026. The lowest price since the top uses intraday lows (Binance BTC/USDT, then CoinGecko 4-hour candles), so it catches wicks a daily close misses. The live price and recent days load from CoinGecko each visit; if that fails, the page shows the Nov 21, 2026 snapshot. After today the page shows a projected range, not a single path: it widens from today's price to the $35K–$58K bottom zone, then to the $165K–$180K top zone.</p>
           </div>
         </details>
         <details>
@@ -562,7 +575,8 @@ const WEEKLY=[5.04,7.06,6.81,6.51,5.75,5.99,5.96,4.46,5.05,4.81,4.95,5.4,4.73,4.
 const PROJ=[[2026,12,47500],[2027,1,51000],[2027,2,54500],[2027,3,59000],[2027,4,56000],[2027,5,60000],[2027,6,63000],[2027,7,66500],[2027,8,62500],[2027,9,66000],[2027,10,70500],[2027,11,75500],[2027,12,79500],[2028,1,81000],[2028,2,88000],[2028,3,96000],[2028,4,93000],[2028,5,97000],[2028,6,92000],[2028,7,95500],[2028,8,91000],[2028,9,97000],[2028,10,104000],[2028,11,115000],[2028,12,121000],[2029,1,128000],[2029,2,118000],[2029,3,115000],[2029,4,124000],[2029,5,134000],[2029,6,141000],[2029,7,149000],[2029,8,157000],[2029,9,165000],[2029,10,152000],[2029,11,142000],[2029,12,133000]].map(([y,m,p])=>({t:D(y,m),p,proj:true}));
 const TAIL=[[D(2026,11,16),65300],[D(2026,11,17),64818],[D(2026,11,18),64871],[D(2026,11,19),62985],[D(2026,11,20),61894],[D(2026,11,21),57373]];
 let HIST=WEEKLY.map((p,i)=>({t:W0+i*7*DAY,p})).concat(TAIL.map(([t,p])=>({t,p})));
-const SNAP_T=D(2026,11,21), SNAP_LOW={t:D(2026,11,21),p:57373}; // intraday low seen at build time
+const SNAP_T=D(2026,11,21), SNAP_LOW={t:D(2026,11,21),p:55130}; // intraday low, Binance BTC/USDT, Nov 21 2026
+let LIVE_LOW=null; // intraday low from CoinGecko 4-hour candles, filled at load
 const _n=new Date();
 const TODAY=Date.UTC(_n.getUTCFullYear(),_n.getUTCMonth(),_n.getUTCDate());
 
@@ -612,6 +626,7 @@ function rebuildSeries(){
   LOW={t:last.t,p:Infinity};
   for(const r of HIST) if(r.t>=TOP.t && r.p<LOW.p) LOW={t:r.t,p:r.p};
   if(SNAP_LOW.p<LOW.p) LOW={...SNAP_LOW};
+  if(LIVE_LOW&&LIVE_LOW.p<LOW.p) LOW={...LIVE_LOW};
 }
 function priceAt(t){
   const a=SERIES; if(t<=a[0].t) return a[0].p; if(t>=a[a.length-1].t) return a[a.length-1].p;
@@ -654,10 +669,12 @@ function paint(){
   let h, lede;
   const L1={early:'The clock is not there yet.',open:'The clock says now.',past:'The clock has run out.'}[timeState];
   const L2=below?'The price went deeper.':inZone?'So does the price.':'The price says almost.';
-  h=L1+'<br><em>'+L2+'</em>';
+  const both=timeState==='open'&&inZone;
+  h=both?'Now is the time to<br><em>accumulate Bitcoin.</em>':L1+'<br><em>'+L2+'</em>';
   $('#heroTitle').innerHTML=h;
+  $('#heroGo').hidden=!both;
   const gap=(PRICE/ZONE[1]-1)*100;
-  lede='Bitcoin bear markets end on one of two signals: <b>time runs out</b>, or <b>the price falls deep enough</b>. '
+  lede=both?('Bitcoin bear markets end when <b>time runs out</b> or <b>the price falls deep enough</b>. Both have happened: day '+n.d+' is inside the bottom window, and the low of <b>'+kusd(LOW.p)+'</b> is inside the $35K–$58K zone. This page called it.'):'Bitcoin bear markets end on one of two signals: <b>time runs out</b>, or <b>the price falls deep enough</b>. '
     +(timeState==='open'?'Time: we are on day '+n.d+', inside the bottom window. ':timeState==='past'?'Time: day '+n.d+', past the window. ':'Time: day '+n.d+', the window opens on day 370. ')
     +(inZone?'Depth: the low so far, '+kusd(LOW.p)+', is already inside the $35K–$58K zone. This page called it.':'Depth: the low so far is '+kusd(LOW.p)+', just above the $35K–$58K zone.');
   $('#heroLede').innerHTML=lede;
@@ -672,6 +689,7 @@ function paint(){
   tm.querySelector('.mk').style.left=map(n.d);
   const ts=$('#tState');
   ts.className='state '+(timeState==='open'?'yes':timeState==='early'?'no':'near');
+  $('#trigTime').classList.toggle('on',timeState==='open');
   ts.textContent=timeState==='open'?('Inside the window · '+(452-n.d)+' days left'):timeState==='early'?((370-n.d)+' days to the window'):('Window closed '+(n.d-452)+' days ago');
   // depth trigger
   $('#pNow').textContent=usd(PRICE);
@@ -681,6 +699,7 @@ function paint(){
   pm.querySelector('.mk').style.left=mp(n.ddLow);
   const ps=$('#pState');
   ps.className='state '+(inZone?'yes':'near');
+  $('#trigDepth').classList.toggle('on',inZone);
   const hitT=(()=>{ for(const r of HIST) if(r.t>=TOP.t&&r.p<=ZONE[1]) return r.t; return SNAP_LOW.p<=ZONE[1]?SNAP_LOW.t:null; })();
   $$('.js-zonestate').forEach(e=>e.textContent=inZone?'we are already inside that zone, since '+fMD.format(hitT):'we are '+Math.round((LOW.p/ZONE[1]-1)*100)+'% above it');
   ps.textContent=below?'Below the zone · low '+kusd(LOW.p):inZone?'Already in the zone · since '+fMD.format(hitT):(Math.round((LOW.p/ZONE[1]-1)*100)+'% above the zone (low '+kusd(LOW.p)+')');
@@ -812,7 +831,7 @@ function buildScenes(){
       const j=Math.min(4,Math.floor(U[i]*5)), f=U[i]*5-j, cx=P.x+(j+.5)*cwid, w=cwid*(L.m?.46:.36);
       if(j<4){ s.x[i]=cx+(R1[i]-.5)*w; s.y[i]=y0+f*cols[j]*sc; s.c[i]=j===0?8:3+j; s.a[i]=.35+.45*R2[i]; s.s[i]=1.5; }
       else if(f<.6){ s.x[i]=cx+(R1[i]-.5)*w; s.y[i]=y0+(f/.6)*cols[4]*sc; s.c[i]=7; s.a[i]=.55+.4*R2[i]; s.s[i]=1.7; }
-      else { s.x[i]=cx+(R1[i]-.5)*w*1.25; s.y[i]=y0+(ZDD[0]+R2[i]*(ZDD[1]-ZDD[0]))*sc; s.c[i]=11; s.a[i]=.4; s.s[i]=1.3; }
+      else { const hit=LOW.p<=ZONE[1]; s.x[i]=cx+(R1[i]-.5)*w*1.25; s.y[i]=y0+(ZDD[0]+R2[i]*(ZDD[1]-ZDD[0]))*sc; s.c[i]=hit?0:11; s.a[i]=hit?.5:.4; s.s[i]=1.3; }
       s.w[i]=.6;
     }
   }
@@ -825,7 +844,7 @@ function buildScenes(){
       const j=Math.min(4,Math.floor(U[i]*5)), f=U[i]*5-j, yc=P.y+(j+.5)*rh;
       if(j<4){ s.x[i]=x0+f*rows[j]*kx; s.y[i]=yc+(R1[i]-.5)*bh; s.c[i]=j===0?8:3+j; s.a[i]=.35+.45*R2[i]; s.s[i]=1.5; }
       else if(f<.62){ s.x[i]=x0+(f/.62)*rows[4]*kx; s.y[i]=yc+(R1[i]-.5)*bh; s.c[i]=7; s.a[i]=.55+.4*R2[i]; s.s[i]=1.7; }
-      else { s.x[i]=x0+(370+R2[i]*82)*kx; s.y[i]=yc+(R1[i]-.5)*bh*1.5; s.c[i]=11; s.a[i]=.4; s.s[i]=1.3; }
+      else { const hit=n.d>=370&&n.d<=452; s.x[i]=x0+(370+R2[i]*82)*kx; s.y[i]=yc+(R1[i]-.5)*bh*1.5; s.c[i]=hit?0:11; s.a[i]=hit?.5:.4; s.s[i]=1.3; }
       s.w[i]=.6;
     }
   }
@@ -929,16 +948,18 @@ function buildMarks(){
       if(j<4) s+=T(cx,y+18,pct(v),'lbl','middle'); else s+=T(cx,g.y0-8,pct(v)+(m?'':' so far'),'lbl','middle');
       s+=T(cx,P.y+P.h+20,lbls[j],'ax','middle'); });
     const cx=P.x+4.5*g.cwid, zy0=g.y0+ZDD[0]*g.sc, zy1=g.y0+ZDD[1]*g.sc, zw=g.cwid*(m?.6:.5);
-    s+=`<rect x="${(cx-zw/2).toFixed(1)}" y="${zy0.toFixed(1)}" width="${zw.toFixed(1)}" height="${(zy1-zy0).toFixed(1)}" class="zone" rx="3"/>`;
-    s+=T(cx,zy1+16,'target zone','lbl','middle')+T(cx,zy1+30,'$35K–$58K','ax','middle');
+    const zHit=LOW.p<=ZONE[1];
+    s+=`<rect x="${(cx-zw/2).toFixed(1)}" y="${zy0.toFixed(1)}" width="${zw.toFixed(1)}" height="${(zy1-zy0).toFixed(1)}" class="zone${zHit?' hit':''}" rx="3"/>`;
+    s+=zHit?T(cx,zy1+18,'✓ zone reached','go','middle')+T(cx,zy1+32,'$35K–$58K','ax','middle'):T(cx,zy1+16,'target zone','lbl','middle')+T(cx,zy1+30,'$35K–$58K','ax','middle');
     out.drawdown=s;
   }
   /* duration */
   { const g=GEO.duration; let s='';
     const lbls=BEARS.map(b=>b.lb).concat(['now']);
     const zx0=g.x0+370*g.kx, zx1=g.x0+452*g.kx;
-    s+=`<rect x="${zx0.toFixed(1)}" y="${P.y.toFixed(1)}" width="${(zx1-zx0).toFixed(1)}" height="${P.h.toFixed(1)}" class="zone" rx="3"/>`;
-    s+=T((zx0+zx1)/2,P.y-6,'window · day 370–452','lbl','middle');
+    const wHit=n.d>=370&&n.d<=452;
+    s+=`<rect x="${zx0.toFixed(1)}" y="${P.y.toFixed(1)}" width="${(zx1-zx0).toFixed(1)}" height="${P.h.toFixed(1)}" class="zone${wHit?' hit':''}" rx="3"/>`;
+    s+=T((zx0+zx1)/2,P.y-6,wHit?'✓ inside the window · day 370–452':'window · day 370–452',wHit?'go':'lbl','middle');
     g.rows.forEach((v,j)=>{ const yc=P.y+(j+.5)*g.rh;
       s+=T(L.C.x,yc+4,lbls[j],j===4?'lbl':'ax','start');
       s+=T(g.x0+v*g.kx+8,yc+4,m?v+' d':(j===4?v+' days so far':v+' days'),'lbl','start'); });
@@ -999,7 +1020,7 @@ function buildLogo(){
   for(let y=0;y<H;y+=step) for(let x=0;x<W;x+=step){ if(d[((y|0)*W+(x|0))*4+3]>128){ const u=(x-W/2)/(H/2), v=(y-H/2)/(H/2); pts.push([u*cs-v*sn, u*sn+v*cs]); } }
   LOGO=pts;
 }
-const LOGO_COL=['#5EC8FF','#6FB0FF','#7E98FF','#8C80FF','#9C6BFF','#B060FF'];
+const LOGO_COL=['#FFE2A8','#FFC766','#FFB03B','#FF9F1F','#F7931A','#EB860F'];
 function drawLogo(tt,alpha){
   if(!LOGO||alpha<.02) return; const g=GEO.ring; if(!g) return;
   const S=g.R*.4, ay=RM?0:.5*Math.sin(tt*.45), ax=RM?0:.22*Math.sin(tt*.33), ca=Math.cos(ay), sa=Math.sin(ay), cb=Math.cos(ax), sb=Math.sin(ax), f=3.2;
@@ -1012,7 +1033,7 @@ function drawLogo(tt,alpha){
     buckets[ci].push(px,py,k);
   }
   ctx.globalCompositeOperation='lighter';
-  buckets.forEach((b,ci)=>{ ctx.fillStyle=LOGO_COL[ci]; for(let q=0;q<b.length;q+=3){ const sz=1.5*b[q+2]; ctx.globalAlpha=alpha*(.45+.5*(b[q+2]-.8)); ctx.fillRect(b[q]-sz/2,b[q+1]-sz/2,sz,sz); } });
+  buckets.forEach((b,ci)=>{ ctx.fillStyle=LOGO_COL[ci]; for(let q=0;q<b.length;q+=3){ const sz=1.8*b[q+2]; ctx.globalAlpha=Math.min(1,alpha*(.8+.6*(b[q+2]-.85))); ctx.fillRect(b[q]-sz/2,b[q+1]-sz/2,sz,sz); } });
 }
 function frame(now){
   const tt=now/1000;
@@ -1268,6 +1289,8 @@ if(document.fonts&&document.fonts.ready) document.fonts.ready.then(()=>{ sim.run
       const t=k===pr.length-1?TODAY:Date.UTC(new Date(ms).getUTCFullYear(),new Date(ms).getUTCMonth(),new Date(ms).getUTCDate());
       if(t>lastSnap) add.push({t,p}); else if(t===lastSnap && k===pr.length-1) HIST[HIST.length-1].p=p; });
     const seen=new Map(); add.forEach(a=>seen.set(a.t,a)); seen.forEach(a=>HIST.push(a));
+    try{ const o=await (await fetch('https://api.coingecko.com/api/v3/coins/bitcoin/ohlc?vs_currency=usd&days=30')).json();
+      if(Array.isArray(o)) for(const c of o){ const lo=c&&c[3]; if(typeof lo==='number'&&lo>1000&&c[0]>=TOP.t&&(!LIVE_LOW||lo<LIVE_LOW.p)) LIVE_LOW={t:c[0],p:lo}; } }catch(e){}
     LIVE=true; rebuildSeries(); paint(); buildScenes(); buildMarks(); sim.run();
   }catch(e){ /* offline or rate-limited: the Nov 21, 2026 snapshot stays */ }
 })();
