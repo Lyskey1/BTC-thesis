@@ -678,9 +678,9 @@ function paint(){
   $('#heroTitle').innerHTML=h;
   $('#heroGo').hidden=!both;
   const gap=(PRICE/ZONE[1]-1)*100;
-  lede=both?('Bitcoin bear markets end when <b>time runs out</b> or <b>the price falls deep enough</b>. Both have happened: day '+n.d+' is inside the bottom window, and the low of <b>'+kusd(LOW.p)+'</b> is inside the $35K–$58K zone. This page called it.'):'Bitcoin bear markets end on one of two signals: <b>time runs out</b>, or <b>the price falls deep enough</b>. '
+  lede=both?('Bitcoin bear markets end when <b>time runs out</b> or <b>the price falls deep enough</b>. Both have happened: day '+n.d+' is inside the bottom window, and the low of <b>'+kusd(LOW.p)+'</b> is inside the $35K–$58K zone.'):'Bitcoin bear markets end on one of two signals: <b>time runs out</b>, or <b>the price falls deep enough</b>. '
     +(timeState==='open'?'Time: we are on day '+n.d+', inside the bottom window. ':timeState==='past'?'Time: day '+n.d+', past the window. ':'Time: day '+n.d+', the window opens on day 370. ')
-    +(inZone?'Depth: the low so far, '+kusd(LOW.p)+', is already inside the $35K–$58K zone. This page called it.':'Depth: the low so far is '+kusd(LOW.p)+', just above the $35K–$58K zone.');
+    +(inZone?'Depth: the low so far, '+kusd(LOW.p)+', is already inside the $35K–$58K zone.':'Depth: the low so far is '+kusd(LOW.p)+', just above the $35K–$58K zone.');
   $('#heroLede').innerHTML=lede;
   $('#heroEyebrow').textContent=(LIVE?'Live · ':'Snapshot · ')+fD.format(LIVE?TODAY:lastT())+' · Bitcoin cycle thesis';
   $('#liveDot').classList.toggle('off',!LIVE);
@@ -898,7 +898,7 @@ function buildMarks(){
       s+=T(tx2+(an==='end'?-6:6),ty2-3,'You are here','lbl',an); }
     /* cycle progress under the ring */
     { const pct_=Math.round(g.fT*100), bw=m?170:230, y1=g.cy+g.R*(m?1.2:1.36), bx=g.cx-bw/2;
-      s+=T(g.cx,y1,'2024 cycle','big','middle');
+      s+=T(g.cx,y1,'2024–2028 cycle','big','middle');
       s+=`<rect x="${bx.toFixed(1)}" y="${(y1+12).toFixed(1)}" width="${bw}" height="4" rx="2" fill="rgba(236,238,243,.12)"/>`;
       s+=`<rect x="${bx.toFixed(1)}" y="${(y1+12).toFixed(1)}" width="${(bw*g.fT).toFixed(1)}" height="4" rx="2" fill="url(#pgrad)" filter="url(#pglow)"/>`;
       s+=`<circle cx="${(bx+bw*g.fT).toFixed(1)}" cy="${(y1+14).toFixed(1)}" r="3.5" fill="#F2FFFB" filter="url(#pglow)"/>`;
