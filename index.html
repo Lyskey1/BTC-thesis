@@ -1,19 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="color-scheme:dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#05060A">
 <title>BTC Quant · The Bitcoin Bottom Window</title>
-<meta name="description" content="Bitcoin's bear markets end on time or on depth. A live read of the 4-year cycle: where we are, the bottom window, and the plan if history rhymes.">
+<meta name="description" content="Bitcoin's bear markets end on time or on depth. A live read of the 4-year cycle: where the cycle stands, the bottom window, and the plan if history rhymes.">
+<link rel="canonical" href="https://lyskey1.github.io/BTC-thesis/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="BTC Quant">
+<meta property="og:url" content="https://lyskey1.github.io/BTC-thesis/">
+<meta property="og:title" content="Now is the time to accumulate Bitcoin · BTC Quant">
+<meta property="og:description" content="Bitcoin's bear markets end on time or on depth. A live read of the 4-year cycle: the bottom window, the target zone, and the plan if history rhymes.">
+<meta property="og:image" content="https://lyskey1.github.io/BTC-thesis/og.png?v=20261121">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="BTC Quant: the Bitcoin 4-year cycle clock with today's position and the bottom signals">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:creator" content="@Lyskey">
+<meta name="twitter:title" content="Now is the time to accumulate Bitcoin · BTC Quant">
+<meta name="twitter:description" content="Bitcoin's bear markets end on time or on depth. A live read of the 4-year cycle: the bottom window, the target zone, and the plan if history rhymes.">
+<meta name="twitter:image" content="https://lyskey1.github.io/BTC-thesis/og.png?v=20261121">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Now is the time to accumulate Bitcoin.", "description": "Bitcoin's bear markets end on time or on depth. A live read of the 4-year cycle: the bottom window, the target zone, and the plan if history rhymes.", "url": "https://lyskey1.github.io/BTC-thesis/", "image": "https://lyskey1.github.io/BTC-thesis/og.png", "dateModified": "2026-11-21", "inLanguage": "en", "author": {"@type": "Person", "name": "Lyskey", "url": "https://x.com/Lyskey", "sameAs": ["https://x.com/Lyskey"]}, "publisher": {"@type": "Person", "name": "Lyskey", "url": "https://x.com/Lyskey"}, "about": [{"@type": "Thing", "name": "Bitcoin"}, {"@type": "Thing", "name": "Bitcoin halving cycle"}]}</script>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20viewBox%3D'0%200%2064%2064'%20xmlns%3D'http://www.w3.org/2000/svg'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%2305060A'/%3E%3Ccircle%20cx%3D'32'%20cy%3D'32'%20r%3D'19'%20fill%3D'none'%20stroke%3D'%232A3340'%20stroke-width%3D'4'/%3E%3Cpath%20d%3D'M32%2013a19%2019%200%200%201%2017.6%2026.2'%20fill%3D'none'%20stroke%3D'%235EEAD4'%20stroke-width%3D'4'%20stroke-linecap%3D'round'/%3E%3Ccircle%20cx%3D'49.6'%20cy%3D'39.2'%20r%3D'4'%20fill%3D'%23F2FFFB'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#05060A; --bg2:#0A0C12; --glass:rgba(10,12,18,.66); --glass-hi:rgba(16,19,27,.78);
-  --ink:#ECEEF3; --ink2:#A3A9B8; --ink3:#6B7182;
+  --ink:#ECEEF3; --ink2:#A3A9B8; --ink3:#7C8394;
   --line:rgba(236,238,243,.11); --line2:rgba(236,238,243,.06);
   --mint:#5EEAD4; --mint-ui:#52C9B3; --go:#5EEAD4; --violet:#8A78FF; --violet-hi:#A898FF;
   --spring:#19E6B0; --summer:#FFB21E; --autumn:#FF3B6B; --winter:#7B5BFF;
@@ -82,7 +98,16 @@ main{position:relative;z-index:4}
 .live-dot{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 0 rgba(94,234,212,.6);animation:pulse 2.2s infinite}
 .live-dot.off{background:var(--ink3);animation:none}
 @keyframes pulse{70%{box-shadow:0 0 0 9px rgba(94,234,212,0)}100%{box-shadow:0 0 0 0 rgba(94,234,212,0)}}
-h1,h2,h3{font-family:var(--serif);font-weight:300;letter-spacing:-.01em;line-height:1.02}
+h1,h2,h3{font-family:var(--serif);font-weight:300;letter-spacing:-.01em;line-height:1.02;text-wrap:balance}
+[id]{scroll-margin-top:84px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip{position:fixed;left:12px;top:-60px;z-index:60;background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:999px;font-size:14px;font-weight:500;transition:top .2s}
+.skip:focus{top:12px;text-decoration:none}
+.pause{position:fixed;right:16px;bottom:16px;z-index:45;display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:rgba(8,10,15,.7);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:var(--ink2);font-family:var(--mono);font-size:11px;letter-spacing:.06em;padding:8px 13px;border-radius:999px;cursor:pointer;transition:color .2s,border-color .2s}
+.pause:hover{color:var(--ink);border-color:rgba(236,238,243,.3)}
+body.paused .aurora i{animation-play-state:paused}
+@media (max-width:860px){.pause{right:12px;bottom:12px;width:38px;height:38px;padding:0;justify-content:center}.pause .pl{display:none}}
+html{touch-action:manipulation;-webkit-tap-highlight-color:rgba(94,234,212,.15)}
 h1{font-size:clamp(2.9rem,5.4vw,5.5rem)}
 h1 em,h2 em{font-style:italic;color:var(--mint)}
 
@@ -136,7 +161,7 @@ p.body b{color:var(--ink)}
 .stat small{font-size:12.5px;color:var(--ink3)}
 .stat::before{content:"";position:absolute;left:calc(var(--gut) - 12px);top:22px;width:1px;height:38px;background:var(--line)}
 @media (max-width:860px){
-  .hero{padding-top:57vh}
+  .hero{padding-top:47vh}
   .hero-copy{max-width:none;background:linear-gradient(180deg,transparent,rgba(5,6,10,.86) 90px);margin:0 calc(-1*var(--gut));padding:40px var(--gut) 34px}
   .triggers{grid-template-columns:1fr}
   .strip{grid-template-columns:1fr 1fr;background:rgba(5,6,10,.86)}
@@ -209,6 +234,7 @@ p.body b{color:var(--ink)}
 .fld input[type=number],.fld input[type=date]{width:100%;background:rgba(236,238,243,.04);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-family:var(--mono);font-size:14px;color:var(--ink);color-scheme:dark;min-width:0}
 .fld input:focus{outline:none;border-color:var(--mint-ui)}
 .seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:rgba(236,238,243,.03);width:max-content}
+.seg button:not([aria-pressed=true]):hover{color:var(--ink);background:rgba(236,238,243,.06)}
 .seg button{border:0;background:transparent;color:var(--ink2);font-size:13px;padding:6px 14px;border-radius:999px;cursor:pointer;transition:background .2s,color .2s}
 .seg button[aria-pressed=true]{background:var(--ink);color:var(--bg);font-weight:500}
 .legrow{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:26px 0 12px}
@@ -279,6 +305,8 @@ footer p{max-width:620px}
 <div id="hit" aria-hidden="true"></div>
 <div class="tip" id="tip"></div>
 
+<a class="skip" href="#main">Skip to content</a>
+<button class="pause" id="pauseBtn" type="button" aria-pressed="false" aria-label="Pause animation"><span aria-hidden="true">❚❚</span><span class="pl">Pause animation</span></button>
 <nav class="nav" aria-label="Main">
   <a class="brand" href="#takeaway" aria-label="BTC Quant, back to top">
     <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="22" fill="none" stroke="#2A3340" stroke-width="5"/><path d="M32 10a22 22 0 0 1 20.4 30.3" fill="none" stroke="#5EEAD4" stroke-width="5" stroke-linecap="round"/><circle cx="52.4" cy="40.3" r="5" fill="#F2FFFB"/></svg>
@@ -294,29 +322,30 @@ footer p{max-width:620px}
   <a class="by" href="https://x.com/Lyskey" target="_blank" rel="noopener noreferrer">By Lyskey</a>
 </nav>
 
-<main>
+<main id="main" tabindex="-1">
   <!-- ============ THE TAKEAWAY ============ -->
   <header class="hero wrap" id="takeaway" data-scene="ring">
     <div class="hero-copy">
-      <p class="eyebrow"><span class="live-dot off" id="liveDot"></span><span id="heroEyebrow">Bitcoin cycle thesis</span></p>
-      <p class="go" id="heroGo" hidden>Both bottom signals are on</p>
-      <h1 id="heroTitle">The clock says now.<br><em>The price says almost.</em></h1>
-      <p class="lede" id="heroLede">Bitcoin bear markets end on one of two signals: <b>time runs out</b>, or <b>the price falls deep enough</b>.</p>
+      <p class="eyebrow"><span class="live-dot off" id="liveDot"></span><span id="heroEyebrow">Snapshot · Nov 21, 2026 · Bitcoin cycle thesis</span></p>
+      <p class="go" id="heroGo">Both bottom signals are on</p>
+      <p class="sr-only">Chart: the 2024 to 2028 halving cycle drawn as a clock; today is <span class="js-cycle">65%</span> of the way through, in the winter season.</p>
+      <h1 id="heroTitle">Now is the time to<br><em>accumulate Bitcoin.</em></h1>
+      <p class="lede" id="heroLede">Bitcoin bear markets end when <b>time runs out</b> or <b>the price falls deep enough</b>. Both have happened: day 411 is inside the bottom window, and the price is inside the $35K–$58K zone right now.</p>
 
       <div class="triggers">
-        <div class="trig" id="trigTime">
+        <div class="trig on" id="trigTime">
           <div class="trig-k">Time signal<span class="on-tag">● On</span></div>
           <div class="trig-v"><span class="num" id="tDays">411 days</span>since the Oct 6, 2025 top</div>
-          <div class="meter" id="mTime" aria-hidden="true"><div class="trk"></div><div class="band"></div><div class="band in"></div><div class="mk"></div><div class="ends"><span>day 300</span><span>day 500</span></div></div>
+          <div class="meter" id="mTime" aria-hidden="true"><div class="trk"></div><div class="band" style="left: 35%; width: 41%;"></div><div class="band in" style="left: 45%; width: 21%;"></div><div class="mk" style="left: 55.5%;"></div><div class="ends"><span>day 300</span><span>day 500</span></div></div>
           <div class="trig-n">Window: the longest bear (411 days) ±10%<br><span id="tWin">day 370–452 · Oct 11, 2026 → Jan 1, 2027</span></div>
-          <div class="state yes" id="tState">Inside the window</div>
+          <div class="state yes" id="tState">Inside the window · 41 days left</div>
         </div>
-        <div class="trig" id="trigDepth">
+        <div class="trig on" id="trigDepth">
           <div class="trig-k">Depth signal<span class="on-tag">● On</span></div>
           <div class="trig-v"><span class="num" id="pNow">$57,373</span><span id="pNowSub">−54.5% from the $126,198 top</span></div>
-          <div class="meter" id="mDepth" aria-hidden="true"><div class="trk"></div><div class="band"></div><div class="mk"></div><div class="ends"><span>top</span><span>−80%</span></div></div>
+          <div class="meter" id="mDepth" aria-hidden="true"><div class="trk"></div><div class="band" style="left: 67.5506%; width: 22.7817%;"></div><div class="mk" style="left: 70.3934%;"></div><div class="ends"><span>top</span><span>−80%</span></div></div>
           <div class="trig-n">Target zone: $35K–$58K<br>−54% to −72% from the top</div>
-          <div class="state near" id="pState">4% above the zone</div>
+          <div class="state yes" id="pState">In the zone now</div>
         </div>
       </div>
       <p class="play" id="heroPlay"><b>The play:</b> buy in slices through the window and the zone. Nobody catches the exact low; the edge is being there when it prints.</p>
@@ -324,8 +353,8 @@ footer p{max-width:620px}
     </div>
 
     <div class="strip" aria-label="Key numbers">
-      <div class="stat"><span class="num" id="sPrice">$57,373</span><small id="sPriceSrc">BTC price · snapshot Nov 21, 2026</small></div>
-      <div class="stat"><span class="num" id="sLow">$57,373</span><small>lowest since the top</small></div>
+      <div class="stat"><span class="num" id="sPrice">$57,373</span><small id="sPriceSrc">BTC price · snapshot Nov 21</small></div>
+      <div class="stat"><span class="num" id="sLow">$55,130</span><small>lowest since the top</small></div>
       <div class="stat"><span class="num" id="sCycle">65%</span><small id="sCycleSub">through the 2024–2028 cycle</small></div>
       <div class="stat"><span class="num" id="sHalv">~511 days</span><small>to the next halving (Apr 2028)</small></div>
     </div>
@@ -336,6 +365,7 @@ footer p{max-width:620px}
     <div class="step" data-scene="price">
       <div class="card">
         <p class="kicker">The evidence</p>
+        <p class="sr-only" id="srPrice">Chart: Bitcoin price on a log scale from 2012 to today, coloured by season. Tops: $1,163 (2013), $19,783 (2017), $68,789 (2021), $126,198 (2025). Bottoms: $152 (2015), $3,122 (2018), $15,476 (2022).</p>
         <h2>Fourteen years, <em>one rhythm.</em></h2>
         <p class="body">Every ~4 years the halving cuts new supply in half. The same sequence follows each time: a bull run, a top <b>17 to 18 months later</b>, a fall that lasts <b>about a year</b>, then quiet accumulation.</p>
         <ul class="keys" aria-label="Seasons">
@@ -350,6 +380,7 @@ footer p{max-width:620px}
     <div class="step" data-scene="rhythm">
       <div class="card">
         <p class="kicker">The rhythm</p>
+        <p class="sr-only">Chart: up legs of 1,068, 1,061 and 1,050 days from bottom to top, down legs of 363 and 376 days, the current down leg at <span class="js-days">411 days</span>, and a projected 1,050 to 1,068 day up leg ending in late 2029.</p>
         <h2>About three years up, <em>one year down.</em></h2>
         <p class="body">Since 2015 every rally ran <b>~1,060 days</b> from bottom to top (1,068, 1,061, 1,050), and every fall about <b>a year</b> (363, then 376). This fall is at <b class="js-days">411 days</b>. If the rhythm holds, the next 1,060-day rally starts in the bottom window and tops out in <b>late 2029</b>.</p>
         <ul class="keys">
@@ -363,8 +394,9 @@ footer p{max-width:620px}
     <div class="step" data-scene="channel">
       <div class="card">
         <p class="kicker">Two lines</p>
+        <p class="sr-only">Chart: a straight top line through the 2017, 2021 and 2025 tops reaching $178K to $180K in Sep to Oct 2029, and a rising floor through the 2018 and 2022 bottoms reading <span class="js-floor">$52.2K</span> today, touched by the <span class="js-low">$55.1K</span> low.</p>
         <h2>Tops on one line, <em>bottoms on another.</em></h2>
-        <p class="body">The 2017, 2021 and 2025 tops sit on one straight line, pointing to <b>$178K–$180K</b> in Sep–Oct 2029. Underneath, the 2018 bottom, the 2022 bottom and this month's <b class="js-low">$55.1K</b> low all touch one rising floor, which reads about <b class="js-floor">$52K</b> today.<span class="desk"> Equal dollar gains make each top a smaller multiple:</span></p>
+        <p class="body">The 2017, 2021 and 2025 tops sit on one straight line, pointing to <b>$178K–$180K</b> in Sep–Oct 2029. Underneath, the 2018 bottom, the 2022 bottom and this month's <b class="js-low">$55.1K</b> low all touch one rising floor, which reads about <b class="js-floor">$52.2K</b> today.<span class="desk"> Equal dollar gains make each top a smaller multiple:</span></p>
         <div class="fig desk" aria-label="Halving-to-top multiples"><span>×94</span><span class="ar">→</span><span>×30</span><span class="ar">→</span><span>×8</span><span class="ar">→</span><span>×2</span></div>
         <ul class="keys">
           <li><span class="sw ln" style="background:#E8B04E"></span>Top line</li>
@@ -376,8 +408,9 @@ footer p{max-width:620px}
     <div class="step" data-scene="drawdown">
       <div class="card">
         <p class="kicker">Signal one · depth</p>
+        <p class="sr-only">Chart: drawdowns from top to bottom of 94, 87, 84 and 77.5 percent, the current bear at <span class="js-ddlow">−56.3%</span>, and the target zone of 54 to 72 percent ($35K to $58K).</p>
         <h2>Every bear is <em>a little shallower.</em></h2>
-        <p class="body">From top to bottom, the falls went −94%, −87%, −84%, −77.5%. The thesis puts this bear's floor between <b>−54% and −72%</b>, which is <b>$35K–$58K</b>. At <b class="js-ddlow">−54.5%</b>, <b class="js-zonestate">we are already inside that zone</b>.</p>
+        <p class="body">From top to bottom, the falls went −94%, −87%, −84%, −77.5%. The thesis puts this bear's floor between <b>−54% and −72%</b>, which is <b>$35K–$58K</b>. At <b class="js-ddlow">−56.3%</b>, <b class="js-zonestate">the price is in that zone right now</b>.</p>
         <ul class="keys">
           <li><span class="sw" style="background:var(--c4)"></span>This bear so far</li>
           <li><span class="sw box"></span>Target zone</li>
@@ -388,6 +421,7 @@ footer p{max-width:620px}
     <div class="step" data-scene="duration">
       <div class="card">
         <p class="kicker">Signal two · time</p>
+        <p class="sr-only">Chart: bear market lengths of 162, 411, 363 and 376 days, the current bear at <span class="js-days">411 days</span>, and the bottom window from day 370 to day 452.</p>
         <h2>And they last <em>about a year.</em></h2>
         <p class="body">Mature bears ran 411, 363 and 376 days from top to bottom. This one is at <b class="js-days">411 days</b>, as long as the longest. The window is that record ±10%: <b>day 370 to 452</b>, closing around <b>Jan 1, 2027</b>.</p>
         <ul class="keys">
@@ -402,10 +436,11 @@ footer p{max-width:620px}
   <section id="plan" class="side wrap" data-scene="projection">
     <div class="col">
       <p class="kicker">If the rhyme holds</p>
+        <p class="sr-only">Chart: price from 2022 to today, then a projected range widening to the $35K to $58K bottom zone and rising to a $165K to $180K top zone in Sep to Oct 2029, after the April 2028 halving.</p>
       <h2>One move <em>per season.</em></h2>
       <p class="body">The cycle tells you what kind of moment you are in, not the exact day. Match the action to the season.</p>
       <div class="seasons" id="seasons">
-        <div class="season" data-s="winter"><div class="sn"><span class="sw" style="background:var(--winter)"></span>Winter</div><div class="sd">Survive</div><p>Protect capital. Slow DCA if convinced.</p></div>
+        <div class="season now" data-s="winter"><div class="sn"><span class="sw" style="background:var(--winter)"></span>Winter<em>● now</em></div><div class="sd">Survive</div><p>Protect capital. Slow DCA if convinced.</p></div>
         <div class="season" data-s="spring"><div class="sn"><span class="sw" style="background:var(--spring)"></span>Accumulation</div><div class="sd">Buy, boringly</div><p>Steady DCA while nobody is watching.</p></div>
         <div class="season" data-s="summer"><div class="sn"><span class="sw" style="background:var(--summer)"></span>Bull run</div><div class="sd">Ride, then ladder out</div><p>Sell in slices on the way up. Euphoria is the exit.</p></div>
         <div class="season" data-s="autumn"><div class="sn"><span class="sw" style="background:var(--autumn)"></span>The fall</div><div class="sd">Wait</div><p>No falling knives. Cash is a position.</p></div>
@@ -430,22 +465,22 @@ footer p{max-width:620px}
     <div class="sim">
       <div class="leg-title"><span class="sw" style="background:var(--spring)"></span>Buy</div>
       <div class="sim-controls" style="margin-top:12px">
-        <div class="fld"><label for="bAmt">Amount per buy (USD)</label><input type="number" id="bAmt" min="0" step="50" value="500" inputmode="decimal"></div>
+        <div class="fld"><label for="bAmt">Amount per buy (USD)</label><input type="number" id="bAmt" name="bAmt" autocomplete="off" min="0" step="50" value="500" inputmode="decimal"></div>
         <div class="fld"><span class="lb">Every</span><div class="seg" role="group" aria-label="Buy frequency"><button type="button" data-f="week" aria-pressed="true">Week</button><button type="button" data-f="month" aria-pressed="false">Month</button></div></div>
-        <div class="fld"><label for="bStart">From</label><input type="date" id="bStart"></div>
-        <div class="fld"><label for="bEnd">To</label><input type="date" id="bEnd"></div>
+        <div class="fld"><label for="bStart">From</label><input type="date" id="bStart" name="bStart" autocomplete="off" min="2012-01-01" max="2029-12-31"></div>
+        <div class="fld"><label for="bEnd">To</label><input type="date" id="bEnd" name="bEnd" autocomplete="off" min="2012-01-01" max="2029-12-31"></div>
       </div>
       <div class="legrow">
         <div class="leg-title"><span class="sw" style="background:var(--summer)"></span>Sell everything, in equal weekly slices</div>
-        <label class="switch"><input type="checkbox" id="sOn" checked> Include a sell plan</label>
+        <label class="switch"><input type="checkbox" id="sOn" name="sOn" checked=""> Include a sell plan</label>
       </div>
       <div class="sim-sub" id="sellBox">
-        <div class="fld"><label for="sStart">From</label><input type="date" id="sStart"></div>
-        <div class="fld"><label for="sEnd">To</label><input type="date" id="sEnd"></div>
+        <div class="fld"><label for="sStart">From</label><input type="date" id="sStart" name="sStart" autocomplete="off" min="2012-01-01" max="2029-12-31"></div>
+        <div class="fld"><label for="sEnd">To</label><input type="date" id="sEnd" name="sEnd" autocomplete="off" min="2012-01-01" max="2029-12-31"></div>
       </div>
-      <div class="sim-chart"><canvas id="simChart" aria-label="Price path with buy and sell windows"></canvas></div>
-      <div class="results" id="results" aria-live="polite"></div>
-      <p class="sim-foot" id="simFoot"></p>
+      <div class="sim-chart"><canvas id="simChart" aria-label="Price path with buy and sell windows" width="1230" height="300"></canvas></div>
+      <div class="results" id="results" aria-live="polite"><div class="res"><div class="k">Invested</div><div class="v">$37,000</div><div class="n">74 weekly buys</div></div><div class="res"><div class="k">BTC stacked</div><div class="v">0.4765–0.7083</div></div><div class="res"><div class="k">Average buy price</div><div class="v">$52.2K–$77.6K</div></div><div class="res key"><div class="k">Proceeds</div><div class="v">$74.3K–$98.6K</div><div class="n">avg sell $139K–$156K · ×2.0–2.7</div></div></div>
+      <p class="sim-foot" id="simFoot">113 of 114 orders fall after today, so they use the projected range (violet). Not financial advice.</p>
     </div>
   </section>
 
@@ -464,7 +499,7 @@ footer p{max-width:620px}
       <article class="risk">
         <canvas class="rk" data-anim="rivals" aria-hidden="true"></canvas>
         <h3>Credible alternatives</h3>
-        <p>Emerging stores of value compete for the same "digital gold" capital: Zcash with shielded, private transactions, and Pearl with proof-of-work mining tied to AI compute. Capital that flows to them is demand Bitcoin does not capture.</p>
+        <p>Emerging stores of value compete for the same “digital gold” capital: Zcash with shielded, private transactions, and Pearl with proof-of-work mining tied to AI compute. Capital that flows to them is demand Bitcoin does not capture.</p>
       </article>
       <article class="risk">
         <canvas class="rk" data-anim="ai" aria-hidden="true"></canvas>
@@ -499,7 +534,7 @@ footer p{max-width:620px}
                 <tr><td>Nov 29, 2013 → Jan 14, 2015</td><td class="r">411</td><td class="r">−87%</td></tr>
                 <tr><td>Dec 17, 2017 → Dec 15, 2018</td><td class="r">363</td><td class="r">−84%</td></tr>
                 <tr><td>Nov 10, 2021 → Nov 21, 2022</td><td class="r">376</td><td class="r">−77.5%</td></tr>
-                <tr class="live"><td>Oct 6, 2025 → ?</td><td class="r js-daysn">411</td><td class="r js-ddlow">−54.5%</td></tr>
+                <tr class="live"><td>Oct 6, 2025 → ?</td><td class="r js-daysn">411</td><td class="r js-ddlow">−56.3%</td></tr>
               </tbody></table>
               <table><caption>Bottom → top (the rallies)</caption><thead><tr><th>Rally</th><th class="r">Days</th></tr></thead><tbody>
                 <tr><td>Jan 14, 2015 → Dec 17, 2017</td><td class="r">1,068</td></tr>
@@ -532,7 +567,7 @@ footer p{max-width:620px}
                 <tr><td>2013</td><td>Nov 29, 2013 · $1,163</td><td>Jan 14, 2015 · $152</td></tr>
                 <tr><td>2017</td><td>Dec 17, 2017 · $19,783</td><td>Dec 15, 2018 · $3,122</td></tr>
                 <tr><td>2021</td><td>Nov 10, 2021 · $68,789</td><td>Nov 21, 2022 · $15,476</td></tr>
-                <tr class="live"><td>2025</td><td>Oct 6, 2025 · $126,198</td><td>zone $35K–$58K · low so far <span class="js-low">$57.4K</span></td></tr>
+                <tr class="live"><td>2025</td><td>Oct 6, 2025 · $126,198</td><td>zone $35K–$58K · low so far <span class="js-low">$55.1K</span></td></tr>
               </tbody></table>
             </div>
           </div>
@@ -652,7 +687,8 @@ const isProj=t=>t>lastT()+DAY;
 const fD=new Intl.DateTimeFormat('en-US',{month:'short',day:'numeric',year:'numeric',timeZone:'UTC'});
 const fMD=new Intl.DateTimeFormat('en-US',{month:'short',day:'numeric',timeZone:'UTC'});
 const fMY=new Intl.DateTimeFormat('en-US',{month:'short',year:'numeric',timeZone:'UTC'});
-const usd=p=>p>=1000?'$'+Math.round(p).toLocaleString('en-US'):p>=100?'$'+Math.round(p):'$'+(+p.toFixed(2));
+const NF0=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}), NF2=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:2});
+const usd=p=>p>=100?NF0.format(p):NF2.format(p);
 const kusd=p=>p>=100000?'$'+Math.round(p/1000)+'K':p>=1000?'$'+(p/1000).toFixed(1).replace(/\.0$/,'')+'K':usd(p);
 const tick$=p=>p>=1000?'$'+(p/1000)+'K':'$'+p;
 const pct=v=>'−'+Math.abs(v).toFixed(1).replace(/\.0$/,'')+'%';
@@ -681,7 +717,7 @@ function paint(){
   $('#heroGo').hidden=!both;
   const gap=(PRICE/ZONE[1]-1)*100;
   lede=both?('Bitcoin bear markets end when <b>time runs out</b> or <b>the price falls deep enough</b>. Both have happened: day '+n.d+' is inside the bottom window, and '+(inNow?'the price is inside the '+ZT+' zone right now.':'the low so far, <b>'+kusd(LOW.p)+'</b>, touched the '+ZT+' zone on '+fMD.format(hitT)+'.')):'Bitcoin bear markets end on one of two signals: <b>time runs out</b>, or <b>the price falls deep enough</b>. '
-    +(timeState==='open'?'Time: we are on day '+n.d+', inside the bottom window. ':timeState==='past'?'Time: day '+n.d+', past the window. ':'Time: day '+n.d+', the window opens on day 370. ')
+    +(timeState==='open'?'Time: today is day '+n.d+', inside the bottom window. ':timeState==='past'?'Time: day '+n.d+', past the window. ':'Time: day '+n.d+', the window opens on day 370. ')
     +(inNow?'Depth: the price is inside the '+ZT+' zone right now.':inZone?'Depth: the low so far, '+kusd(LOW.p)+', touched the '+ZT+' zone.':'Depth: the low so far is '+kusd(LOW.p)+', just above the '+ZT+' zone.');
   $('#heroLede').innerHTML=lede;
   $('#heroEyebrow').textContent=(LIVE?'Live · ':'Snapshot · ')+fD.format(LIVE?TODAY:lastT())+' · Bitcoin cycle thesis';
@@ -707,7 +743,7 @@ function paint(){
   ps.className='state '+(inZone?'yes':'near');
   $('#trigDepth').classList.toggle('on',inZone);
   const above=(LOW.p/ZONE[1]-1)*100, aboveTxt=above<1?above.toFixed(1)+'%':Math.round(above)+'%';
-  $$('.js-zonestate').forEach(e=>e.textContent=inNow?'we are in that zone right now':inZone?'we touched it on '+fMD.format(hitT):'we are '+aboveTxt+' above it');
+  $$('.js-zonestate').forEach(e=>e.textContent=inNow?'the price is in that zone right now':inZone?'the price touched it on '+fMD.format(hitT):'the low is '+aboveTxt+' above it');
   ps.textContent=below?'Below the zone · low '+kusd(LOW.p):inNow?'In the zone now':inZone?'Touched the zone · '+fMD.format(hitT):(aboveTxt+' above the zone (low so far '+kusd(LOW.p)+')');
   // strip
   $('#sPrice').textContent=usd(PRICE);
@@ -718,6 +754,7 @@ function paint(){
   $('#sHalv').textContent='~'+days((NEXT_H-TODAY)/DAY);
   // inline spans
   $$('.js-days').forEach(e=>e.textContent=days(n.d));
+  $$('.js-cycle').forEach(e=>e.textContent=Math.round(cf*100)+'%');
   $$('.js-daysn').forEach(e=>e.textContent=n.d);
   $$('.js-ddlow').forEach(e=>e.textContent=pct(n.ddLow));
   $$('.js-low').forEach(e=>e.textContent=kusd(LOW.p));
@@ -755,7 +792,7 @@ function layout(){
   const C=m?{x:16,y:74,w:vw-32,h:Math.min(vh*.38,330)}:{x:vw*.45,y:vh*.16,w:vw*.5,h:vh*.66};
   const pad=m?{l:40,r:8,t:14,b:22}:{l:52,r:12,t:14,b:26};
   const P={x:C.x+pad.l,y:C.y+pad.t,w:C.w-pad.l-pad.r,h:C.h-pad.t-pad.b};
-  const ring=m?{cx:vw/2,cy:Math.min(vh*.27,250),R:Math.min(vw*.33,vh*.17)}:{cx:vw*.72,cy:vh*.42,R:Math.min(vw*.17,vh*.27)};
+  const ring=m?{cx:vw/2,cy:Math.min(vh*.215,200),R:Math.min(vw*.3,vh*.145)}:{cx:vw*.72,cy:vh*.42,R:Math.min(vw*.17,vh*.27)};
   return {m,C,P,ring};
 }
 const logY=(p,lo,hi,P)=>P.y+P.h-(Math.log(p)-Math.log(lo))/(Math.log(hi)-Math.log(lo))*P.h;
@@ -1001,8 +1038,13 @@ let MG={};
 
 /* ---------- scroll → scene mix ---------- */
 const anchors=$$('[data-scene]');
+let anchorY=[];
+function measureAnchors(){ const y=scrollY; anchorY=anchors.map(el=>{ const r=el.getBoundingClientRect(); return {top:r.top+y,h:r.height}; }); }
+if('ResizeObserver' in window) new ResizeObserver(()=>measureAnchors()).observe(document.body);
+addEventListener('load',measureAnchors);
 function sceneMix(){
-  const mid=vh*.5; let i=-1; const cs=anchors.map(el=>{const r=el.getBoundingClientRect(); return r.top+Math.min(r.height,vh)*.5;});
+  if(anchorY.length!==anchors.length) measureAnchors();
+  const mid=vh*.5, sy=scrollY; let i=-1; const cs=anchorY.map(a=>a.top-sy+Math.min(a.h,vh)*.5);
   for(let k=0;k<cs.length;k++) if(cs[k]<=mid) i=k;
   if(i<0) return {A:anchors[0].dataset.scene,B:anchors[0].dataset.scene,e:0};
   if(i>=cs.length-1) return {A:anchors[i].dataset.scene,B:anchors[i].dataset.scene,e:0};
@@ -1018,6 +1060,12 @@ let bStart=new Int32Array(BUCK+1), bIdx=null, keyArr=null;
 let glow=null;
 function makeGlow(){ glow=document.createElement('canvas'); glow.width=glow.height=48; const g=glow.getContext('2d'); const gr=g.createRadialGradient(24,24,0,24,24,24); gr.addColorStop(0,'rgba(220,255,248,.9)'); gr.addColorStop(.25,'rgba(94,234,212,.35)'); gr.addColorStop(1,'rgba(94,234,212,0)'); g.fillStyle=gr; g.fillRect(0,0,48,48); }
 let lastMix='', curA='ring';
+let PAUSED=false, pausedAt=0;
+(()=>{ const b=$('#pauseBtn'); if(!b) return;
+  const set=v=>{ PAUSED=v; document.body.classList.toggle('paused',v); b.setAttribute('aria-pressed',v); b.setAttribute('aria-label',v?'Play animation':'Pause animation'); b.firstChild.textContent=v?'▶':'❚❚'; b.lastChild.textContent=v?'Play animation':'Pause animation'; try{ localStorage.setItem('btcq-paused',v?'1':'0'); }catch(e){} };
+  let saved=null; try{ saved=localStorage.getItem('btcq-paused'); }catch(e){}
+  if(RM){ b.hidden=true; } else if(saved==='1') set(true);
+  b.addEventListener('click',()=>set(!PAUSED)); })();
 /* ---------- ₿ dot-surface in the ring centre ---------- */
 let LOGO=null;
 function buildLogo(){
@@ -1046,7 +1094,7 @@ function drawLogo(tt,alpha){
   buckets.forEach((b,ci)=>{ ctx.fillStyle=LOGO_COL[ci]; for(let q=0;q<b.length;q+=3){ const sz=1.8*b[q+2]; ctx.globalAlpha=Math.min(1,alpha*(.8+.6*(b[q+2]-.85))); ctx.fillRect(b[q]-sz/2,b[q+1]-sz/2,sz,sz); } });
 }
 function frame(now){
-  const tt=now/1000;
+  if(!PAUSED) pausedAt=now; const tt=(PAUSED?pausedAt:now)/1000;
   const {A,B,e}=sceneMix();
   const SA=SC[A], SB=SC[B];
   const mixKey=A+B+(e>.5?1:0);
@@ -1066,7 +1114,7 @@ function frame(now){
     const w=SA.w[i]+(SB.w[i]-SA.w[i])*ei;
     if(!RM){ tx+=Math.sin(tt*SP[i]+PH[i])*w; ty+=Math.cos(tt*SP[i]*.83+PH[i]*1.3)*w; }
     let x=X[i]+(tx-X[i])*k, y=Y[i]+(ty-Y[i])*k;
-    if(!RM){ const dx=x-mx, dy=y-my, d2=dx*dx+dy*dy; if(d2<8100&&d2>.01){ const d=Math.sqrt(d2), f=(90-d)/90*3.2; x+=dx/d*f; y+=dy/d*f; } }
+    if(!RM&&!PAUSED){ const dx=x-mx, dy=y-my, d2=dx*dx+dy*dy; if(d2<8100&&d2>.01){ const d=Math.sqrt(d2), f=(90-d)/90*3.2; x+=dx/d*f; y+=dy/d*f; } }
     X[i]=x; Y[i]=y;
     const src=ei<.5?SA:SB;
     const a=SA.a[i]+(SB.a[i]-SA.a[i])*ei;
@@ -1271,7 +1319,7 @@ const sim=(()=>{
       x.font='500 10px "Geist Mono", monospace'; x.textAlign='right'; x.fillStyle='#B4A8FF'; x.fillText('AI scan',W-10,Math.max(12,sy-6)); x.fillStyle='#19E6B0'; x.fillText('patches',W-10,patchY+12);
     }
   };
-  function loop(now){ const t=now/1000;
+  let frozen=0; function loop(now){ if(!PAUSED) frozen=now; const t=frozen/1000;
     for(const c of vis){ const [x,W,H]=fit(c); x.clearRect(0,0,W,H); A[c.dataset.anim](x,W,H,RM?2:t,st.get(c)); x.globalAlpha=1; x.globalCompositeOperation='source-over'; }
     requestAnimationFrame(loop); }
   requestAnimationFrame(loop);
