@@ -364,7 +364,7 @@ footer p{max-width:620px}
       <div class="card">
         <p class="kicker">Two lines</p>
         <h2>Tops on one line, <em>bottoms on another.</em></h2>
-        <p class="body">The 2017, 2021 and 2025 tops sit on one straight line, pointing to <b>$178K–$180K</b> in Sep–Oct 2029. From the 2022 bottom, a rising floor sits near <b class="js-floor">$35K</b> today: the bottom of the target zone.<span class="desk"> Equal dollar gains make each top a smaller multiple:</span></p>
+        <p class="body">The 2017, 2021 and 2025 tops sit on one straight line, pointing to <b>$178K–$180K</b> in Sep–Oct 2029. Underneath, the 2018 bottom, the 2022 bottom and this month's <b class="js-low">$55.1K</b> low all touch one rising floor, which reads about <b class="js-floor">$52K</b> today.<span class="desk"> Equal dollar gains make each top a smaller multiple:</span></p>
         <div class="fig desk" aria-label="Halving-to-top multiples"><span>×94</span><span class="ar">→</span><span>×30</span><span class="ar">→</span><span>×8</span><span class="ar">→</span><span>×2</span></div>
         <ul class="keys">
           <li><span class="sw ln" style="background:#E8B04E"></span>Top line</li>
@@ -486,7 +486,7 @@ footer p{max-width:620px}
           <div class="in">
             <p><b>Time.</b> The longest mature bear ran 411 days (Nov 29, 2013 → Jan 14, 2015). The window is that length ±5% for the core (day 390–432, <span id="rcIn">Oct 31 → Dec 12, 2026</span>) and ±10% for the outer edge (day 370–452, <span id="rcOut">Oct 11, 2026 → Jan 1, 2027</span>).</p>
             <p style="margin-top:10px"><b>Depth.</b> A target of $35K–$58K, which is −54% to −72% from the $126,198 top. Past bears went −94%, −87%, −84% and −77.5%; a shallower floor continues that trend.</p>
-            <p style="margin-top:10px"><b>The two lines.</b> The top line is the best straight fit (linear price scale) through the 2017, 2021 and 2025 tops; each top sits within $2.8K of it, and it reads $178K–$180K in Sep–Oct 2029. The 2029 top zone runs from the ×1.8 halving multiple (~$165K) up to that line: <b>$165K–$180K, Sep–Oct 2029</b>. The floor line runs from the Nov 21, 2022 bottom ($15,476) to $35K today, the floor of the target zone, and rises about $4.9K a year.</p>
+            <p style="margin-top:10px"><b>The two lines.</b> The top line is the best straight fit (linear price scale) through the 2017, 2021 and 2025 tops; each top sits within $2.8K of it, and it reads $178K–$180K in Sep–Oct 2029. The 2029 top zone runs from the ×1.8 halving multiple (~$165K) up to that line: <b>$165K–$180K, Sep–Oct 2029</b>. The floor line is a power law: price rises with a power of the days since Bitcoin's first block (exponent 4.8), fitted through the Dec 15, 2018 ($3,122) and Nov 21, 2022 ($15,476) bottoms. It reads about $52K on Nov 21, 2026, when that day's $55,130 low sat 6% above it, and about $54K when the bottom window closes on Jan 1, 2027.</p>
             <p style="margin-top:10px"><b>Which one wins.</b> Bitcoin bottoms on time or on depth, whichever comes first.</p>
           </div>
         </details>
@@ -602,7 +602,11 @@ const UP_AVG=UPS.reduce((a,[b,t])=>a+(t.t-b.t)/DAY,0)/UPS.length;
 const TOPLINE=(()=>{ const pts=[TOPS[1],TOPS[2],TOP]; const n=pts.length, mx=pts.reduce((a,p)=>a+p.t,0)/n, my=pts.reduce((a,p)=>a+p.p,0)/n;
   const sl=pts.reduce((a,p)=>a+(p.t-mx)*(p.p-my),0)/pts.reduce((a,p)=>a+(p.t-mx)**2,0); return t=>my+sl*(t-mx); })();
 /* floor line: from the Nov 21, 2022 bottom to the $35K floor of the target zone on Nov 21, 2026 */
-const FLOOR_T=D(2026,11,21), FLOOR=t=>BOTS[2].p+(ZONE[0]-BOTS[2].p)*(t-BOTS[2].t)/(FLOOR_T-BOTS[2].t);
+/* floor: a power law (log price vs log days since the genesis block) through the Dec 15, 2018 and Nov 21, 2022 bottoms.
+   It reads ~$52K on Nov 21, 2026, where that day's $55.1K low touched it. */
+const GENESIS=Date.UTC(2009,0,3), gd=t=>Math.log10((t-GENESIS)/DAY);
+const FLOOR_K=(Math.log10(BOTS[2].p)-Math.log10(BOTS[1].p))/(gd(BOTS[2].t)-gd(BOTS[1].t));
+const FLOOR=t=>Math.pow(10,Math.log10(BOTS[1].p)+FLOOR_K*(gd(t)-gd(BOTS[1].t)));
 const NEXT_UP={x0:WIN.mid,x1:WIN.mid+UP_AVG*DAY};
 /* cycles used for season colouring (halving → top → bottom); the 2024 cycle's winter runs until the window closes */
 const CYC=[
@@ -814,10 +818,10 @@ function buildScenes(){
   /* ---- channel: top line and floor line ---- */
   { const s=SC.channel=newScene(); const t0=D(2017,1,1), t1=D(2029,12,31), hi=200000;
     const g=GEO.channel={t0,t1,lo:0,hi,P,X:t=>linX(t,t0,t1,P),Y:p=>linY(p,hi)};
-    g.top=[D(2017,6,1),D(2029,12,31)]; g.floor=[D(2022,6,1),D(2027,6,30)];
+    g.top=[D(2017,6,1),D(2029,12,31)]; g.floor=[D(2018,6,1),D(2027,6,30)];
     for(let i=0;i<N;i++){
       if(R1[i]<.2){ const t=g.top[0]+R2[i]*(g.top[1]-g.top[0]); s.x[i]=g.X(t)+G1[i]*.4; s.y[i]=g.Y(TOPLINE(t))+G2[i]*.9; s.c[i]=1; s.a[i]=t>tl?.45:.8; s.s[i]=1.4; s.w[i]=.4; continue; }
-      if(R1[i]<.34){ const t=g.floor[0]+R2[i]*(g.floor[1]-g.floor[0]); s.x[i]=g.X(t)+G1[i]*.4; s.y[i]=g.Y(FLOOR(t))+G2[i]*.9; s.c[i]=3; s.a[i]=t>tl?.45:.8; s.s[i]=1.4; s.w[i]=.4; continue; }
+      if(R1[i]<.36){ const t=g.floor[0]+R2[i]*(g.floor[1]-g.floor[0]); s.x[i]=g.X(t)+G1[i]*.5; s.y[i]=g.Y(FLOOR(t)*(1+G2[i]*.025))+G2[i]*1.2; s.c[i]=3; s.a[i]=t>tl?.5:.85; s.s[i]=1.8; s.w[i]=.4; continue; }
       if(R1[i]<.4){ s.x[i]=R2[i]*vw; s.y[i]=R3[i]*vh; s.c[i]=13; s.a[i]=.12; s.s[i]=1; s.w[i]=12; continue; }
       linPath(s,i,g,t0+U[i]*(t1-t0));
     }
@@ -932,12 +936,15 @@ function buildMarks(){
   { const g=GEO.channel; let s='';
     for(const v of [50000,100000,150000,200000]){ const y=g.Y(v); s+=Ln(P.x,y,P.x+P.w,y,'grid')+T(P.x-8,y+3.5,tick$(v),'ax','end'); }
     s+=T(P.x-8,g.Y(0)+3.5,'$0','ax','end');
-    for(let yr=2017;yr<=2029;yr+=4){ const x=g.X(D(yr,1,1)); s+=T(x,P.y+P.h+18,yr,'ax','middle'); }
+    for(let yr=2017;yr<=2029;yr+=6){ const x=g.X(D(yr,1,1)); s+=T(x,P.y+P.h+18,yr,'ax','middle'); }
     const ring=(x,y,c)=>`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="9" fill="none" stroke="${c}" stroke-width="1.5"/>`;
     [[TOPS[1],'2017 top'],[TOPS[2],'2021 top'],[TOP,'2025 top']].forEach(([t,l])=>{ const x=g.X(t.t), y=g.Y(t.p); s+=ring(x,y,'#E8B04E')+T(x-14,y-8,l+(m?'':' · '+kusd(t.p)),'lbl','end'); });
     { const x0=g.X(TOPZ.t0), x1=g.X(TOPZ.t1), y0=g.Y(TOPZ.p1), y1=g.Y(TOPZ.p0); s+=`<rect x="${(x0-2).toFixed(1)}" y="${y0.toFixed(1)}" width="${(x1-x0+4).toFixed(1)}" height="${(y1-y0).toFixed(1)}" class="zone" rx="2"/>`+T(x0-10,y0+4,m?'top zone':'2029 top zone · $165K–$180K','lbl','end','style="fill:#A898FF"')+(m?'':T(x0-10,y0+18,'Sep–Oct 2029','ax','end')); }
-    [[BOTS[2],'2022 bottom']].forEach(([b,l])=>{ const x=g.X(b.t), y=g.Y(b.p); s+=ring(x,y,'#9C8CFF')+(m?'':T(x+4,y+24,l+' · '+kusd(b.p),'ax','middle')); });
-    const fx=g.X(TODAY), fy=g.Y(FLOOR(TODAY)); s+=Dot(fx,fy,3.5,'#9C8CFF')+(m?T(fx+6,fy+16,'floor ≈ '+kusd(FLOOR(TODAY)),'lbl','middle'):T(fx+10,fy+18,'floor today ≈ '+kusd(FLOOR(TODAY)),'lbl','start'));
+    { let d='M'; for(let k=0;k<=80;k++){ const t=g.floor[0]+k/80*(g.floor[1]-g.floor[0]); d+=(k?'L':'')+g.X(t).toFixed(1)+' '+g.Y(FLOOR(t)).toFixed(1); }
+      s+=`<path d="${d}" fill="none" stroke="#9C8CFF" stroke-width="9" stroke-linecap="round" opacity=".16"/>`; }
+    [[BOTS[1],'2018 bottom'],[BOTS[2],'2022 bottom']].forEach(([b,l],k)=>{ const x=g.X(b.t), y=g.Y(b.p); s+=ring(x,y,'#9C8CFF')+(m?'':T(x+(k?14:16),y+24,'①②'[k]+' '+l+' · '+kusd(b.p),'lbl','start')); });
+    { const x=g.X(LOW.t), y=g.Y(LOW.p); s+=ring(x,y,'#3DF5A0')+T(x+16,y-20,m?kusd(LOW.p):'③ low '+fMD.format(LOW.t)+' · '+kusd(LOW.p),'go','start'); }
+    { const t4=WIN.out1, x=g.X(t4), y=g.Y(FLOOR(t4)); s+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="9" fill="none" stroke="#A898FF" stroke-width="1.5" stroke-dasharray="3 3"/>`+(m?'':T(x+16,y+24,'④ window close · '+rng(FLOOR(TODAY),FLOOR(t4),kusd),'lbl','start','style="fill:#A898FF"')); }
     out.channel=s;
   }
   /* drawdown */
