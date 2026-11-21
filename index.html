@@ -15,7 +15,7 @@
   --bg:#05060A; --bg2:#0A0C12; --glass:rgba(10,12,18,.66); --glass-hi:rgba(16,19,27,.78);
   --ink:#ECEEF3; --ink2:#A3A9B8; --ink3:#6B7182;
   --line:rgba(236,238,243,.11); --line2:rgba(236,238,243,.06);
-  --mint:#5EEAD4; --mint-ui:#52C9B3; --go:#3DF5A0; --violet:#8A78FF; --violet-hi:#A898FF;
+  --mint:#5EEAD4; --mint-ui:#52C9B3; --go:#5EEAD4; --violet:#8A78FF; --violet-hi:#A898FF;
   --spring:#19E6B0; --summer:#FFB21E; --autumn:#FF3B6B; --winter:#7B5BFF;
   --c1:#2A6E64; --c2:#3A9C8C; --c3:#52C9B3; --c4:#9AF7E2;
   --paper:rgba(14,17,24,.82); --paper-ink:#ECEEF3; --paper-ink2:#A3A9B8; --paper-line:rgba(236,238,243,.1);
@@ -53,8 +53,8 @@ button,input{font:inherit;color:inherit}
 #marks .rule{stroke:rgba(236,238,243,.22);stroke-width:1}
 #marks .hv{stroke:rgba(236,238,243,.18);stroke-width:1;stroke-dasharray:2 4}
 #marks .zone{fill:rgba(138,120,255,.06);stroke:var(--violet-hi);stroke-width:1;stroke-dasharray:4 4}
-#marks .zone.hit{fill:rgba(61,245,160,.10);stroke:#3DF5A0;stroke-dasharray:none;filter:drop-shadow(0 0 8px rgba(61,245,160,.45))}
-#marks .go{fill:#3DF5A0;font-weight:500}
+#marks .zone.hit{fill:rgba(94,234,212,.07);stroke:rgba(94,234,212,.85);stroke-dasharray:none}
+#marks .go{fill:#ECEEF3;font-weight:500}
 #marks .dot{stroke:var(--bg);stroke-width:2}
 #marks g.sc{transition:opacity .25s linear}
 #hit{position:fixed;z-index:6;display:none;cursor:crosshair;touch-action:pan-y}
@@ -85,7 +85,7 @@ main{position:relative;z-index:4}
 h1,h2,h3{font-family:var(--serif);font-weight:300;letter-spacing:-.01em;line-height:1.02}
 h1{font-size:clamp(2.9rem,5.4vw,5.5rem)}
 h1 em,h2 em{font-style:italic;color:var(--mint)}
-#heroTitle em{color:var(--go);text-shadow:0 0 40px rgba(61,245,160,.25)}
+
 h2{font-size:clamp(2.2rem,4.2vw,3.7rem)}
 h3{font-size:1.7rem;line-height:1.1}
 .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mint-ui);margin-bottom:16px}
@@ -116,14 +116,14 @@ p.body b{color:var(--ink)}
 .state.yes{color:var(--mint)} .state.near{color:#E8B04E} .state.no{color:var(--ink2)}
 .state span{color:var(--ink)}
 .trig-k{display:flex;justify-content:space-between;align-items:center}
-.on-tag{display:none;color:#04140F;background:var(--go);padding:2px 8px;border-radius:999px;letter-spacing:.06em;font-weight:500}
-.trig.on{border-color:rgba(61,245,160,.6);background:linear-gradient(180deg,rgba(61,245,160,.10),rgba(10,12,18,.66) 60%);box-shadow:0 0 0 1px rgba(61,245,160,.18),0 0 34px rgba(61,245,160,.14)}
+.on-tag{display:none;color:var(--bg);background:var(--ink);padding:2px 8px;border-radius:999px;letter-spacing:.06em;font-weight:500}
+.trig.on{border-color:rgba(236,238,243,.32);background:linear-gradient(180deg,rgba(94,234,212,.06),rgba(10,12,18,.66) 60%)}
 .trig.on .on-tag{display:inline-block}
-.trig.on .state{color:#04140F;background:var(--go);border-color:var(--go);font-weight:500;box-shadow:0 0 18px rgba(61,245,160,.45)}
-.trig.on .state::before{background:#04140F}
-.trig.on .meter .mk{background:var(--go);box-shadow:0 0 14px var(--go)}
-.go{display:inline-flex;align-items:center;gap:9px;margin-top:22px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#04140F;background:var(--go);padding:7px 14px;border-radius:999px;font-weight:500;box-shadow:0 0 30px rgba(61,245,160,.35)}
-.go::before{content:"";width:7px;height:7px;border-radius:50%;background:#04140F;animation:pulse 2.2s infinite}
+.trig.on .state{color:var(--bg);background:var(--ink);border-color:var(--ink);font-weight:500}
+.trig.on .state::before{background:var(--mint-ui)}
+.trig.on .meter .mk{background:var(--mint);box-shadow:0 0 12px var(--mint)}
+.go{display:inline-flex;align-items:center;gap:9px;margin-top:22px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--bg);background:var(--ink);padding:7px 14px;border-radius:999px;font-weight:500}
+.go::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--mint-ui)}
 .go[hidden]{display:none}
 .play{margin-top:22px;color:var(--ink2);font-size:.98rem;max-width:560px;border-left:2px solid var(--mint);padding-left:14px}
 .play b{color:var(--ink)}
@@ -377,7 +377,7 @@ footer p{max-width:620px}
       <div class="card">
         <p class="kicker">Signal one · depth</p>
         <h2>Every bear is <em>a little shallower.</em></h2>
-        <p class="body">From top to bottom, the falls went −94%, −87%, −84%, −77.5%. The thesis puts this bear's floor between <b>−54% and −72%</b>, which is <b>$35K–$58K</b>. At <b class="js-ddlow">−54.5%</b>, <b class="js-zonestate" style="color:var(--go)">we are already inside that zone</b>.</p>
+        <p class="body">From top to bottom, the falls went −94%, −87%, −84%, −77.5%. The thesis puts this bear's floor between <b>−54% and −72%</b>, which is <b>$35K–$58K</b>. At <b class="js-ddlow">−54.5%</b>, <b class="js-zonestate">we are already inside that zone</b>.</p>
         <ul class="keys">
           <li><span class="sw" style="background:var(--c4)"></span>This bear so far</li>
           <li><span class="sw box"></span>Target zone</li>
@@ -667,6 +667,8 @@ function nums(){
 function paint(){
   const n=nums();
   const inZone=LOW.p<=ZONE[1], below=LOW.p<ZONE[0];
+  const inNow=PRICE<=ZONE[1]&&PRICE>=ZONE[0], ZT=kusd(ZONE[0])+'–'+kusd(ZONE[1]);
+  const hitT=(()=>{ for(const r of HIST) if(r.t>=TOP.t&&r.p<=ZONE[1]) return r.t; if(LIVE_LOW&&LIVE_LOW.p<=ZONE[1]) return LIVE_LOW.t; return SNAP_LOW.p<=ZONE[1]?SNAP_LOW.t:LOW.t; })();
   const timeState=n.d<370?'early':n.d<=452?'open':'past';
   const priceNowAbove=PRICE>ZONE[1];
   // headline
@@ -678,9 +680,9 @@ function paint(){
   $('#heroTitle').innerHTML=h;
   $('#heroGo').hidden=!both;
   const gap=(PRICE/ZONE[1]-1)*100;
-  lede=both?('Bitcoin bear markets end when <b>time runs out</b> or <b>the price falls deep enough</b>. Both have happened: day '+n.d+' is inside the bottom window, and the low of <b>'+kusd(LOW.p)+'</b> is inside the $35K–$58K zone.'):'Bitcoin bear markets end on one of two signals: <b>time runs out</b>, or <b>the price falls deep enough</b>. '
+  lede=both?('Bitcoin bear markets end when <b>time runs out</b> or <b>the price falls deep enough</b>. Both have happened: day '+n.d+' is inside the bottom window, and '+(inNow?'the price is inside the '+ZT+' zone right now.':'the low so far, <b>'+kusd(LOW.p)+'</b>, touched the '+ZT+' zone on '+fMD.format(hitT)+'.')):'Bitcoin bear markets end on one of two signals: <b>time runs out</b>, or <b>the price falls deep enough</b>. '
     +(timeState==='open'?'Time: we are on day '+n.d+', inside the bottom window. ':timeState==='past'?'Time: day '+n.d+', past the window. ':'Time: day '+n.d+', the window opens on day 370. ')
-    +(inZone?'Depth: the low so far, '+kusd(LOW.p)+', is already inside the $35K–$58K zone.':'Depth: the low so far is '+kusd(LOW.p)+', just above the $35K–$58K zone.');
+    +(inNow?'Depth: the price is inside the '+ZT+' zone right now.':inZone?'Depth: the low so far, '+kusd(LOW.p)+', touched the '+ZT+' zone.':'Depth: the low so far is '+kusd(LOW.p)+', just above the '+ZT+' zone.');
   $('#heroLede').innerHTML=lede;
   $('#heroEyebrow').textContent=(LIVE?'Live · ':'Snapshot · ')+fD.format(LIVE?TODAY:lastT())+' · Bitcoin cycle thesis';
   $('#liveDot').classList.toggle('off',!LIVE);
@@ -704,9 +706,9 @@ function paint(){
   const ps=$('#pState');
   ps.className='state '+(inZone?'yes':'near');
   $('#trigDepth').classList.toggle('on',inZone);
-  const hitT=(()=>{ for(const r of HIST) if(r.t>=TOP.t&&r.p<=ZONE[1]) return r.t; return SNAP_LOW.p<=ZONE[1]?SNAP_LOW.t:null; })();
-  $$('.js-zonestate').forEach(e=>e.textContent=inZone?'we are already inside that zone, since '+fMD.format(hitT):'we are '+Math.round((LOW.p/ZONE[1]-1)*100)+'% above it');
-  ps.textContent=below?'Below the zone · low '+kusd(LOW.p):inZone?'Already in the zone · since '+fMD.format(hitT):(Math.round((LOW.p/ZONE[1]-1)*100)+'% above the zone (low '+kusd(LOW.p)+')');
+  const above=(LOW.p/ZONE[1]-1)*100, aboveTxt=above<1?above.toFixed(1)+'%':Math.round(above)+'%';
+  $$('.js-zonestate').forEach(e=>e.textContent=inNow?'we are in that zone right now':inZone?'we touched it on '+fMD.format(hitT):'we are '+aboveTxt+' above it');
+  ps.textContent=below?'Below the zone · low '+kusd(LOW.p):inNow?'In the zone now':inZone?'Touched the zone · '+fMD.format(hitT):(aboveTxt+' above the zone (low so far '+kusd(LOW.p)+')');
   // strip
   $('#sPrice').textContent=usd(PRICE);
   $('#sPriceSrc').textContent=LIVE?'BTC price · live, CoinGecko':'BTC price · snapshot '+fMD.format(lastT());
@@ -835,7 +837,7 @@ function buildScenes(){
       const j=Math.min(4,Math.floor(U[i]*5)), f=U[i]*5-j, cx=P.x+(j+.5)*cwid, w=cwid*(L.m?.46:.36);
       if(j<4){ s.x[i]=cx+(R1[i]-.5)*w; s.y[i]=y0+f*cols[j]*sc; s.c[i]=j===0?8:3+j; s.a[i]=.35+.45*R2[i]; s.s[i]=1.5; }
       else if(f<.6){ s.x[i]=cx+(R1[i]-.5)*w; s.y[i]=y0+(f/.6)*cols[4]*sc; s.c[i]=7; s.a[i]=.55+.4*R2[i]; s.s[i]=1.7; }
-      else { const hit=LOW.p<=ZONE[1]; s.x[i]=cx+(R1[i]-.5)*w*1.25; s.y[i]=y0+(ZDD[0]+R2[i]*(ZDD[1]-ZDD[0]))*sc; s.c[i]=hit?0:11; s.a[i]=hit?.5:.4; s.s[i]=1.3; }
+      else { const hit=LOW.p<=ZONE[1]; s.x[i]=cx+(R1[i]-.5)*w*1.25; s.y[i]=y0+(ZDD[0]+R2[i]*(ZDD[1]-ZDD[0]))*sc; s.c[i]=hit?12:11; s.a[i]=hit?.45:.4; s.s[i]=1.3; }
       s.w[i]=.6;
     }
   }
@@ -848,7 +850,7 @@ function buildScenes(){
       const j=Math.min(4,Math.floor(U[i]*5)), f=U[i]*5-j, yc=P.y+(j+.5)*rh;
       if(j<4){ s.x[i]=x0+f*rows[j]*kx; s.y[i]=yc+(R1[i]-.5)*bh; s.c[i]=j===0?8:3+j; s.a[i]=.35+.45*R2[i]; s.s[i]=1.5; }
       else if(f<.62){ s.x[i]=x0+(f/.62)*rows[4]*kx; s.y[i]=yc+(R1[i]-.5)*bh; s.c[i]=7; s.a[i]=.55+.4*R2[i]; s.s[i]=1.7; }
-      else { const hit=n.d>=370&&n.d<=452; s.x[i]=x0+(370+R2[i]*82)*kx; s.y[i]=yc+(R1[i]-.5)*bh*1.5; s.c[i]=hit?0:11; s.a[i]=hit?.5:.4; s.s[i]=1.3; }
+      else { const hit=n.d>=370&&n.d<=452; s.x[i]=x0+(370+R2[i]*82)*kx; s.y[i]=yc+(R1[i]-.5)*bh*1.5; s.c[i]=hit?12:11; s.a[i]=hit?.45:.4; s.s[i]=1.3; }
       s.w[i]=.6;
     }
   }
@@ -943,7 +945,7 @@ function buildMarks(){
     { let d='M'; for(let k=0;k<=80;k++){ const t=g.floor[0]+k/80*(g.floor[1]-g.floor[0]); d+=(k?'L':'')+g.X(t).toFixed(1)+' '+g.Y(FLOOR(t)).toFixed(1); }
       s+=`<path d="${d}" fill="none" stroke="#9C8CFF" stroke-width="9" stroke-linecap="round" opacity=".16"/>`; }
     [[BOTS[1],'2018 bottom'],[BOTS[2],'2022 bottom']].forEach(([b,l],k)=>{ const x=g.X(b.t), y=g.Y(b.p); s+=ring(x,y,'#9C8CFF')+(m?'':T(x+(k?14:16),y+24,'①②'[k]+' '+l+' · '+kusd(b.p),'lbl','start')); });
-    { const x=g.X(LOW.t), y=g.Y(LOW.p); s+=ring(x,y,'#3DF5A0')+T(x+16,y-20,m?kusd(LOW.p):'③ low '+fMD.format(LOW.t)+' · '+kusd(LOW.p),'go','start'); }
+    { const x=g.X(LOW.t), y=g.Y(LOW.p); s+=ring(x,y,'#5EEAD4')+T(x+16,y-20,m?'low so far '+kusd(LOW.p):'③ low so far · '+kusd(LOW.p),'go','start'); }
     { const t4=WIN.out1, x=g.X(t4), y=g.Y(FLOOR(t4)); s+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="9" fill="none" stroke="#A898FF" stroke-width="1.5" stroke-dasharray="3 3"/>`+(m?'':T(x+16,y+24,'④ window close · '+rng(FLOOR(TODAY),FLOOR(t4),kusd),'lbl','start','style="fill:#A898FF"')); }
     out.channel=s;
   }
@@ -957,7 +959,8 @@ function buildMarks(){
     const cx=P.x+4.5*g.cwid, zy0=g.y0+ZDD[0]*g.sc, zy1=g.y0+ZDD[1]*g.sc, zw=g.cwid*(m?.6:.5);
     const zHit=LOW.p<=ZONE[1];
     s+=`<rect x="${(cx-zw/2).toFixed(1)}" y="${zy0.toFixed(1)}" width="${zw.toFixed(1)}" height="${(zy1-zy0).toFixed(1)}" class="zone${zHit?' hit':''}" rx="3"/>`;
-    s+=zHit?T(cx,zy1+18,'✓ zone reached','go','middle')+T(cx,zy1+32,'$35K–$58K','ax','middle'):T(cx,zy1+16,'target zone','lbl','middle')+T(cx,zy1+30,'$35K–$58K','ax','middle');
+    const zNow=PRICE<=ZONE[1]&&PRICE>=ZONE[0], ZT=kusd(ZONE[0])+'–'+kusd(ZONE[1]);
+    s+=zHit?T(cx,zy1+18,zNow?'✓ in the zone now':'✓ zone touched · '+fMD.format(LOW.t),'go','middle')+T(cx,zy1+32,ZT,'ax','middle'):T(cx,zy1+16,'target zone','lbl','middle')+T(cx,zy1+30,ZT,'ax','middle');
     out.drawdown=s;
   }
   /* duration */
