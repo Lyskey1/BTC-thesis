@@ -210,7 +210,7 @@ p.body b{color:var(--ink)}
 .res .k{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
 .res .v{font-family:var(--mono);font-size:1.25rem;color:var(--ink);margin-top:4px;font-variant-numeric:tabular-nums}
 .res .n{font-size:.78rem;color:var(--ink3);margin-top:2px}
-.res.hero .v{color:var(--mint)}
+.res.key .v{color:var(--mint)}
 .sim-foot{font-size:.8rem;color:var(--ink3);margin-top:14px;line-height:1.6}
 .switch{display:inline-flex;align-items:center;gap:9px;cursor:pointer;font-size:13px;color:var(--ink2)}
 .switch input{appearance:none;-webkit-appearance:none;width:34px;height:20px;border-radius:999px;background:rgba(236,238,243,.14);position:relative;cursor:pointer;transition:background .2s}
@@ -439,7 +439,7 @@ footer p{max-width:620px}
           <div class="in">
             <p><b>Time.</b> The longest mature bear ran 411 days (Nov 29, 2013 → Jan 14, 2015). The window is that length ±5% for the core (day 390–432, <span id="rcIn">Oct 31 → Dec 12, 2026</span>) and ±10% for the outer edge (day 370–452, <span id="rcOut">Oct 11, 2026 → Jan 1, 2027</span>).</p>
             <p style="margin-top:10px"><b>Depth.</b> A target of $40K–$55K, which is −56% to −68% from the $126,198 top. Past bears went −94%, −87%, −84% and −77.5%; a shallower floor continues that trend.</p>
-            <p style="margin-top:10px"><b>Which one wins.</b> A bear ends on time or on depth, whichever comes first. If the window closes without the zone, the time signal still says the worst is likely behind.</p>
+            <p style="margin-top:10px"><b>Which one wins.</b> Bitcoin bottoms on time or on depth, whichever comes first.</p>
           </div>
         </details>
         <details>
@@ -538,10 +538,10 @@ const ZONE=[40000,55000];
 const ZDD=[(1-ZONE[1]/TOP.p)*100,(1-ZONE[0]/TOP.p)*100];
 const OLD={t:D(2026,10,28),p:35000};
 const NEXT_TOP={t:D(2029,9,20),p:165000}, NEXT_BOT={t:D(2030,10,5),p:54000};
-/* cycles used for season colouring (halving → top → bottom); the 2024 bottom uses the window's centre */
+/* cycles used for season colouring (halving → top → bottom); the 2024 cycle's winter runs until the window closes */
 const CYC=[
   {h:HALV[0].t,top:TOPS[0].t,bot:BOTS[0].t},{h:HALV[1].t,top:TOPS[1].t,bot:BOTS[1].t},
-  {h:HALV[2].t,top:TOPS[2].t,bot:BOTS[2].t},{h:HALV[3].t,top:TOP.t,bot:WIN.mid},
+  {h:HALV[2].t,top:TOPS[2].t,bot:BOTS[2].t},{h:HALV[3].t,top:TOP.t,bot:WIN.out1},
   {h:NEXT_H,top:NEXT_TOP.t,bot:NEXT_BOT.t}];
 function seasonAt(t){ // 0 spring · 1 summer · 2 autumn · 3 winter
   if(t<CYC[0].h) return 0;
@@ -784,7 +784,7 @@ function buildMarks(){
   { const g=GEO.ring; let s='';
     const at=(f,r)=>{const th=-Math.PI/2+f*Math.PI*2; return [g.cx+r*Math.cos(th), g.cy+r*Math.sin(th)];};
     const fr=t=>(t-g.h)/g.len;
-    const segs=[[0,fr(TOP.t),1,'Bull run'],[fr(TOP.t),fr(TOP.t+(WIN.mid-TOP.t)*.45),2,'The fall'],[fr(TOP.t+(WIN.mid-TOP.t)*.45),fr(WIN.mid),3,'Winter'],[fr(WIN.mid),1,0,'Accumulation']];
+    const segs=[[0,fr(TOP.t),1,'Bull run'],[fr(TOP.t),fr(TOP.t+(WIN.out1-TOP.t)*.45),2,'The fall'],[fr(TOP.t+(WIN.out1-TOP.t)*.45),fr(WIN.out1),3,'Winter'],[fr(WIN.out1),1,0,'Accumulation']];
     if(!m){ for(const [a,b,c,name] of segs){ const mf=(a+b)/2, [x,y]=at(mf,g.R*1.22); const anchor=x<g.cx-10?'end':x>g.cx+10?'start':'middle';
         s+=`<circle cx="${(anchor==='end'?x+8:anchor==='start'?x-8:x).toFixed(1)}" cy="${(y-3.5).toFixed(1)}" r="3.5" fill="${SEASON_HEX[c]}"/>`+T(x+(anchor==='end'?-2:anchor==='start'?2:0)+(anchor==='middle'?0:0),y,name,'lbl',anchor); }
       const [hx,hy]=at(0,g.R*1.13); s+=T(hx,hy-8,'Halving · Apr 2024','ax','middle')+T(hx,hy+4,'next ~Apr 2028','ax','middle');
@@ -1018,7 +1018,7 @@ const sim=(()=>{
       if(lastBuy!=null){ const before=st.length; st=st.filter(t=>t>=lastBuy); if(st.length<before) sellNote='Sells before your last buy are skipped. '; }
       if(st.length&&btc>0){ const sl=btc/st.length; sells=st.map(t=>{const p=priceAt(t); proceeds+=sl*p; return {t,p};}); avgSell=proceeds/btc; }
     }
-    const R=$('#results'); const cell=(k,v,n,hero)=>`<div class="res${hero?' hero':''}"><div class="k">${k}</div><div class="v">${v}</div>${n?`<div class="n">${n}</div>`:''}</div>`;
+    const R=$('#results'); const cell=(k,v,n,hero)=>`<div class="res${hero?' key':''}"><div class="k">${k}</div><div class="v">${v}</div>${n?`<div class="n">${n}</div>`:''}</div>`;
     let html=cell('Invested',usd(inv),buys.length+' '+freq+'ly buys')+cell('BTC stacked',btc.toFixed(4),'')+cell('Average buy price',btc?usd(avgBuy):'—','');
     if(sellOn&&sells.length){ html+=cell('Proceeds',usd(proceeds),'avg sell '+usd(avgSell)+' · ×'+(proceeds/inv).toFixed(2),true); }
     else { const v=btc*NEXT_TOP.p; html+=cell('Worth at the projected top',btc?usd(v):'—',btc?'~$165K, Sep 2029 · ×'+(v/inv).toFixed(2):'',true); }
@@ -1079,7 +1079,7 @@ if(document.fonts&&document.fonts.ready) document.fonts.ready.then(()=>sim.run()
 (async()=>{
   try{
     const ctrl=new AbortController(); const to=setTimeout(()=>ctrl.abort(),5000);
-    const r=await fetch('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=120&interval=daily',{signal:ctrl.signal});
+    const r=await fetch('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=365&interval=daily',{signal:ctrl.signal});
     clearTimeout(to); if(!r.ok) return;
     const j=await r.json(); const pr=j&&j.prices; if(!Array.isArray(pr)||pr.length<5) return;
     const lastSnap=HIST[HIST.length-1].t;
