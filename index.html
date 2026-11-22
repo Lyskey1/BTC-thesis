@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#05060A">
 <script>/* the site moved to Vercel: send old GitHub Pages links to the new address */
 if(/github\.io$/.test(location.hostname)) location.replace('https://btcthesis.vercel.app/'+location.search+location.hash);</script>
-<title>BTC Quant · The Bitcoin Bottom Window</title>
+<title>Bitcoin Cycle Bottom: Time and Depth Signals · BTC Quant</title>
 <meta name="description" content="Bitcoin's bear markets end on time or on depth. A live read of the 4-year cycle: where the cycle stands, the bottom window, and the plan if history rhymes.">
 <link rel="canonical" href="https://btcthesis.vercel.app/">
 <meta property="og:type" content="article">
@@ -14,7 +14,7 @@ if(/github\.io$/.test(location.hostname)) location.replace('https://btcthesis.ve
 <meta property="og:url" content="https://btcthesis.vercel.app/">
 <meta property="og:title" content="Now is the time to accumulate Bitcoin · BTC Quant">
 <meta property="og:description" content="Bitcoin's bear markets end on time or on depth. A live read of the 4-year cycle: the bottom window, the target zone, and the plan if history rhymes.">
-<meta property="og:image" content="https://btcthesis.vercel.app/og.png?v=20261121">
+<meta property="og:image" content="https://btcthesis.vercel.app/og.png?v=20261122">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="BTC Quant: the Bitcoin 4-year cycle clock with today's position and the bottom signals">
@@ -22,8 +22,8 @@ if(/github\.io$/.test(location.hostname)) location.replace('https://btcthesis.ve
 <meta name="twitter:creator" content="@Lyskey">
 <meta name="twitter:title" content="Now is the time to accumulate Bitcoin · BTC Quant">
 <meta name="twitter:description" content="Bitcoin's bear markets end on time or on depth. A live read of the 4-year cycle: the bottom window, the target zone, and the plan if history rhymes.">
-<meta name="twitter:image" content="https://btcthesis.vercel.app/og.png?v=20261121">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Now is the time to accumulate Bitcoin.", "description": "Bitcoin's bear markets end on time or on depth. A live read of the 4-year cycle: the bottom window, the target zone, and the plan if history rhymes.", "url": "https://btcthesis.vercel.app/", "image": "https://btcthesis.vercel.app/og.png", "dateModified": "2026-11-21", "inLanguage": "en", "author": {"@type": "Person", "name": "Lyskey", "url": "https://x.com/Lyskey", "sameAs": ["https://x.com/Lyskey"]}, "publisher": {"@type": "Person", "name": "Lyskey", "url": "https://x.com/Lyskey"}, "about": [{"@type": "Thing", "name": "Bitcoin"}, {"@type": "Thing", "name": "Bitcoin halving cycle"}]}</script>
+<meta name="twitter:image" content="https://btcthesis.vercel.app/og.png?v=20261122">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Now is the time to accumulate Bitcoin.", "description": "Bitcoin's bear markets end on time or on depth. A live read of the 4-year cycle: the bottom window, the target zone, and the plan if history rhymes.", "url": "https://btcthesis.vercel.app/", "image": "https://btcthesis.vercel.app/og.png", "dateModified": "2026-11-22", "inLanguage": "en", "author": {"@type": "Person", "name": "Lyskey", "url": "https://x.com/Lyskey", "sameAs": ["https://x.com/Lyskey"]}, "publisher": {"@type": "Person", "name": "Lyskey", "url": "https://x.com/Lyskey"}, "about": [{"@type": "Thing", "name": "Bitcoin"}, {"@type": "Thing", "name": "Bitcoin halving cycle"}]}</script>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20viewBox%3D'0%200%2064%2064'%20xmlns%3D'http://www.w3.org/2000/svg'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%2305060A'/%3E%3Ccircle%20cx%3D'32'%20cy%3D'32'%20r%3D'19'%20fill%3D'none'%20stroke%3D'%232A3340'%20stroke-width%3D'4'/%3E%3Cpath%20d%3D'M32%2013a19%2019%200%200%201%2017.6%2026.2'%20fill%3D'none'%20stroke%3D'%235EEAD4'%20stroke-width%3D'4'%20stroke-linecap%3D'round'/%3E%3Ccircle%20cx%3D'49.6'%20cy%3D'39.2'%20r%3D'4'%20fill%3D'%23F2FFFB'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -72,7 +72,7 @@ button,input{font:inherit;color:inherit}
 #marks .hv{stroke:rgba(236,238,243,.18);stroke-width:1;stroke-dasharray:2 4}
 #marks .zone{fill:rgba(138,120,255,.06);stroke:var(--violet-hi);stroke-width:1;stroke-dasharray:4 4}
 #marks .zone.hit{fill:rgba(94,234,212,.07);stroke:rgba(94,234,212,.85);stroke-dasharray:none}
-#marks .go{fill:#ECEEF3;font-weight:500}
+#marks .mgo{fill:#ECEEF3;font-weight:500}
 #marks .dot{stroke:var(--bg);stroke-width:2}
 #marks g.sc{transition:opacity .25s linear}
 #hit{position:fixed;z-index:6;display:none;cursor:crosshair;touch-action:pan-y}
@@ -281,6 +281,7 @@ p.body b{color:var(--ink)}
 .acc details[open] summary::after{transform:rotate(45deg)}
 .acc .in{padding:0 2px 22px;color:var(--paper-ink2);font-size:.95rem;line-height:1.7}
 .acc .in b{color:var(--paper-ink);font-weight:500}
+.acc .in a{text-decoration:underline;text-underline-offset:3px}
 .tables{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-top:6px}
 .tables table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12px}
 .tables caption{text-align:left;font-family:var(--sans);font-size:.88rem;color:var(--paper-ink);padding-bottom:8px}
@@ -328,26 +329,26 @@ footer p{max-width:620px}
   <!-- ============ THE TAKEAWAY ============ -->
   <header class="hero wrap" id="takeaway" data-scene="ring">
     <div class="hero-copy">
-      <p class="eyebrow"><span class="live-dot off" id="liveDot"></span><span id="heroEyebrow">Snapshot · Nov 21, 2026 · Bitcoin cycle thesis</span></p>
+      <p class="eyebrow"><span class="live-dot" id="liveDot"></span><span id="heroEyebrow">Live · Nov 22, 2026 · Bitcoin cycle thesis</span></p>
       <p class="go" id="heroGo">Both bottom signals are on</p>
       <p class="sr-only">Chart: the 2024 to 2028 halving cycle drawn as a clock; today is <span class="js-cycle">65%</span> of the way through, in the winter season.</p>
       <h1 id="heroTitle">Now is the time to<br><em>accumulate Bitcoin.</em></h1>
-      <p class="lede" id="heroLede">Bitcoin bear markets end when <b>time runs out</b> or <b>the price falls deep enough</b>. Both have happened: day 411 is inside the bottom window, and the price is inside the $35K–$58K zone right now.</p>
+      <p class="lede" id="heroLede">Bitcoin bear markets end when <b>time runs out</b> or <b>the price falls deep enough</b>. Both have happened: day 412 is inside the bottom window, and the low so far, <b>$55.1K</b>, touched the $35K–$58K zone on Nov 21.</p>
 
       <div class="triggers">
         <div class="trig on" id="trigTime">
           <div class="trig-k">Time signal<span class="on-tag">● On</span></div>
-          <div class="trig-v"><span class="num" id="tDays">411 days</span>since the Oct 6, 2025 top</div>
-          <div class="meter" id="mTime" aria-hidden="true"><div class="trk"></div><div class="band" style="left: 35%; width: 41%;"></div><div class="band in" style="left: 45%; width: 21%;"></div><div class="mk" style="left: 55.5%;"></div><div class="ends"><span>day 300</span><span>day 500</span></div></div>
+          <div class="trig-v"><span class="num" id="tDays">412 days</span>since the Oct 6, 2025 top</div>
+          <div class="meter" id="mTime" aria-hidden="true"><div class="trk"></div><div class="band" style="left: 35%; width: 41%;"></div><div class="band in" style="left: 45%; width: 21%;"></div><div class="mk" style="left: 56%;"></div><div class="ends"><span>day 300</span><span>day 500</span></div></div>
           <div class="trig-n">Window: the longest bear (411 days) ±10%<br><span id="tWin">day 370–452 · Oct 11, 2026 → Jan 1, 2027</span></div>
-          <div class="state yes" id="tState">Inside the window · 41 days left</div>
+          <div class="state yes" id="tState">Inside the window · 40 days left</div>
         </div>
         <div class="trig on" id="trigDepth">
           <div class="trig-k">Depth signal<span class="on-tag">● On</span></div>
-          <div class="trig-v"><span class="num" id="pNow">$57,373</span><span id="pNowSub">−54.5% from the $126,198 top</span></div>
+          <div class="trig-v"><span class="num" id="pNow">$60,870</span><span id="pNowSub">−51.8% from the $126,198 top</span></div>
           <div class="meter" id="mDepth" aria-hidden="true"><div class="trk"></div><div class="band" style="left: 67.5506%; width: 22.7817%;"></div><div class="mk" style="left: 70.3934%;"></div><div class="ends"><span>top</span><span>−80%</span></div></div>
           <div class="trig-n">Target zone: $35K–$58K<br>−54% to −72% from the top</div>
-          <div class="state yes" id="pState">In the zone now</div>
+          <div class="state yes" id="pState">Touched the zone · Nov 21</div>
         </div>
       </div>
       <p class="play" id="heroPlay"><b>The play:</b> buy in slices through the window and the zone. Nobody catches the exact low; the edge is being there when it prints.</p>
@@ -355,10 +356,10 @@ footer p{max-width:620px}
     </div>
 
     <div class="strip" aria-label="Key numbers">
-      <div class="stat"><span class="num" id="sPrice">$57,373</span><small id="sPriceSrc">BTC price · snapshot Nov 21</small></div>
+      <div class="stat"><span class="num" id="sPrice">$60,870</span><small id="sPriceSrc">BTC price · live, CoinGecko</small></div>
       <div class="stat"><span class="num" id="sLow">$55,130</span><small>lowest since the top</small></div>
       <div class="stat"><span class="num" id="sCycle">65%</span><small id="sCycleSub">through the 2024–2028 cycle</small></div>
-      <div class="stat"><span class="num" id="sHalv">~511 days</span><small>to the next halving (Apr 2028)</small></div>
+      <div class="stat"><span class="num" id="sHalv">~510 days</span><small>to the next halving (Apr 2028)</small></div>
     </div>
   </header>
 
@@ -382,9 +383,9 @@ footer p{max-width:620px}
     <div class="step" data-scene="rhythm">
       <div class="card">
         <p class="kicker">The rhythm</p>
-        <p class="sr-only">Chart: up legs of 1,068, 1,061 and 1,050 days from bottom to top, down legs of 363 and 376 days, the current down leg at <span class="js-days">411 days</span>, and a projected 1,050 to 1,068 day up leg ending in late 2029.</p>
+        <p class="sr-only">Chart: up legs of 1,068, 1,061 and 1,050 days from bottom to top, down legs of 363 and 376 days, the current down leg at <span class="js-days">412 days</span>, and a projected 1,050 to 1,068 day up leg ending in late 2029.</p>
         <h2>About three years up, <em>one year down.</em></h2>
-        <p class="body">Since 2015 every rally ran <b>~1,060 days</b> from bottom to top (1,068, 1,061, 1,050), and every fall about <b>a year</b> (363, then 376). This fall is at <b class="js-days">411 days</b>. If the rhythm holds, the next 1,060-day rally starts in the bottom window and tops out in <b>late 2029</b>.</p>
+        <p class="body">Since 2015 every rally ran <b>~1,060 days</b> from bottom to top (1,068, 1,061, 1,050), and every fall about <b>a year</b> (363, then 376). This fall is at <b class="js-days">412 days</b>. If the rhythm holds, the next 1,060-day rally starts in the bottom window and tops out in <b>late 2029</b>.</p>
         <ul class="keys">
           <li><span class="sw box" style="background:rgba(47,217,180,.22);border-color:#2FD9B4"></span>Up leg</li>
           <li><span class="sw box" style="background:rgba(255,107,142,.2);border-color:#FF6B8E"></span>Down leg</li>
@@ -396,9 +397,9 @@ footer p{max-width:620px}
     <div class="step" data-scene="channel">
       <div class="card">
         <p class="kicker">Two lines</p>
-        <p class="sr-only">Chart: a straight top line through the 2017, 2021 and 2025 tops reaching $178K to $180K in Sep to Oct 2029, and a rising floor through the 2018 and 2022 bottoms reading <span class="js-floor">$52.2K</span> today, touched by the <span class="js-low">$55.1K</span> low.</p>
+        <p class="sr-only">Chart: a straight top line through the 2017, 2021 and 2025 tops reaching $178K to $180K in Sep to Oct 2029, and a rising floor through the 2018 and 2022 bottoms reading <span class="js-floor">$52.3K</span> today, touched by the <span class="js-low">$55.1K</span> low.</p>
         <h2>Tops on one line, <em>bottoms on another.</em></h2>
-        <p class="body">The 2017, 2021 and 2025 tops sit on one straight line, pointing to <b>$178K–$180K</b> in Sep–Oct 2029. Underneath, the 2018 bottom, the 2022 bottom and this month's <b class="js-low">$55.1K</b> low all touch one rising floor, which reads about <b class="js-floor">$52.2K</b> today.<span class="desk"> Equal dollar gains make each top a smaller multiple:</span></p>
+        <p class="body">The 2017, 2021 and 2025 tops sit on one straight line, pointing to <b>$178K–$180K</b> in Sep–Oct 2029. Underneath, the 2018 bottom, the 2022 bottom and this month's <b class="js-low">$55.1K</b> low all touch one rising floor, which reads about <b class="js-floor">$52.3K</b> today.<span class="desk"> Equal dollar gains make each top a smaller multiple:</span></p>
         <div class="fig desk" aria-label="Halving-to-top multiples"><span>×94</span><span class="ar">→</span><span>×30</span><span class="ar">→</span><span>×8</span><span class="ar">→</span><span>×2</span></div>
         <ul class="keys">
           <li><span class="sw ln" style="background:#E8B04E"></span>Top line</li>
@@ -412,7 +413,7 @@ footer p{max-width:620px}
         <p class="kicker">Signal one · depth</p>
         <p class="sr-only">Chart: drawdowns from top to bottom of 94, 87, 84 and 77.5 percent, the current bear at <span class="js-ddlow">−56.3%</span>, and the target zone of 54 to 72 percent ($35K to $58K).</p>
         <h2>Every bear is <em>a little shallower.</em></h2>
-        <p class="body">From top to bottom, the falls went −94%, −87%, −84%, −77.5%. The thesis puts this bear's floor between <b>−54% and −72%</b>, which is <b>$35K–$58K</b>. At <b class="js-ddlow">−56.3%</b>, <b class="js-zonestate">the price is in that zone right now</b>.</p>
+        <p class="body">From top to bottom, the falls went −94%, −87%, −84%, −77.5%. The thesis puts this bear's floor between <b>−54% and −72%</b>, which is <b>$35K–$58K</b>. At <b class="js-ddlow">−56.3%</b>, <b class="js-zonestate">the price touched it on Nov 21</b>.</p>
         <ul class="keys">
           <li><span class="sw" style="background:var(--c4)"></span>This bear so far</li>
           <li><span class="sw box"></span>Target zone</li>
@@ -423,9 +424,9 @@ footer p{max-width:620px}
     <div class="step" data-scene="duration">
       <div class="card">
         <p class="kicker">Signal two · time</p>
-        <p class="sr-only">Chart: bear market lengths of 162, 411, 363 and 376 days, the current bear at <span class="js-days">411 days</span>, and the bottom window from day 370 to day 452.</p>
+        <p class="sr-only">Chart: bear market lengths of 162, 411, 363 and 376 days, the current bear at <span class="js-days">412 days</span>, and the bottom window from day 370 to day 452.</p>
         <h2>And they last <em>about a year.</em></h2>
-        <p class="body">Mature bears ran 411, 363 and 376 days from top to bottom. This one is at <b class="js-days">411 days</b>, as long as the longest. The window is that record ±10%: <b>day 370 to 452</b>, closing around <b>Jan 1, 2027</b>.</p>
+        <p class="body">Mature bears ran 411, 363 and 376 days from top to bottom. This one is at <b class="js-days">412 days</b>, as long as the longest. The window is that record ±10%: <b>day 370 to 452</b>, closing around <b>Jan 1, 2027</b>.</p>
         <ul class="keys">
           <li><span class="sw" style="background:var(--c4)"></span>This bear so far</li>
           <li><span class="sw box"></span>Bottom window</li>
@@ -481,8 +482,8 @@ footer p{max-width:620px}
         <div class="fld"><label for="sEnd">To</label><input type="date" id="sEnd" name="sEnd" autocomplete="off" min="2012-01-01" max="2029-12-31"></div>
       </div>
       <div class="sim-chart"><canvas id="simChart" aria-label="Price path with buy and sell windows" width="1230" height="300"></canvas></div>
-      <div class="results" id="results" aria-live="polite"><div class="res"><div class="k">Invested</div><div class="v">$37,000</div><div class="n">74 weekly buys</div></div><div class="res"><div class="k">BTC stacked</div><div class="v">0.4765–0.7083</div></div><div class="res"><div class="k">Average buy price</div><div class="v">$52.2K–$77.6K</div></div><div class="res key"><div class="k">Proceeds</div><div class="v">$74.3K–$98.6K</div><div class="n">avg sell $139K–$156K · ×2.0–2.7</div></div></div>
-      <p class="sim-foot" id="simFoot">113 of 114 orders fall after today, so they use the projected range (violet). Not financial advice.</p>
+      <div class="results" id="results" aria-live="polite"><div class="res"><div class="k">Invested</div><div class="v">$36,500</div><div class="n">73 weekly buys</div></div><div class="res"><div class="k">BTC stacked</div><div class="v">0.4702–0.7002</div></div><div class="res"><div class="k">Average buy price</div><div class="v">$52.1K–$77.6K</div></div><div class="res key"><div class="k">Proceeds</div><div class="v">$73.3K–$97.5K</div><div class="n">avg sell $139K–$156K · ×2.0–2.7</div></div></div>
+      <p class="sim-foot" id="simFoot">112 of 113 orders fall after today, so they use the projected range (violet). Not financial advice.</p>
     </div>
   </section>
 
@@ -536,7 +537,7 @@ footer p{max-width:620px}
                 <tr><td>Nov 29, 2013 → Jan 14, 2015</td><td class="r">411</td><td class="r">−87%</td></tr>
                 <tr><td>Dec 17, 2017 → Dec 15, 2018</td><td class="r">363</td><td class="r">−84%</td></tr>
                 <tr><td>Nov 10, 2021 → Nov 21, 2022</td><td class="r">376</td><td class="r">−77.5%</td></tr>
-                <tr class="live"><td>Oct 6, 2025 → ?</td><td class="r js-daysn">411</td><td class="r js-ddlow">−56.3%</td></tr>
+                <tr class="live"><td>Oct 6, 2025 → ?</td><td class="r js-daysn">412</td><td class="r js-ddlow">−56.3%</td></tr>
               </tbody></table>
               <table><caption>Bottom → top (the rallies)</caption><thead><tr><th>Rally</th><th class="r">Days</th></tr></thead><tbody>
                 <tr><td>Jan 14, 2015 → Dec 17, 2017</td><td class="r">1,068</td></tr>
@@ -555,7 +556,7 @@ footer p{max-width:620px}
                 <tr><td>Top 2021 → 2025</td><td class="r">1,426</td></tr>
                 <tr><td>Bottom 2015 → 2018</td><td class="r">1,431</td></tr>
                 <tr><td>Bottom 2018 → 2022</td><td class="r">1,437</td></tr>
-                <tr class="live"><td>Bottom 2022 → ?</td><td class="r js-b2b">1,461</td></tr>
+                <tr class="live"><td>Bottom 2022 → ?</td><td class="r js-b2b">1,462</td></tr>
               </tbody></table>
             </div>
           </div>
@@ -577,8 +578,8 @@ footer p{max-width:620px}
         <details>
           <summary>Sources and data</summary>
           <div class="in">
-            <p>Top and bottom dates: Bitbo (2011 and 2013 highs, 2018 and 2022 lows), VanEck (2017 top), Axios (Nov 10, 2021 record), CoinMarketCap (ATH $126,198, Oct 6, 2025). Dates can shift by 1–5 days depending on the exchange and on daily close vs intraday.</p>
-            <p style="margin-top:10px">Price history: weekly prices from blockchain.com, 2012 to Nov 2026. The lowest price since the top uses intraday lows (Binance BTC/USDT, then CoinGecko 4-hour candles), so it catches wicks a daily close misses. The live price and recent days load from CoinGecko each visit; if that fails, the page shows the Nov 21, 2026 snapshot. After today the page shows a projected range, not a single path: it widens from today's price to the $35K–$58K bottom zone, then to the $165K–$180K top zone.</p>
+            <p>Top and bottom dates: <a href="https://bitbo.io/" target="_blank" rel="noopener noreferrer">Bitbo</a> (2011 and 2013 highs, 2018 and 2022 lows), <a href="https://www.vaneck.com/" target="_blank" rel="noopener noreferrer">VanEck</a> (2017 top), <a href="https://www.axios.com/" target="_blank" rel="noopener noreferrer">Axios</a> (Nov 10, 2021 record), <a href="https://coinmarketcap.com/currencies/bitcoin/" target="_blank" rel="noopener noreferrer">CoinMarketCap</a> (ATH $126,198, Oct 6, 2025). Dates can shift by 1–5 days depending on the exchange and on daily close vs intraday.</p>
+            <p style="margin-top:10px">Price history: weekly prices from <a href="https://www.blockchain.com/explorer/charts/market-price" target="_blank" rel="noopener noreferrer">blockchain.com</a>, 2012 to Nov 2026. The lowest price since the top uses intraday lows (<a href="https://www.binance.com/en/trade/BTC_USDT" target="_blank" rel="noopener noreferrer">Binance</a> BTC/USDT, then <a href="https://www.coingecko.com/en/coins/bitcoin" target="_blank" rel="noopener noreferrer">CoinGecko</a> 4-hour candles), so it catches wicks a daily close misses. The live price and recent days load from CoinGecko each visit; if that fails, the page shows the Nov 21, 2026 snapshot. After today the page shows a projected range, not a single path: it widens from today's price to the $35K–$58K bottom zone, then to the $165K–$180K top zone.</p>
           </div>
         </details>
         <details>
@@ -592,7 +593,7 @@ footer p{max-width:620px}
   <footer class="wrap">
     <div class="fl">
       <p>Made by <a href="https://x.com/Lyskey" target="_blank" rel="noopener noreferrer">Lyskey</a>.</p>
-      <p class="num" id="footStamp">Data through Nov 21, 2026</p>
+      <p class="num" id="footStamp">Data through Nov 22, 2026</p>
     </div>
   </footer>
 </main>
@@ -794,7 +795,7 @@ function layout(){
   const C=m?{x:16,y:74,w:vw-32,h:Math.min(vh*.38,330)}:{x:vw*.45,y:vh*.16,w:vw*.5,h:vh*.66};
   const pad=m?{l:40,r:8,t:14,b:22}:{l:52,r:12,t:14,b:26};
   const P={x:C.x+pad.l,y:C.y+pad.t,w:C.w-pad.l-pad.r,h:C.h-pad.t-pad.b};
-  const ring=m?{cx:vw/2,cy:Math.min(vh*.215,200),R:Math.min(vw*.3,vh*.145)}:{cx:vw*.72,cy:vh*.42,R:Math.min(vw*.17,vh*.27)};
+  const mR=Math.min(vw*.3,vh*.145), ring=m?{cx:vw/2,cy:Math.max(Math.min(vh*.215,200),mR+84),R:mR}:{cx:vw*.72,cy:vh*.42,R:Math.min(vw*.17,vh*.27)};
   return {m,C,P,ring};
 }
 const logY=(p,lo,hi,P)=>P.y+P.h-(Math.log(p)-Math.log(lo))/(Math.log(hi)-Math.log(lo))*P.h;
@@ -961,7 +962,7 @@ function buildMarks(){
   { const g=GEO.rhythm; let s='';
     for(const v of [50000,100000,150000,200000]){ const y=g.Y(v); s+=Ln(P.x,y,P.x+P.w,y,'grid')+T(P.x-8,y+3.5,tick$(v),'ax','end'); }
     s+=T(P.x-8,g.Y(0)+3.5,'$0','ax','end');
-    for(let yr=2015;yr<=2029;yr+=m?4:2){ const x=g.X(D(yr,1,1)); s+=T(x,P.y+P.h+18,yr,'ax','middle'); }
+    for(let yr=2015;yr<=2029;yr+=m?4:2){ const x=g.X(D(yr,1,1)); s+=T(x,P.y+P.h+(m?32:18),yr,'ax','middle'); }
     const st={up:'stroke:rgba(47,217,180,.75);fill:none',down:'stroke:rgba(255,107,142,.75);fill:none',now:'stroke:rgba(255,107,142,.75);fill:none;stroke-dasharray:3 3',proj:'stroke:#A898FF;fill:none;stroke-dasharray:4 4'};
     for(const b of g.boxes){
       s+=`<rect x="${b.px0.toFixed(1)}" y="${b.py0.toFixed(1)}" width="${(b.px1-b.px0).toFixed(1)}" height="${(b.py1-b.py0).toFixed(1)}" style="${st[b.k]};stroke-width:1"/>`;
@@ -984,7 +985,7 @@ function buildMarks(){
     { let d='M'; for(let k=0;k<=80;k++){ const t=g.floor[0]+k/80*(g.floor[1]-g.floor[0]); d+=(k?'L':'')+g.X(t).toFixed(1)+' '+g.Y(FLOOR(t)).toFixed(1); }
       s+=`<path d="${d}" fill="none" stroke="#9C8CFF" stroke-width="9" stroke-linecap="round" opacity=".16"/>`; }
     [[BOTS[1],'2018 bottom'],[BOTS[2],'2022 bottom']].forEach(([b,l],k)=>{ const x=g.X(b.t), y=g.Y(b.p); s+=ring(x,y,'#9C8CFF')+(m?'':T(x+(k?14:16),y+24,'①②'[k]+' '+l+' · '+kusd(b.p),'lbl','start')); });
-    { const x=g.X(LOW.t), y=g.Y(LOW.p); s+=ring(x,y,'#5EEAD4')+T(x+16,y-20,m?'low so far '+kusd(LOW.p):'③ low so far · '+kusd(LOW.p),'go','start'); }
+    { const x=g.X(LOW.t), y=g.Y(LOW.p); s+=ring(x,y,'#5EEAD4')+(m?T(x+14,y+22,'low '+kusd(LOW.p),'mgo','start'):T(x+16,y-20,'③ low so far · '+kusd(LOW.p),'mgo','start')); }
     { const t4=WIN.out1, x=g.X(t4), y=g.Y(FLOOR(t4)); s+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="9" fill="none" stroke="#A898FF" stroke-width="1.5" stroke-dasharray="3 3"/>`+(m?'':T(x+16,y+24,'④ window close · '+rng(FLOOR(TODAY),FLOOR(t4),kusd),'lbl','start','style="fill:#A898FF"')); }
     out.channel=s;
   }
@@ -999,7 +1000,7 @@ function buildMarks(){
     const zHit=LOW.p<=ZONE[1];
     s+=`<rect x="${(cx-zw/2).toFixed(1)}" y="${zy0.toFixed(1)}" width="${zw.toFixed(1)}" height="${(zy1-zy0).toFixed(1)}" class="zone${zHit?' hit':''}" rx="3"/>`;
     const zNow=PRICE<=ZONE[1]&&PRICE>=ZONE[0], ZT=kusd(ZONE[0])+'–'+kusd(ZONE[1]);
-    s+=zHit?T(cx,zy1+18,zNow?'✓ in the zone now':'✓ zone touched · '+fMD.format(LOW.t),'go','middle')+T(cx,zy1+32,ZT,'ax','middle'):T(cx,zy1+16,'target zone','lbl','middle')+T(cx,zy1+30,ZT,'ax','middle');
+    s+=zHit?T(cx,zy1+18,zNow?(m?'✓ in zone':'✓ in the zone now'):(m?'✓ touched':'✓ zone touched · '+fMD.format(LOW.t)),'mgo','middle')+T(cx,zy1+32,ZT,'ax','middle'):T(cx,zy1+16,'target zone','lbl','middle')+T(cx,zy1+30,ZT,'ax','middle');
     out.drawdown=s;
   }
   /* duration */
@@ -1008,7 +1009,7 @@ function buildMarks(){
     const zx0=g.x0+370*g.kx, zx1=g.x0+452*g.kx;
     const wHit=n.d>=370&&n.d<=452;
     s+=`<rect x="${zx0.toFixed(1)}" y="${P.y.toFixed(1)}" width="${(zx1-zx0).toFixed(1)}" height="${P.h.toFixed(1)}" class="zone${wHit?' hit':''}" rx="3"/>`;
-    s+=T((zx0+zx1)/2,P.y-6,wHit?'✓ inside the window · day 370–452':'window · day 370–452',wHit?'go':'lbl','middle');
+    s+=m?T(zx1,P.y-6,wHit?'✓ inside the window':'window',wHit?'mgo':'lbl','end'):T((zx0+zx1)/2,P.y-6,wHit?'✓ inside the window · day 370–452':'window · day 370–452',wHit?'mgo':'lbl','middle');
     g.rows.forEach((v,j)=>{ const yc=P.y+(j+.5)*g.rh;
       s+=T(L.C.x,yc+4,lbls[j],j===4?'lbl':'ax','start');
       s+=T(g.x0+v*g.kx+8,yc+4,m?v+' d':(j===4?v+' days so far':v+' days'),'lbl','start'); });
@@ -1256,9 +1257,9 @@ const sim=(()=>{
     const pj=pts.filter(([t])=>t>=split-step);
     if(pj.length>1){ cx.beginPath(); pj.forEach(([t,,b],i)=>{const x=X_(t),y=Y_(b); i?cx.lineTo(x,y):cx.moveTo(x,y);}); for(let i=pj.length-1;i>=0;i--){ const [t,a]=pj[i]; cx.lineTo(X_(t),Y_(a)); } cx.closePath();
       cx.fillStyle='rgba(138,120,255,.2)'; cx.fill(); cx.strokeStyle='rgba(168,152,255,.7)'; cx.lineWidth=1; cx.stroke(); }
-    const hband=(v,c,fill,label)=>{ if(!v||!v[0]) return; const ya=Y_(Math.max(v[0],v[1])), yb=Y_(Math.min(v[0],v[1]));
-      cx.fillStyle=fill; cx.fillRect(P.x,ya,P.w,Math.max(1.5,yb-ya)); cx.fillStyle=c; cx.textAlign='left'; cx.fillText(label,P.x+6,ya-6); };
-    hband(S.avgBuy,'#2FD9B4','rgba(47,217,180,.22)','avg buy '+rng(S.avgBuy[0],S.avgBuy[1],kusd));
+    const hband=(v,c,fill,label,right)=>{ if(!v||!v[0]) return; const ya=Y_(Math.max(v[0],v[1])), yb=Y_(Math.min(v[0],v[1]));
+      cx.fillStyle=fill; cx.fillRect(P.x,ya,P.w,Math.max(1.5,yb-ya)); cx.fillStyle=c; cx.textAlign=right?'right':'left'; cx.fillText(label,right?P.x+P.w-6:P.x+6,ya-6); };
+    hband(S.avgBuy,'#2FD9B4','rgba(47,217,180,.22)','avg buy '+rng(S.avgBuy[0],S.avgBuy[1],kusd),true);
     if(S.avgSell) hband(S.avgSell,'#E8B04E','rgba(232,176,78,.22)','avg sell '+rng(S.avgSell[0],S.avgSell[1],kusd));
     if(S.buys.length<=160){ cx.fillStyle='#2FD9B4'; for(const t of S.buys){ if(isProj(t)) continue; cx.beginPath(); cx.arc(X_(t),Y_(priceAt(t)),2.4,0,7); cx.fill(); } }
     if(hov!=null){ const t=t0+hov*(t1-t0), [a,b]=bandAt(t), x=X_(t); cx.strokeStyle='rgba(236,238,243,.3)'; cx.beginPath(); cx.moveTo(x,P.y); cx.lineTo(x,P.y+P.h); cx.stroke();

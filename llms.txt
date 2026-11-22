@@ -1,0 +1,22 @@
+# BTC Quant
+
+> A live read of Bitcoin's 4-year halving cycle by Lyskey: where the cycle stands, the bottom window, the target zone, and the plan if history rhymes. Pattern extrapolation, not financial advice.
+
+Updated: 2026-11-22
+
+## Current read
+
+- Now is the time to accumulate Bitcoin.
+- Bitcoin bear markets end when time runs out or the price falls deep enough. Both have happened: day 412 is inside the bottom window, and the low so far, $55.1K, touched the $35K–$58K zone on Nov 21.
+
+## Thesis
+
+- Bear markets end on time or on depth, whichever comes first.
+- Time: the longest mature bear ran 411 days; the bottom window is day 370-452 after the Oct 6, 2025 top (Oct 11, 2026 to Jan 1, 2027).
+- Depth: target zone $35K-$58K, 54% to 72% below the $126,198 top.
+- Rhythm: rallies of about 1,060 days from bottom to top, falls of about one year.
+- Next top zone: $165K-$180K in Sep-Oct 2029, after the April 2028 halving.
+
+## Page
+
+- [BTC Quant](https://btcthesis.vercel.app/): the full page with charts, simulator, risks and sources
